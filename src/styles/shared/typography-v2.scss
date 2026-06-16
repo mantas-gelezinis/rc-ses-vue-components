@@ -1,0 +1,3 @@
+@use '../vuetify/typography-v2' as typo-v2;
+
+@include typo-v2.rc-typography-v2-utilities();

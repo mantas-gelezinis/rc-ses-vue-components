@@ -1,0 +1,95 @@
+@use 'sass:map';
+
+$rc-radius-v2-primitives: (
+  'radius-0-v2': 0,
+  'radius-2-v2': 2px,
+  'radius-4-v2': 4px,
+  'radius-6-v2': 6px,
+  'radius-8-v2': 8px,
+  'radius-10-v2': 10px,
+  'radius-12-v2': 12px,
+  'radius-16-v2': 16px,
+  'radius-20-v2': 20px,
+  'radius-24-v2': 24px,
+  'radius-full-v2': 9999px,
+);
+
+$rc-stroke-v2-primitives: (
+  'stroke-0-v2': 0,
+  'stroke-1-v2': 1px,
+  'stroke-2-v2': 2px,
+  'stroke-4-v2': 4px,
+);
+
+$rc-radius-v2-semantic: (
+  'input-radius-v2': 'radius-6-v2',
+  'button-radius-v2': 'radius-8-v2',
+  'card-radius-v2': 'radius-16-v2',
+  'modal-radius-v2': 'radius-16-v2',
+  'chip-radius-v2': 'radius-4-v2',
+  'pill-radius-v2': 'radius-full-v2',
+);
+
+$rc-stroke-v2-semantic: (
+  'border-width-default-v2': 'stroke-1-v2',
+  'border-width-focus-v2': 'stroke-2-v2',
+  'border-width-accent-v2': 'stroke-4-v2',
+);
+
+@function rc-radius-v2($token) {
+  @if map.has-key($rc-radius-v2-primitives, $token) {
+    @return map.get($rc-radius-v2-primitives, $token);
+  }
+
+  $primitive-key: map.get($rc-radius-v2-semantic, $token);
+
+  @if $primitive-key {
+    @return map.get($rc-radius-v2-primitives, $primitive-key);
+  }
+
+  @error "Unknown radius v2 token `#{$token}`. Use a primitive (radius-*-v2) or semantic alias.";
+}
+
+@function rc-stroke-v2($token) {
+  @if map.has-key($rc-stroke-v2-primitives, $token) {
+    @return map.get($rc-stroke-v2-primitives, $token);
+  }
+
+  $primitive-key: map.get($rc-stroke-v2-semantic, $token);
+
+  @if $primitive-key {
+    @return map.get($rc-stroke-v2-primitives, $primitive-key);
+  }
+
+  @error "Unknown stroke v2 token `#{$token}`. Use a primitive (stroke-*-v2) or semantic alias.";
+}
+
+@mixin rc-borders-v2-css-vars() {
+  @each $name, $value in $rc-radius-v2-primitives {
+    --rc-#{$name}: #{$value};
+  }
+
+  @each $semantic, $primitive in $rc-radius-v2-semantic {
+    --rc-#{$semantic}: var(--rc-#{$primitive});
+  }
+
+  @each $name, $value in $rc-stroke-v2-primitives {
+    --rc-#{$name}: #{$value};
+  }
+
+  @each $semantic, $primitive in $rc-stroke-v2-semantic {
+    --rc-#{$semantic}: var(--rc-#{$primitive});
+  }
+}
+
+@mixin rc-borders-v2-utilities() {
+  :root {
+    @include rc-borders-v2-css-vars();
+  }
+
+  @each $semantic, $_ in $rc-radius-v2-semantic {
+    .rounded-#{$semantic} {
+      border-radius: rc-radius-v2($semantic);
+    }
+  }
+}

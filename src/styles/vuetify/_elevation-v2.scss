@@ -1,0 +1,65 @@
+@use 'sass:map';
+
+$rc-elevation-v2: (
+  'elevation-sm-v2': (
+    0 1px 2px 0 rgba(0, 0, 0, 0.05),
+    0 2px 4px 0 rgba(0, 0, 0, 0.04),
+  ),
+  'elevation-md-v2': 0 4px 16px 0 rgba(0, 0, 0, 0.08),
+  'elevation-lg-v2': 0 8px 16px 0 rgba(0, 0, 0, 0.12),
+);
+
+$rc-focus-ring-v2: (
+  'focus-ring-default-v2': 0 0 0 3px rgba(var(--v-theme-cyan-200-v2), 0.5),
+  'focus-ring-error-v2': 0 0 0 3px rgba(var(--v-theme-red-200-v2), 0.5),
+);
+
+@function rc-elevation-v2($token) {
+  $value: map.get($rc-elevation-v2, $token);
+
+  @if $value == null {
+    @error "Unknown elevation v2 token `#{$token}`. Available: #{map.keys($rc-elevation-v2)}";
+  }
+
+  @return $value;
+}
+
+@function rc-focus-ring-v2($token) {
+  $value: map.get($rc-focus-ring-v2, $token);
+
+  @if $value == null {
+    @error "Unknown focus ring v2 token `#{$token}`. Available: #{map.keys($rc-focus-ring-v2)}";
+  }
+
+  @return $value;
+}
+
+@mixin rc-elevation-v2($token) {
+  box-shadow: rc-elevation-v2($token);
+}
+
+@mixin rc-focus-ring-v2($token) {
+  box-shadow: rc-focus-ring-v2($token);
+}
+
+@mixin rc-elevation-v2-css-vars() {
+  @each $name, $value in $rc-elevation-v2 {
+    --rc-#{$name}: #{$value};
+  }
+
+  @each $name, $value in $rc-focus-ring-v2 {
+    --rc-#{$name}: #{$value};
+  }
+}
+
+@mixin rc-elevation-v2-utilities() {
+  :root {
+    @include rc-elevation-v2-css-vars();
+  }
+
+  @each $token, $_ in $rc-elevation-v2 {
+    .#{$token} {
+      @include rc-elevation-v2($token);
+    }
+  }
+}

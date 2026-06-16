@@ -1,0 +1,3 @@
+@use '../vuetify/borders-v2' as borders-v2;
+
+@include borders-v2.rc-borders-v2-utilities();

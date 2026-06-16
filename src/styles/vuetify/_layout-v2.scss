@@ -1,0 +1,189 @@
+@use 'sass:map';
+
+$rc-breakpoints-v2: (
+  'xs-v2': 0,
+  'sm-v2': 600px,
+  'md-v2': 900px,
+  'lg-v2': 1200px,
+);
+
+$rc-layout-v2-primitives: (
+  'grid-columns-v2': 12,
+  'grid-col-width-v2': 72px,
+  'grid-gutter-v2': 24px,
+  'container-outer-max-v2': 1200px,
+  'container-grid-width-v2': 1128px,
+  'container-narrow-v2': 744px,
+  'container-medium-v2': 936px,
+  'container-wide-v2': 1128px,
+  'container-padding-xs-v2': 16px,
+  'container-padding-sm-v2': 24px,
+  'container-padding-md-v2': 24px,
+  'container-padding-lg-v2': 36px,
+);
+
+$rc-layout-v2-semantic: (
+  'layout-gutter-v2': 'grid-gutter-v2',
+  'layout-col-width-v2': 'grid-col-width-v2',
+  'layout-outer-max-v2': 'container-outer-max-v2',
+  'layout-narrow-v2': 'container-narrow-v2',
+  'layout-medium-v2': 'container-medium-v2',
+  'layout-wide-v2': 'container-wide-v2',
+);
+
+@function rc-breakpoint-v2($name) {
+  $value: map.get($rc-breakpoints-v2, $name);
+
+  @if $value == null {
+    @error "Unknown breakpoint v2 `#{$name}`. Available: #{map.keys($rc-breakpoints-v2)}";
+  }
+
+  @return $value;
+}
+
+@function rc-layout-v2($token) {
+  @if map.has-key($rc-layout-v2-primitives, $token) {
+    @return map.get($rc-layout-v2-primitives, $token);
+  }
+
+  $primitive-key: map.get($rc-layout-v2-semantic, $token);
+
+  @if $primitive-key {
+    @return map.get($rc-layout-v2-primitives, $primitive-key);
+  }
+
+  @error "Unknown layout v2 token `#{$token}`. Use a primitive or semantic alias.";
+}
+
+@mixin rc-breakpoint-v2-up($name) {
+  $min: rc-breakpoint-v2($name);
+
+  @if $min == 0 {
+    @content;
+  } @else {
+    @media (min-width: $min) {
+      @content;
+    }
+  }
+}
+
+@mixin rc-breakpoint-v2-down($name) {
+  $max: rc-breakpoint-v2($name) - 0.02px;
+
+  @media (max-width: $max) {
+    @content;
+  }
+}
+
+@mixin rc-layout-v2-css-vars() {
+  @each $name, $value in $rc-layout-v2-primitives {
+    --rc-#{$name}: #{$value};
+  }
+
+  @each $semantic, $primitive in $rc-layout-v2-semantic {
+    --rc-#{$semantic}: var(--rc-#{$primitive});
+  }
+}
+
+@mixin rc-container-v2-padding() {
+  padding-inline: rc-layout-v2('container-padding-xs-v2');
+
+  @include rc-breakpoint-v2-up('sm-v2') {
+    padding-inline: rc-layout-v2('container-padding-sm-v2');
+  }
+
+  @include rc-breakpoint-v2-up('lg-v2') {
+    padding-inline: rc-layout-v2('container-padding-lg-v2');
+  }
+}
+
+@mixin rc-container-v2-base() {
+  box-sizing: border-box;
+  width: 100%;
+  margin-inline: auto;
+
+  @include rc-container-v2-padding();
+}
+
+@mixin rc-container-v2-variant($max-width-token) {
+  @include rc-container-v2-base();
+
+  @include rc-breakpoint-v2-up('md-v2') {
+    max-width: rc-layout-v2($max-width-token);
+  }
+}
+
+@mixin rc-layout-v2-utilities() {
+  :root {
+    @include rc-layout-v2-css-vars();
+  }
+
+  .rc-container-v2 {
+    @include rc-container-v2-base();
+  }
+
+  .rc-container-outer-v2 {
+    @include rc-container-v2-base();
+
+    @include rc-breakpoint-v2-up('lg-v2') {
+      max-width: rc-layout-v2('container-outer-max-v2');
+    }
+  }
+
+  .rc-container-narrow-v2 {
+    @include rc-container-v2-variant('container-narrow-v2');
+  }
+
+  .rc-container-medium-v2 {
+    @include rc-container-v2-variant('container-medium-v2');
+  }
+
+  .rc-container-wide-v2 {
+    @include rc-container-v2-variant('container-wide-v2');
+  }
+
+  .rc-container-fluid-v2 {
+    @include rc-container-v2-base();
+    max-width: none;
+  }
+
+  .rc-grid-v2 {
+    display: grid;
+    gap: rc-layout-v2('grid-gutter-v2');
+    grid-template-columns: repeat(#{rc-layout-v2('grid-columns-v2')}, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  @for $span from 1 through 12 {
+    .rc-col-v2-#{$span} {
+      grid-column: span $span;
+    }
+  }
+
+  .rc-layout-two-column-v2 {
+    display: grid;
+    gap: rc-layout-v2('grid-gutter-v2');
+    grid-template-columns: repeat(#{rc-layout-v2('grid-columns-v2')}, minmax(0, 1fr));
+    width: 100%;
+
+    @include rc-breakpoint-v2-down('md-v2') {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .rc-layout-main-v2 {
+    grid-column: span 8;
+
+    @include rc-breakpoint-v2-down('md-v2') {
+      grid-column: span 1;
+    }
+  }
+
+  .rc-layout-aside-v2 {
+    grid-column: span 4;
+
+    @include rc-breakpoint-v2-down('md-v2') {
+      grid-column: span 1;
+    }
+  }
+}

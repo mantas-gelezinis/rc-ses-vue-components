@@ -1,0 +1,5 @@
+export { default as BriefcaseLightIcon } from './BriefcaseLightIcon.vue'
+export { default as CoinsLightIcon } from './CoinsLightIcon.vue'
+export { default as HandCoinsLightIcon } from './HandCoinsLightIcon.vue'
+export { default as HeartbeatLightIcon } from './HeartbeatLightIcon.vue'
+export { default as MoneyLightIcon } from './MoneyLightIcon.vue'

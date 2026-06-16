@@ -1,0 +1,113 @@
+@use 'sass:map';
+@use 'variables' as var;
+
+$rc-typography-v2: (
+  'h1-v2': (
+    'size': 2.25rem,
+    'weight': 500,
+    'line-height': 2.5rem,
+    'letter-spacing': -0.0225rem,
+  ),
+  'h2-v2': (
+    'size': 1.5rem,
+    'weight': 500,
+    'line-height': 2rem,
+    'letter-spacing': -0.015rem,
+  ),
+  'h3-v2': (
+    'size': 1.125rem,
+    'weight': 500,
+    'line-height': 1.5rem,
+    'letter-spacing': 0,
+  ),
+  'h4-v2': (
+    'size': 0.875rem,
+    'weight': 500,
+    'line-height': 1.25rem,
+    'letter-spacing': 0,
+  ),
+  'card-title-v2': (
+    'size': 1.25rem,
+    'weight': 500,
+    'line-height': 2rem,
+    'letter-spacing': -0.0125rem,
+  ),
+  'body-large-v2': (
+    'size': 1rem,
+    'weight': 400,
+    'line-height': 1.5rem,
+    'letter-spacing': 0,
+  ),
+  'body-lead-v2': (
+    'size': 1rem,
+    'weight': 300,
+    'line-height': 1.5rem,
+    'letter-spacing': 0,
+  ),
+  'body-regular-v2': (
+    'size': 0.9375rem,
+    'weight': 400,
+    'line-height': 1.375rem,
+    'letter-spacing': 0,
+  ),
+  'body-small-v2': (
+    'size': 0.875rem,
+    'weight': 400,
+    'line-height': 1.25rem,
+    'letter-spacing': 0,
+  ),
+  'body-caption-v2': (
+    'size': 0.8125rem,
+    'weight': 400,
+    'line-height': 1.125rem,
+    'letter-spacing': 0,
+  ),
+  'body-micro-v2': (
+    'size': 0.75rem,
+    'weight': 400,
+    'line-height': 1.25rem,
+    'letter-spacing': 0,
+  ),
+  'button-regular-v2': (
+    'size': 0.9375rem,
+    'weight': 500,
+    'line-height': 1.25rem,
+    'letter-spacing': 0,
+  ),
+  'button-compact-v2': (
+    'size': 0.875rem,
+    'weight': 500,
+    'line-height': 1.25rem,
+    'letter-spacing': 0,
+  ),
+);
+
+@mixin rc-typography-v2($style) {
+  $props: map.get($rc-typography-v2, $style);
+
+  @if $props == null {
+    @error "Unknown typography v2 style `#{$style}`. Available: #{map.keys($rc-typography-v2)}";
+  }
+
+  font-family: var.$body-font-family, sans-serif;
+  font-size: map.get($props, 'size');
+  font-weight: map.get($props, 'weight');
+  line-height: map.get($props, 'line-height');
+  letter-spacing: map.get($props, 'letter-spacing');
+}
+
+@mixin rc-v2-root() {
+  @include rc-typography-v2('body-regular-v2');
+}
+
+@mixin rc-typography-v2-utilities() {
+  @each $style, $_ in $rc-typography-v2 {
+    .text-#{$style} {
+      @include rc-typography-v2($style);
+    }
+  }
+
+  .rc-v2 {
+    @include rc-v2-root();
+  }
+}
