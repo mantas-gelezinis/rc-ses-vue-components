@@ -62,4 +62,10 @@ $rc-focus-ring-v2: (
       @include rc-elevation-v2($token);
     }
   }
+
+  @each $token, $_ in $rc-focus-ring-v2 {
+    .#{$token} {
+      @include rc-focus-ring-v2($token);
+    }
+  }
 }
