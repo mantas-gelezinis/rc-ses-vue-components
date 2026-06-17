@@ -1,0 +1,100 @@
+@use 'sass:map';
+
+$rc-spacing-v2-primitives: (
+  'spacing-0-v2': 0,
+  'spacing-2-v2': 2px,
+  'spacing-4-v2': 4px,
+  'spacing-6-v2': 6px,
+  'spacing-8-v2': 8px,
+  'spacing-12-v2': 12px,
+  'spacing-16-v2': 16px,
+  'spacing-20-v2': 20px,
+  'spacing-24-v2': 24px,
+  'spacing-32-v2': 32px,
+  'spacing-40-v2': 40px,
+  'spacing-48-v2': 48px,
+  'spacing-64-v2': 64px,
+  'spacing-80-v2': 80px,
+  'spacing-96-v2': 96px,
+);
+
+$rc-spacing-v2-semantic: (
+  // Card
+  'card-padding-x-v2': 'spacing-32-v2',
+  'card-padding-top-v2': 'spacing-24-v2',
+  'card-padding-bottom-v2': 'spacing-32-v2',
+  'card-heading-gap-v2': 'spacing-4-v2',
+  'card-section-gap-v2': 'spacing-24-v2',
+  'card-footer-buttons-gap-v2': 'spacing-16-v2',
+  // Stack
+  'stack-tight-v2': 'spacing-8-v2',
+  'stack-default-v2': 'spacing-16-v2',
+  'stack-loose-v2': 'spacing-24-v2',
+  // Form
+  'form-field-gap-v2': 'spacing-16-v2',
+  'form-group-gap-v2': 'spacing-32-v2',
+  // Page
+  'page-breadcrumbs-to-h1-v2': 'spacing-16-v2',
+  'page-h1-to-stepper-v2': 'spacing-32-v2',
+  'page-stepper-to-card-v2': 'spacing-32-v2',
+  'page-card-to-footer-v2': 'spacing-48-v2',
+  'page-section-gap-v2': 'spacing-48-v2',
+  // Stepper
+  'stepper-item-gap-v2': 'spacing-4-v2',
+  // Selectable area
+  'selectable-area-padding-y-v2': 'spacing-8-v2',
+  'selectable-area-padding-x-v2': 'spacing-12-v2',
+  // List
+  'list-item-padding-v2': 'spacing-16-v2',
+  'list-item-gap-v2': 'spacing-12-v2',
+  // Badge
+  'badge-padding-x-small-v2': 'spacing-8-v2',
+  'badge-padding-y-small-v2': 'spacing-4-v2',
+  'badge-padding-x-regular-v2': 'spacing-12-v2',
+  'badge-padding-y-regular-v2': 'spacing-6-v2',
+  'badge-icon-text-gap-v2': 'spacing-4-v2',
+  // Chrome & snackbar
+  'topbar-padding-x-v2': 'spacing-16-v2',
+  'header-padding-x-v2': 'spacing-32-v2',
+  'snackbar-padding-x-v2': 'spacing-16-v2',
+  'snackbar-padding-y-v2': 'spacing-12-v2',
+  // Component-specific
+  'pagination-button-gap-v2': 'spacing-2-v2',
+  'breadcrumbs-item-gap-v2': 'spacing-6-v2',
+);
+
+@function rc-spacing-v2($token) {
+  @if map.has-key($rc-spacing-v2-primitives, $token) {
+    @return map.get($rc-spacing-v2-primitives, $token);
+  }
+
+  $primitive-key: map.get($rc-spacing-v2-semantic, $token);
+
+  @if $primitive-key {
+    @return map.get($rc-spacing-v2-primitives, $primitive-key);
+  }
+
+  @error "Unknown spacing v2 token `#{$token}`. Use a primitive (spacing-*-v2) or semantic alias.";
+}
+
+@mixin rc-spacing-v2-css-vars() {
+  @each $name, $value in $rc-spacing-v2-primitives {
+    --rc-#{$name}: #{$value};
+  }
+
+  @each $semantic, $primitive in $rc-spacing-v2-semantic {
+    --rc-#{$semantic}: var(--rc-#{$primitive});
+  }
+}
+
+@mixin rc-spacing-v2-utilities() {
+  :root {
+    @include rc-spacing-v2-css-vars();
+  }
+
+  @each $semantic, $_ in $rc-spacing-v2-semantic {
+    .gap-#{$semantic} {
+      gap: rc-spacing-v2($semantic);
+    }
+  }
+}

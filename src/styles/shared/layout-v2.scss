@@ -1,0 +1,3 @@
+@use '../vuetify/layout-v2' as layout-v2;
+
+@include layout-v2.rc-layout-v2-utilities();
