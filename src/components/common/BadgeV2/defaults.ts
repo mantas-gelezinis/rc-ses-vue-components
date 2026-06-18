@@ -10,7 +10,6 @@ export default {
   showClose: false,
 
   // Extended VChip props for Vuetify parity
-  active: true,
   border: undefined,
   closable: undefined,
   closeIcon: undefined,

@@ -13,7 +13,6 @@ export interface BadgeProps {
   accessibleLabel?: string
 
   // Extended VChip props for Vuetify parity
-  active?: VChip['$props']['active']
   appendIcon?: VChip['$props']['appendIcon']
   border?: VChip['$props']['border']
   closable?: VChip['$props']['closable']
