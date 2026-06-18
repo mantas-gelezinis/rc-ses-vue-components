@@ -1,0 +1,170 @@
+@use '/src/styles/vuetify/settings.scss';
+@use '/src/styles/vuetify/typography-v2' as typo-v2;
+@use '/src/styles/vuetify/borders-v2' as borders-v2;
+@use '/src/styles/vuetify/sizes-v2' as sizes-v2;
+@use '/src/styles/vuetify/spacing-v2' as spacing-v2;
+
+.rc-ses-btn-v2 {
+  border-radius: borders-v2.rc-radius-v2('button-radius-v2');
+  @include typo-v2.rc-typography-v2('button-compact-v2');
+  padding-left: spacing-v2.rc-spacing-v2('spacing-16-v2');
+  padding-right: spacing-v2.rc-spacing-v2('spacing-16-v2');
+
+  &--loading {
+    pointer-events: none !important;
+    cursor: default !important;
+
+    .v-icon,
+    .v-btn__loader {
+      animation: rcSesSpin 1s linear infinite !important;
+    }
+  }
+
+  &--text-loading {
+    &.rc-ses-btn-v2--regular {
+      min-width: 5.5rem;
+    }
+
+    &.rc-ses-btn-v2--small {
+      min-width: 4.5rem;
+    }
+  }
+
+  .v-icon {
+    @include sizes-v2.rc-icon-size-v2('icon-medium-v2');
+  }
+
+  .v-btn__prepend {
+    margin-inline-end: spacing-v2.rc-spacing-v2('badge-icon-text-gap-v2') !important;
+    margin-inline-start: 0 !important;
+  }
+
+  .v-btn__append {
+    margin-inline-start: spacing-v2.rc-spacing-v2('badge-icon-text-gap-v2') !important;
+    margin-inline-end: 0 !important;
+  }
+
+  &:focus-visible {
+    > .v-btn__overlay {
+      opacity: 0 !important;
+    }
+  }
+
+  &:hover {
+    > .v-btn__overlay {
+      opacity: 0 !important;
+    }
+  }
+
+  &:focus-visible {
+    border-color: rgb(var(--v-theme-border-focus-actual-v2)) !important;
+  }
+
+  &:focus-visible::after {
+    border-color: rgb(var(--v-theme-border-focus-actual-v2)) !important;
+    opacity: 1 !important;
+  }
+
+  &--small {
+    height: 36px !important;
+    padding-top: spacing-v2.rc-spacing-v2('spacing-8-v2') !important;
+    padding-bottom: spacing-v2.rc-spacing-v2('spacing-8-v2') !important;
+  }
+
+  &--regular {
+    height: 44px !important;
+    padding-top: spacing-v2.rc-spacing-v2('spacing-12-v2') !important;
+    padding-bottom: spacing-v2.rc-spacing-v2('spacing-12-v2') !important;
+  }
+
+  &--icon-only {
+    width: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+    padding: 0 !important;
+
+    &.rc-ses-btn-v2--small {
+      width: 36px !important;
+      min-width: 36px !important;
+      max-width: 36px !important;
+    }
+  }
+
+  &--primary {
+    background-color: rgb(var(--v-theme-primary-bg-v2)) !important;
+    color: rgb(var(--v-theme-primary-text-v2)) !important;
+    &:hover {
+      background-color: rgb(var(--v-theme-primary-bg-hover-v2)) !important;
+    }
+
+    &:disabled {
+      background-color: rgb(var(--v-theme-primary-bg-disabled-v2)) !important;
+      color: rgb(var(--v-theme-primary-text-disabled-v2)) !important;
+      opacity: unset;
+      .v-btn__overlay {
+        background-color: unset;
+      }
+    }
+  }
+
+  &--secondary {
+    background-color: rgb(var(--v-theme-secondary-bg-v2)) !important;
+    border: 1px solid rgb(var(--v-theme-secondary-border-v2));
+    color: rgb(var(--v-theme-secondary-text-v2)) !important;
+    &:hover {
+      background-color: rgb(var(--v-theme-secondary-bg-hover-v2)) !important;
+    }
+
+    &:disabled {
+      background-color: rgb(var(--v-theme-secondary-bg-v2)) !important;
+      border-color: rgb(var(--v-theme-text-disabled-v2)) !important;
+      color: rgb(var(--v-theme-text-disabled-v2)) !important;
+      opacity: unset;
+      .v-btn__overlay {
+        background-color: unset;
+      }
+    }
+  }
+
+  &--error {
+    background-color: rgb(var(--v-theme-destructive-bg-v2)) !important;
+    color: rgb(var(--v-theme-destructive-text-v2)) !important;
+    &:hover {
+      background-color: rgb(var(--v-theme-destructive-bg-hover-v2)) !important;
+    }
+
+    &:disabled {
+      background-color: rgb(var(--v-theme-primary-bg-disabled-v2)) !important;
+      color: rgb(var(--v-theme-text-disabled-v2)) !important;
+      opacity: unset;
+      .v-btn__overlay {
+        background-color: unset;
+      }
+    }
+  }
+
+  &--link {
+    color: rgb(var(--v-theme-link-text-v2)) !important;
+    &:hover {
+      color: rgb(var(--v-theme-link-text-hover-v2)) !important;
+      background-color: unset !important;
+    }
+
+    &:disabled {
+      color: rgb(var(--v-theme-text-disabled-v2)) !important;
+      opacity: unset;
+      .v-btn__overlay {
+        background-color: unset;
+      }
+    }
+  }
+}
+
+@keyframes rcSesSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
