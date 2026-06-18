@@ -4,6 +4,7 @@ import 'vuetify/styles'
 import RcSesAccordion from '@/components/common/Accordion/RcSesAccordion.vue'
 import useAccordionController from '@/components/common/Accordion/hooks/useAccordionController'
 import RcSesAlert from '@/components/common/Alert/RcSesAlert.vue'
+import RCSesBadgeV2 from '@/components/common/BadgeV2/RCSesBadgeV2.vue'
 import RcSesError from '@/components/common/Error/RcSesError.vue'
 import RcSesButton from '@/components/common/buttons/Button/RcSesButton.vue'
 import RcSesFormControl from '@/components/common/forms/RcSesFormControl.vue'
@@ -113,6 +114,8 @@ export function createRcSesComponents(options: object = {}): Plugin<[]> {
     app.component('RcSesTable', RcSesTable)
     app.component('RcSesTab', RcSesTab)
     app.component('RcSesTooltip', RcSesTooltip)
+
+    app.component('RCSesBadgeV2', RCSesBadgeV2)
   }
 
   return { install }
@@ -128,7 +131,7 @@ export {
   RcSesFormStepper,
   RcSesFormActions,
 }
-export { RcSesAlert, RcSesButton }
+export { RcSesAlert, RcSesButton, RCSesBadgeV2 }
 export { RcSesCheckbox, RcSesCheckboxField }
 export { RcSesFileInput, RcSesFileInputField }
 export { RcSesDatePicker, RcSesDatePickerField, RcSesTimePickerField }
