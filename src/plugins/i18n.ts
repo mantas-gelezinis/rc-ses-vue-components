@@ -40,6 +40,10 @@ const i18n = () => {
           RcSesSelectField: {
             noData: 'Nėra duomenų',
           },
+
+          RcSesBadgeV2: {
+            remove: 'Pašalinti',
+          },
         },
       },
       en: {
@@ -66,6 +70,10 @@ const i18n = () => {
 
           RcSesSelectField: {
             noData: 'No results',
+          },
+
+          RcSesBadgeV2: {
+            remove: 'Remove',
           },
         },
       },

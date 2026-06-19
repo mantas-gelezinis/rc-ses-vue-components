@@ -1,6 +1,7 @@
 import { ThemeDefinition } from 'vuetify'
 
 import Colors from './colors'
+import ColorsV2 from './colorsV2'
 
 export const lightTheme: ThemeDefinition = {
   dark: false,
@@ -12,6 +13,7 @@ export const lightTheme: ThemeDefinition = {
     ...Colors.grey,
     ...Colors.success,
     ...Colors.info,
+    ...ColorsV2,
     background: '#ffffff',
   },
   variables: {},
