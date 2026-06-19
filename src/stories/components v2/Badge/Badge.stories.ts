@@ -1,4 +1,4 @@
-import { StoryFn } from '@storybook/vue3'
+import type { StoryFn } from '@storybook/vue3'
 
 import RcSesBadgeV2 from '@/components/common/BadgeV2/RcSesBadgeV2.vue'
 
