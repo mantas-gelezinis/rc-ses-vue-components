@@ -5,7 +5,7 @@ import { defineComponent } from 'vue'
 
 import initI18n from '@/plugins/i18n'
 
-import RCSesBadgeV2 from './RCSesBadgeV2.vue'
+import RcSesBadgeV2 from './RcSesBadgeV2.vue'
 
 /* eslint-disable vue/one-component-per-file -- test stubs for Vuetify components */
 const VChipStub = defineComponent({
@@ -46,7 +46,7 @@ const VIconStub = defineComponent({
 const { i18next } = initI18n()
 
 const renderBadge = (props = {}, slots = {}) =>
-  render(RCSesBadgeV2, {
+  render(RcSesBadgeV2, {
     props,
     slots,
     global: {
@@ -58,7 +58,7 @@ const renderBadge = (props = {}, slots = {}) =>
     },
   })
 
-describe('RCSesBadgeV2', () => {
+describe('RcSesBadgeV2', () => {
   it('renders badge text via slot', () => {
     renderBadge({}, { default: 'Registered' })
     expect(screen.getByText('Registered')).toBeInTheDocument()

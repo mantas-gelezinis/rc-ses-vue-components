@@ -1,11 +1,11 @@
 import { StoryFn } from '@storybook/vue3'
 
-import RCSesBadgeV2 from '@/components/common/BadgeV2/RCSesBadgeV2.vue'
+import RcSesBadgeV2 from '@/components/common/BadgeV2/RcSesBadgeV2.vue'
 
 export default {
-  components: { RCSesBadgeV2 },
+  components: { RcSesBadgeV2 },
   title: 'ComponentsV2/Badge',
-  component: RCSesBadgeV2,
+  component: RcSesBadgeV2,
   tags: ['autodocs'],
   argTypes: {
     type: {
@@ -34,7 +34,7 @@ export default {
 }
 
 const Template: StoryFn = (args) => ({
-  components: { RCSesBadgeV2 },
+  components: { RcSesBadgeV2 },
   setup() {
     const types = ['neutral', 'success', 'warning', 'error', 'info', 'brand']
     return { args, types }
@@ -42,24 +42,24 @@ const Template: StoryFn = (args) => ({
   template: `
     <div class="storybook-field">
       <div class="storybook-field-view">
-        <RCSesBadgeV2 v-bind="args">
+        <RcSesBadgeV2 v-bind="args">
           {{ args.default || 'Badge label' }}
-        </RCSesBadgeV2>
+        </RcSesBadgeV2>
       </div>
 
       <div class="storybook-field-previews">
         <div class="storybook-field-previews-title">Size: Regular (with icon & close)</div>
         <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;">
-          <RCSesBadgeV2 v-for="t in types" :key="'reg-'+t" :type="t" size="regular" showIcon showClose>
+          <RcSesBadgeV2 v-for="t in types" :key="'reg-'+t" :type="t" size="regular" showIcon showClose>
             {{ t.charAt(0).toUpperCase() + t.slice(1) }}
-          </RCSesBadgeV2>
+          </RcSesBadgeV2>
         </div>
 
         <div class="storybook-field-previews-title">Size: Small (with icon)</div>
         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <RCSesBadgeV2 v-for="t in types" :key="'sm-'+t" :type="t" size="small" showIcon>
+          <RcSesBadgeV2 v-for="t in types" :key="'sm-'+t" :type="t" size="small" showIcon>
             {{ t.charAt(0).toUpperCase() + t.slice(1) }}
-          </RCSesBadgeV2>
+          </RcSesBadgeV2>
         </div>
       </div>
     </div>

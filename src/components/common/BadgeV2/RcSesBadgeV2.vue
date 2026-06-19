@@ -71,7 +71,7 @@ const handleClose = () => {
 const statusTypes: BadgeType[] = ['success', 'warning', 'error', 'info']
 
 const chipRole = computed(() => {
-  if (props.showClose || props.accessibleLabel) {
+  if (props.showClose) {
     return undefined
   }
 
@@ -85,7 +85,15 @@ const chipRole = computed(() => {
 const closeAriaLabel = computed(() => t('RcSesBadgeV2.remove', { ns: 'components' }))
 
 const filteredProps = computed(() => {
-  const { type, size, showIcon, showClose, accessibleLabel, ...vuetifyProps } = props
+  const {
+    type,
+    size,
+    showIcon,
+    showClose,
+    accessibleLabel,
+    prependIcon,
+    ...vuetifyProps
+  } = props
   return vuetifyProps
 })
 </script>
