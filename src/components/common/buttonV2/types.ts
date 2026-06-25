@@ -1,45 +1,39 @@
+import type { VNodeProps } from 'vue'
 import type { VBtn } from 'vuetify/components'
-
-import type { ColorType } from '@/types/common/ColorType'
 
 export type ButtonVariants = 'primary' | 'secondary' | 'error' | 'link'
 export type ButtonSize = 'small' | 'regular'
 
-export interface ButtonProps {
+type VBtnPublicProps = Omit<
+  Partial<VBtn['$props']>,
+  | keyof VNodeProps
+  | 'size'
+  | 'variant'
+  | '$children'
+  | 'v-slots'
+  | 'v-slot:default'
+  | 'v-slot:prepend'
+  | 'v-slot:append'
+  | 'v-slot:loader'
+>
+
+export type ButtonProps = VBtnPublicProps & {
+  /** Screen reader label, e.g. for icon-only buttons without visible text */
   accessibleLabel?: string
-  appendIcon?: VBtn['$props']['appendIcon']
-  baseColor?: VBtn['$props']['baseColor']
-  block?: VBtn['$props']['block']
-  border?: VBtn['$props']['border']
-  color?: ColorType
-  density?: VBtn['$props']['density']
-  disabled?: VBtn['$props']['disabled']
-  elevation?: VBtn['$props']['elevation']
-  exact?: VBtn['$props']['exact']
-  flat?: VBtn['$props']['flat']
-  height?: VBtn['$props']['height']
-  href?: VBtn['$props']['href']
-  icon?: VBtn['$props']['icon']
-  loading?: VBtn['$props']['loading']
-  location?: VBtn['$props']['location']
-  maxHeight?: VBtn['$props']['maxHeight']
-  maxWidth?: VBtn['$props']['maxWidth']
-  minHeight?: VBtn['$props']['minHeight']
-  minWidth?: VBtn['$props']['minWidth']
-  position?: VBtn['$props']['position']
-  prependIcon?: VBtn['$props']['prependIcon']
-  readonly?: VBtn['$props']['readonly']
-  replace?: VBtn['$props']['replace']
-  selectedClass?: VBtn['$props']['selectedClass']
   size?: ButtonSize
-  stacked?: VBtn['$props']['stacked']
-  symbol?: VBtn['$props']['symbol']
-  tag?: VBtn['$props']['tag']
-  text?: VBtn['$props']['text']
-  theme?: VBtn['$props']['theme']
-  tile?: VBtn['$props']['tile']
-  to?: VBtn['$props']['to']
-  value?: VBtn['$props']['value']
   variant?: ButtonVariants
-  width?: VBtn['$props']['width']
+}
+
+/** Props declared at runtime; remaining VBtn props pass through via attrs. */
+export type ButtonOwnProps = {
+  accessibleLabel?: string
+  variant?: ButtonVariants
+  size?: ButtonSize
+  loading?: VBtn['$props']['loading']
+  icon?: VBtn['$props']['icon']
+  prependIcon?: VBtn['$props']['prependIcon']
+  appendIcon?: VBtn['$props']['appendIcon']
+  disabled?: VBtn['$props']['disabled']
+  density?: VBtn['$props']['density']
+  flat?: VBtn['$props']['flat']
 }

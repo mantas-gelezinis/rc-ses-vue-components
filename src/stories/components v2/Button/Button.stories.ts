@@ -1,10 +1,8 @@
-import { StoryFn } from '@storybook/vue3'
+import type { Meta, StoryFn } from '@storybook/vue3'
 
 import RcSesButtonV2 from '@/components/common/buttonV2/RcSesButtonV2.vue'
-import type { ButtonProps } from '@/components/common/buttonV2/types'
 
-export default {
-  components: { RcSesButtonV2 },
+const meta: Meta<typeof RcSesButtonV2> = {
   title: 'components v2/Button',
   component: RcSesButtonV2,
   tags: ['autodocs'],
@@ -26,7 +24,11 @@ export default {
   },
 }
 
-const Template: StoryFn<ButtonProps> = (args) => ({
+export default meta
+
+type Story = StoryFn<typeof RcSesButtonV2>
+
+const Template: Story = (args) => ({
   components: { RcSesButtonV2 },
   setup() {
     return { args }
@@ -53,7 +55,7 @@ Primary.args = {
   size: 'regular',
 }
 
-export const WithPrependIcon: StoryFn<ButtonProps> = (args) => ({
+export const WithPrependIcon: Story = (args) => ({
   components: { RcSesButtonV2 },
   setup() {
     return { args }
@@ -64,7 +66,7 @@ WithPrependIcon.args = {
   variant: 'primary',
 }
 
-export const IconOnly: StoryFn<ButtonProps> = (args) => ({
+export const IconOnly: Story = (args) => ({
   components: { RcSesButtonV2 },
   setup() {
     return { args }
@@ -76,7 +78,7 @@ IconOnly.args = {
   accessibleLabel: 'Add item',
 }
 
-export const Loading: StoryFn<ButtonProps> = (args) => ({
+export const Loading: Story = (args) => ({
   components: { RcSesButtonV2 },
   setup() {
     return { args }
@@ -94,7 +96,7 @@ Loading.args = {
   loading: true,
 }
 
-export const Disabled: StoryFn<ButtonProps> = () => ({
+export const Disabled: Story = () => ({
   components: { RcSesButtonV2 },
   template: `
     <div style="display: flex; gap: 12px; flex-wrap: wrap;">
@@ -106,7 +108,7 @@ export const Disabled: StoryFn<ButtonProps> = () => ({
   `,
 })
 
-export const Small: StoryFn<ButtonProps> = () => ({
+export const Small: Story = () => ({
   components: { RcSesButtonV2 },
   template: `
     <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">

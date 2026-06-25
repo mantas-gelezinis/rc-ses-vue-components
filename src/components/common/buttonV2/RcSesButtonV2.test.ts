@@ -45,146 +45,115 @@ const VIconStub = defineComponent({
   },
 })
 
+const VIconWithDataIconStub = defineComponent({
+  name: 'VIcon',
+  props: { icon: { type: String, default: undefined } },
+  setup(iconProps) {
+    return () => h('span', { class: 'v-icon', 'data-icon': iconProps.icon })
+  },
+})
+
+const renderButton = (
+  props: Partial<ButtonProps> = {},
+  slots: Record<string, string> = {},
+  iconStub = VIconStub,
+) =>
+  render(RcSesButtonV2, {
+    props,
+    slots,
+    global: {
+      stubs: { VBtn: VBtnStub, VIcon: iconStub },
+    },
+  })
+
 describe('RcSesButtonV2', () => {
-  it('renders slot content', () => {
-    render(RcSesButtonV2, {
-      slots: { default: 'Click me' },
-      global: {
-        stubs: { VBtn: VBtnStub, VIcon: VIconStub },
-      },
+  describe('render basics', () => {
+    it('renders slot content', () => {
+      renderButton({}, { default: 'Click me' })
+
+      expect(screen.getByRole('button', { name: 'Click me' })).toBeInTheDocument()
     })
 
-    expect(screen.getByRole('button', { name: 'Click me' })).toBeInTheDocument()
+    describe('variant mapping', () => {
+      it.each([
+        ['primary', 'flat'],
+        ['secondary', 'outlined'],
+        ['error', 'flat'],
+        ['link', 'text'],
+      ] as const)('maps %s to %s v-btn variant', (variant, expected) => {
+        renderButton({ variant }, { default: 'Button' })
+
+        expect(screen.getByRole('button')).toHaveAttribute('data-variant', expected)
+      })
+    })
   })
 
-  it('maps primary variant to flat v-btn variant', () => {
-    render(RcSesButtonV2, {
-      props: { variant: 'primary' },
-      slots: { default: 'Button' },
-      global: {
-        stubs: { VBtn: VBtnStub, VIcon: VIconStub },
-      },
+  describe('loading states', () => {
+    it('uses v-btn loading for text-only loading state', () => {
+      renderButton({ loading: true }, { default: 'Button' })
+
+      const button = screen.getByRole('button')
+      expect(button).toHaveAttribute('data-loading', 'true')
+      expect(button.className).toContain('rc-ses-btn-v2--text-loading')
     })
 
-    expect(screen.getByRole('button')).toHaveAttribute('data-variant', 'flat')
+    it('replaces prepend icon with spinner when loading', () => {
+      renderButton({ loading: true, prependIcon: '$plus' }, { default: 'Button' })
+
+      const button = screen.getByRole('button')
+      expect(button).toHaveAttribute('data-loading', 'false')
+      expect(button).toHaveAttribute('data-prepend-icon', '$spinner')
+      expect(button.className).toContain('rc-ses-btn-v2--loading')
+      expect(button.className).not.toContain('rc-ses-btn-v2--text-loading')
+    })
+
+    it('treats bare loading attribute as loading state', () => {
+      renderButton(
+        { loading: '' as ButtonProps['loading'], prependIcon: '$plus' },
+        { default: 'Button' },
+      )
+
+      const button = screen.getByRole('button')
+      expect(button).toHaveAttribute('data-prepend-icon', '$spinner')
+      expect(button.className).toContain('rc-ses-btn-v2--loading')
+    })
+
+    it('sets aria-busy when loading with custom spinner', () => {
+      renderButton({ loading: true, prependIcon: '$plus' }, { default: 'Button' })
+
+      expect(screen.getByRole('button')).toHaveAttribute('aria-busy', 'true')
+    })
+
+    it('does not apply loading class when loading is undefined', () => {
+      renderButton({}, { default: 'Button' })
+
+      expect(screen.getByRole('button').className).not.toContain('rc-ses-btn-v2--loading')
+    })
   })
 
-  it('maps secondary variant to outlined v-btn variant', () => {
-    render(RcSesButtonV2, {
-      props: { variant: 'secondary' },
-      slots: { default: 'Button' },
-      global: {
-        stubs: { VBtn: VBtnStub, VIcon: VIconStub },
-      },
+  describe('icon-only mode', () => {
+    it('renders icon-only button with icon prop', () => {
+      renderButton({ icon: '$plus', accessibleLabel: 'Add item' })
+
+      const button = screen.getByRole('button', { name: 'Add item' })
+      expect(button).toHaveAttribute('data-icon', 'true')
+      expect(button).toHaveAttribute('aria-label', 'Add item')
+      expect(button.className).toContain('rc-ses-btn-v2--icon-only')
+      expect(button.querySelector('.v-icon')).toBeInTheDocument()
     })
 
-    expect(screen.getByRole('button')).toHaveAttribute('data-variant', 'outlined')
-  })
+    it('renders spinner for icon-only loading state', () => {
+      renderButton(
+        { icon: '$plus', loading: true, accessibleLabel: 'Add item' },
+        { default: 'Button' },
+        VIconWithDataIconStub,
+      )
 
-  it('uses v-btn loading for text-only loading state', () => {
-    render(RcSesButtonV2, {
-      props: { loading: true },
-      slots: { default: 'Button' },
-      global: {
-        stubs: { VBtn: VBtnStub, VIcon: VIconStub },
-      },
+      const button = screen.getByRole('button', { name: 'Add item' })
+      expect(button).toHaveAttribute('data-loading', 'false')
+      expect(button).toHaveAttribute('aria-busy', 'true')
+      expect(button.querySelector('.v-icon')).toHaveAttribute('data-icon', '$spinner')
+      expect(button.className).toContain('rc-ses-btn-v2--loading')
     })
-
-    const button = screen.getByRole('button')
-    expect(button).toHaveAttribute('data-loading', 'true')
-    expect(button.className).toContain('rc-ses-btn-v2--text-loading')
-  })
-
-  it('replaces prepend icon with spinner when loading', () => {
-    render(RcSesButtonV2, {
-      props: { loading: true, prependIcon: '$plus' },
-      slots: { default: 'Button' },
-      global: {
-        stubs: { VBtn: VBtnStub, VIcon: VIconStub },
-      },
-    })
-
-    const button = screen.getByRole('button')
-    expect(button).toHaveAttribute('data-loading', 'false')
-    expect(button).toHaveAttribute('data-prepend-icon', '$spinner')
-    expect(button.className).toContain('rc-ses-btn-v2--loading')
-    expect(button.className).not.toContain('rc-ses-btn-v2--text-loading')
-  })
-
-  it('treats bare loading attribute as loading state', () => {
-    render(RcSesButtonV2, {
-      props: { loading: '' as ButtonProps['loading'], prependIcon: '$plus' },
-      slots: { default: 'Button' },
-      global: {
-        stubs: { VBtn: VBtnStub, VIcon: VIconStub },
-      },
-    })
-
-    const button = screen.getByRole('button')
-    expect(button).toHaveAttribute('data-prepend-icon', '$spinner')
-    expect(button.className).toContain('rc-ses-btn-v2--loading')
-  })
-
-  it('renders icon-only button with icon prop', () => {
-    render(RcSesButtonV2, {
-      props: { icon: '$plus', accessibleLabel: 'Add item' },
-      global: {
-        stubs: { VBtn: VBtnStub, VIcon: VIconStub },
-      },
-    })
-
-    const button = screen.getByRole('button', { name: 'Add item' })
-    expect(button).toHaveAttribute('data-icon', 'true')
-    expect(button).toHaveAttribute('aria-label', 'Add item')
-    expect(button.className).toContain('rc-ses-btn-v2--icon-only')
-    expect(button.querySelector('.v-icon')).toBeInTheDocument()
-  })
-
-  it('sets aria-busy when loading with custom spinner', () => {
-    render(RcSesButtonV2, {
-      props: { loading: true, prependIcon: '$plus' },
-      slots: { default: 'Button' },
-      global: {
-        stubs: { VBtn: VBtnStub, VIcon: VIconStub },
-      },
-    })
-
-    expect(screen.getByRole('button')).toHaveAttribute('aria-busy', 'true')
-  })
-
-  it('renders spinner for icon-only loading state', () => {
-    render(RcSesButtonV2, {
-      props: { icon: '$plus', loading: true, accessibleLabel: 'Add item' },
-      slots: { default: 'Button' },
-      global: {
-        stubs: {
-          VBtn: VBtnStub,
-          VIcon: defineComponent({
-            name: 'VIcon',
-            props: { icon: { type: String, default: undefined } },
-            setup(iconProps) {
-              return () => h('span', { class: 'v-icon', 'data-icon': iconProps.icon })
-            },
-          }),
-        },
-      },
-    })
-
-    const button = screen.getByRole('button', { name: 'Add item' })
-    expect(button).toHaveAttribute('data-loading', 'false')
-    expect(button).toHaveAttribute('aria-busy', 'true')
-    expect(button.querySelector('.v-icon')).toHaveAttribute('data-icon', '$spinner')
-    expect(button.className).toContain('rc-ses-btn-v2--loading')
-  })
-
-  it('does not apply loading class when loading is undefined', () => {
-    render(RcSesButtonV2, {
-      slots: { default: 'Button' },
-      global: {
-        stubs: { VBtn: VBtnStub, VIcon: VIconStub },
-      },
-    })
-
-    expect(screen.getByRole('button').className).not.toContain('rc-ses-btn-v2--loading')
   })
 })

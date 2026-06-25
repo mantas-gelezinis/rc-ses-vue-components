@@ -22,11 +22,11 @@
 
   &--text-loading {
     &.rc-ses-btn-v2--regular {
-      min-width: 5.5rem;
+      min-width: sizes-v2.rc-size-v2('button-loading-min-width-regular-v2');
     }
 
     &.rc-ses-btn-v2--small {
-      min-width: 4.5rem;
+      min-width: sizes-v2.rc-size-v2('button-loading-min-width-small-v2');
     }
   }
 
@@ -44,13 +44,7 @@
     margin-inline-end: 0 !important;
   }
 
-  &:focus-visible {
-    > .v-btn__overlay {
-      opacity: 0 !important;
-    }
-  }
-
-  &:hover {
+  &:is(:hover, :focus-visible) {
     > .v-btn__overlay {
       opacity: 0 !important;
     }
@@ -58,35 +52,35 @@
 
   &:focus-visible {
     border-color: rgb(var(--v-theme-border-focus-actual-v2)) !important;
-  }
 
-  &:focus-visible::after {
-    border-color: rgb(var(--v-theme-border-focus-actual-v2)) !important;
-    opacity: 1 !important;
+    &::after {
+      border-color: rgb(var(--v-theme-border-focus-actual-v2)) !important;
+      opacity: 1 !important;
+    }
   }
 
   &--small {
-    height: 36px !important;
+    height: sizes-v2.rc-size-v2('button-height-small-v2') !important;
     padding-top: spacing-v2.rc-spacing-v2('spacing-8-v2') !important;
     padding-bottom: spacing-v2.rc-spacing-v2('spacing-8-v2') !important;
   }
 
   &--regular {
-    height: 44px !important;
+    height: sizes-v2.rc-size-v2('button-height-regular-v2') !important;
     padding-top: spacing-v2.rc-spacing-v2('spacing-12-v2') !important;
     padding-bottom: spacing-v2.rc-spacing-v2('spacing-12-v2') !important;
   }
 
   &--icon-only {
-    width: 44px !important;
-    min-width: 44px !important;
-    max-width: 44px !important;
+    width: sizes-v2.rc-size-v2('button-height-regular-v2') !important;
+    min-width: sizes-v2.rc-size-v2('button-height-regular-v2') !important;
+    max-width: sizes-v2.rc-size-v2('button-height-regular-v2') !important;
     padding: 0 !important;
 
     &.rc-ses-btn-v2--small {
-      width: 36px !important;
-      min-width: 36px !important;
-      max-width: 36px !important;
+      width: sizes-v2.rc-size-v2('button-height-small-v2') !important;
+      min-width: sizes-v2.rc-size-v2('button-height-small-v2') !important;
+      max-width: sizes-v2.rc-size-v2('button-height-small-v2') !important;
     }
   }
 
