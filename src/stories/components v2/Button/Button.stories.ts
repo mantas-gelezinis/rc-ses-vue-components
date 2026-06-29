@@ -3,7 +3,7 @@ import type { Meta, StoryFn } from '@storybook/vue3'
 import RcSesButtonV2 from '@/components/common/buttonV2/RcSesButtonV2.vue'
 
 const meta: Meta<typeof RcSesButtonV2> = {
-  title: 'components v2/Button',
+  title: 'componentsV2/Button',
   component: RcSesButtonV2,
   tags: ['autodocs'],
   argTypes: {
