@@ -6,6 +6,7 @@ import useAccordionController from '@/components/common/Accordion/hooks/useAccor
 import RcSesAlert from '@/components/common/Alert/RcSesAlert.vue'
 import RcSesBadgeV2 from '@/components/common/BadgeV2/RcSesBadgeV2.vue'
 import RcSesError from '@/components/common/Error/RcSesError.vue'
+import RcSesButtonV2 from '@/components/common/buttonV2/RcSesButtonV2.vue'
 import RcSesButton from '@/components/common/buttons/Button/RcSesButton.vue'
 import RcSesFormControl from '@/components/common/forms/RcSesFormControl.vue'
 import RcSesCheckbox from '@/components/common/inputs/Checkboxes/Checkbox/RcSesCheckbox.vue'
@@ -71,6 +72,7 @@ export function createRcSesComponents(options: object = {}): Plugin<[]> {
 
     // eslint-disable-next-line vue/no-reserved-component-names
     app.component('RcSesButton', RcSesButton)
+    app.component('RcSesButtonV2', RcSesButtonV2)
 
     app.component('RcSesCheckbox', RcSesCheckbox)
 
@@ -131,7 +133,8 @@ export {
   RcSesFormStepper,
   RcSesFormActions,
 }
-export { RcSesAlert, RcSesButton, RcSesBadgeV2 }
+
+export { RcSesAlert, RcSesButton, RcSesBadgeV2, RcSesButtonV2 }
 export { RcSesCheckbox, RcSesCheckboxField }
 export { RcSesFileInput, RcSesFileInputField }
 export { RcSesDatePicker, RcSesDatePickerField, RcSesTimePickerField }
