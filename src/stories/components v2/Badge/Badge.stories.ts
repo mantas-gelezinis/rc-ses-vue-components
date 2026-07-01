@@ -4,7 +4,7 @@ import RcSesBadgeV2 from '@/components/common/BadgeV2/RcSesBadgeV2.vue'
 
 export default {
   components: { RcSesBadgeV2 },
-  title: 'ComponentsV2/Badge',
+  title: 'componentsV2/Badge',
   component: RcSesBadgeV2,
   tags: ['autodocs'],
   argTypes: {
