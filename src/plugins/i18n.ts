@@ -52,7 +52,7 @@ const i18n = () => {
             pay: 'Apmokėti',
             priceBeforeTaxes: 'Suma be PVM:',
           },
-          
+
           RcSesModalV2: {
             actions: {
               destructive: {
@@ -109,7 +109,7 @@ const i18n = () => {
             pay: 'Pay',
             priceBeforeTaxes: 'Amount excl. VAT:',
           },
-          
+
           RcSesModalV2: {
             actions: {
               destructive: {

@@ -142,17 +142,10 @@ export {
   RcSesFormActions,
 }
 
-export {
-  RcSesAlert,
-  RcSesButton,
-  RcSesBadgeV2,
-  RcSesButtonV2,
-  RcSesCardV2,
-  RcSesCardFooterV2,
-}
 export { RcSesAlert, RcSesButton }
 export { RcSesBadgeV2, RcSesButtonV2 }
 export { RcSesModalV2, RcSesBackdropV2 }
+export { RcSesCardV2, RcSesCardFooterV2 }
 export { RcSesCheckbox, RcSesCheckboxField }
 export { RcSesFileInput, RcSesFileInputField }
 export { RcSesDatePicker, RcSesDatePickerField, RcSesTimePickerField }
