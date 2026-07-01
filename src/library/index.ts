@@ -33,6 +33,7 @@ import RcSesTextField from '@/components/common/inputs/TextField/RcSesTextField.
 import RcSesTimePickerField from '@/components/common/inputs/TimePickerField/RcSesTimePickerField.vue'
 import RcSesTable from '@/components/common/tables/table/RcSesTable.vue'
 import RcSesTab from '@/components/common/tabs/RcSesTab.vue'
+import RcSesToggleV2 from '@/components/common/toggleV2/RcSesToggleV2.vue'
 import RcSesTooltip from '@/components/common/tooltip/RcSesTooltip.vue'
 import RcSesFormActions from '@/components/layouts/FormActions/RcSesFormActions.vue'
 import RcSesFormContainer from '@/components/layouts/FormContainer/RcSesFormContainer.vue'
@@ -73,6 +74,7 @@ export function createRcSesComponents(options: object = {}): Plugin<[]> {
     // eslint-disable-next-line vue/no-reserved-component-names
     app.component('RcSesButton', RcSesButton)
     app.component('RcSesButtonV2', RcSesButtonV2)
+    app.component('RcSesToggleV2', RcSesToggleV2)
 
     app.component('RcSesCheckbox', RcSesCheckbox)
 
@@ -134,7 +136,7 @@ export {
   RcSesFormActions,
 }
 
-export { RcSesAlert, RcSesButton, RcSesBadgeV2, RcSesButtonV2 }
+export { RcSesAlert, RcSesButton, RcSesBadgeV2, RcSesButtonV2, RcSesToggleV2 }
 export { RcSesCheckbox, RcSesCheckboxField }
 export { RcSesFileInput, RcSesFileInputField }
 export { RcSesDatePicker, RcSesDatePickerField, RcSesTimePickerField }
