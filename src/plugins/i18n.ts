@@ -44,6 +44,14 @@ const i18n = () => {
           RcSesBadgeV2: {
             remove: 'Pašalinti',
           },
+
+          RcSesCardV2: {
+            back: 'Grįžti',
+            cancel: 'Atšaukti',
+            continue: 'Tęsti',
+            pay: 'Apmokėti',
+            priceBeforeTaxes: 'Suma be PVM:',
+          },
         },
       },
       en: {
@@ -74,6 +82,14 @@ const i18n = () => {
 
           RcSesBadgeV2: {
             remove: 'Remove',
+          },
+
+          RcSesCardV2: {
+            back: 'Back',
+            cancel: 'Cancel',
+            continue: 'Continue',
+            pay: 'Pay',
+            priceBeforeTaxes: 'Amount excl. VAT:',
           },
         },
       },
