@@ -44,6 +44,24 @@ const i18n = () => {
           RcSesBadgeV2: {
             remove: 'Pašalinti',
           },
+
+          RcSesModalV2: {
+            actions: {
+              destructive: {
+                primary: 'Pašalinti',
+              },
+              confirm: {
+                primary: 'Tęsti',
+              },
+              success: {
+                primary: 'Uždaryti',
+              },
+              info: {
+                primary: 'Suprantu',
+              },
+              cancel: 'Atšaukti',
+            },
+          },
         },
       },
       en: {
@@ -74,6 +92,24 @@ const i18n = () => {
 
           RcSesBadgeV2: {
             remove: 'Remove',
+          },
+
+          RcSesModalV2: {
+            actions: {
+              destructive: {
+                primary: 'Remove',
+              },
+              confirm: {
+                primary: 'Continue',
+              },
+              success: {
+                primary: 'Close',
+              },
+              info: {
+                primary: 'I understand',
+              },
+              cancel: 'Cancel',
+            },
           },
         },
       },
