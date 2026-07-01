@@ -42,10 +42,16 @@ const VDialogStub = defineComponent({
     modelValue: { type: Boolean, default: false },
   },
   emits: ['update:modelValue', 'click:outside'],
-  setup(props, { slots, attrs }) {
+  setup(props, { slots, attrs, emit }) {
     return () =>
       props.modelValue
-        ? h('div', { ...attrs, 'data-testid': 'v-dialog' }, slots.default?.())
+        ? h('div', { ...attrs, 'data-testid': 'v-dialog' }, [
+            h('div', {
+              'data-testid': 'dialog-backdrop',
+              onClick: () => emit('click:outside'),
+            }),
+            slots.default?.(),
+          ])
         : null
   },
 })
@@ -126,5 +132,37 @@ describe('RcSesModalV2', () => {
     })
     expect(screen.getByRole('button', { name: 'Delete now' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Keep' })).toBeInTheDocument()
+  })
+
+  it('exposes accessibility attributes linking title and body', () => {
+    renderModal()
+    const dialog = screen.getByRole('document')
+    const title = screen.getByRole('heading', { name: 'Test title' })
+    const body = screen.getByText('Body content')
+
+    expect(dialog).toHaveAttribute('aria-labelledby', title.id)
+    expect(dialog).toHaveAttribute('aria-describedby', body.id)
+    expect(title.id).toMatch(/^rc-ses-modal-v2-title-/)
+    expect(body.id).toMatch(/^rc-ses-modal-v2-body-/)
+  })
+
+  it('marks decorative icon as hidden from assistive technologies', () => {
+    const { container } = renderModal({ type: 'info', showIcon: true })
+    expect(container.querySelector('.rc-ses-modal-v2__icon')).toHaveAttribute(
+      'aria-hidden',
+      'true',
+    )
+  })
+
+  it('closes modal when backdrop is clicked and persistent is false', async () => {
+    const { emitted } = renderModal({ persistent: false })
+    await fireEvent.click(screen.getByTestId('dialog-backdrop'))
+    expect(emitted()['update:modelValue']).toEqual([[false]])
+  })
+
+  it('does not close modal when backdrop is clicked and persistent is true', async () => {
+    const { emitted } = renderModal({ persistent: true })
+    await fireEvent.click(screen.getByTestId('dialog-backdrop'))
+    expect(emitted()['update:modelValue']).toBeUndefined()
   })
 })

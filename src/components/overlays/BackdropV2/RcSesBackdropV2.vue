@@ -1,6 +1,7 @@
 <template>
   <v-overlay
     :class="['rc-ses-backdrop-v2']"
+    data-testid="backdrop"
     :model-value="isVisible"
     v-bind="filteredProps"
     @update:model-value="handleUpdate"
@@ -10,11 +11,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import BackdropDefaults from './defaults'
 import './style.scss'
 import type { BackdropProps } from './types'
 
-const props = withDefaults(defineProps<BackdropProps>(), BackdropDefaults)
+const props = withDefaults(defineProps<BackdropProps>(), {
+  modelValue: true,
+  persistent: true,
+})
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: boolean): void

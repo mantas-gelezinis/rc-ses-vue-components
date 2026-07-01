@@ -8,7 +8,7 @@ import {
 } from '@/assets/icons/regular'
 import type { ButtonVariants } from '@/components/common/buttonV2/types'
 
-import type { ModalType } from './types'
+import type { ModalSize, ModalType } from './types'
 
 export interface ModalTypeConfig {
   icon: Component
@@ -34,7 +34,7 @@ export const MODAL_TYPE_CONFIG: Record<ModalType, ModalTypeConfig> = {
   },
 }
 
-export const MODAL_SIZE_MAP: Record<string, string> = {
+export const MODAL_SIZE_MAP: Record<ModalSize, string> = {
   sm: '480px',
   md: '600px',
   lg: '800px',

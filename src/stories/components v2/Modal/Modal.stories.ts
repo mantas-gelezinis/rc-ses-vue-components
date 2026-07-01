@@ -1,11 +1,10 @@
-import type { StoryFn } from '@storybook/vue3'
+import type { Meta, StoryObj } from '@storybook/vue3'
 import { reactive, ref } from 'vue'
 
 import RcSesButtonV2 from '@/components/common/buttonV2/RcSesButtonV2.vue'
 import RcSesModalV2 from '@/components/overlays/ModalV2/RcSesModalV2.vue'
 
-export default {
-  components: { RcSesModalV2, RcSesButtonV2 },
+const meta: Meta<typeof RcSesModalV2> = {
   title: 'componentsV2/Modal',
   component: RcSesModalV2,
   tags: ['autodocs'],
@@ -40,51 +39,52 @@ export default {
       control: 'text',
       description: 'Secondary action button label',
     },
-    default: {
-      control: 'text',
-      description: 'Main slot content text',
-    },
   },
 }
 
-const Template: StoryFn = (args) => ({
-  components: { RcSesModalV2, RcSesButtonV2 },
-  setup() {
-    const isOpen = ref(false)
-    const previewOpen = reactive({
-      destructive: false,
-      confirm: false,
-      success: false,
-      info: false,
-    })
-    const types = [
-      {
-        type: 'destructive',
-        title: 'Ar tikrai norite pašalinti?',
-        primaryActionLabel: 'Pašalinti',
-        secondaryActionLabel: 'Atšaukti',
-      },
-      {
-        type: 'confirm',
-        title: 'Ar tikrai norite tęsti?',
-        primaryActionLabel: 'Tęsti',
-        secondaryActionLabel: 'Atšaukti',
-      },
-      {
-        type: 'success',
-        title: 'Pavyko!',
-        primaryActionLabel: 'Uždaryti',
-      },
-      {
-        type: 'info',
-        title: 'Informacija',
-        primaryActionLabel: 'Suprantu',
-      },
-    ]
+export default meta
 
-    return { args, isOpen, previewOpen, types }
-  },
-  template: `
+type Story = StoryObj<typeof meta>
+
+const Template: Story = {
+  render: (args) => ({
+    components: { RcSesModalV2, RcSesButtonV2 },
+    setup() {
+      const isOpen = ref(false)
+      const previewOpen = reactive({
+        destructive: false,
+        confirm: false,
+        success: false,
+        info: false,
+      })
+      const types = [
+        {
+          type: 'destructive',
+          title: 'Ar tikrai norite pašalinti?',
+          primaryActionLabel: 'Pašalinti',
+          secondaryActionLabel: 'Atšaukti',
+        },
+        {
+          type: 'confirm',
+          title: 'Ar tikrai norite tęsti?',
+          primaryActionLabel: 'Tęsti',
+          secondaryActionLabel: 'Atšaukti',
+        },
+        {
+          type: 'success',
+          title: 'Pavyko!',
+          primaryActionLabel: 'Uždaryti',
+        },
+        {
+          type: 'info',
+          title: 'Informacija',
+          primaryActionLabel: 'Suprantu',
+        },
+      ]
+
+      return { args, isOpen, previewOpen, types }
+    },
+    template: `
     <div class="storybook-field">
       <div class="storybook-field-view">
         <RcSesButtonV2 @click="isOpen = true">Open Modal</RcSesButtonV2>
@@ -98,7 +98,7 @@ const Template: StoryFn = (args) => ({
           :primary-action-label="args.primaryActionLabel"
           :secondary-action-label="args.secondaryActionLabel"
         >
-          {{ args.default || 'Aprašymo tekstas.' }}
+          Aprašymo tekstas.
         </RcSesModalV2>
       </div>
 
@@ -124,16 +124,18 @@ const Template: StoryFn = (args) => ({
       </div>
     </div>
   `,
-})
+  }),
+}
 
-export const Default = Template.bind({})
-Default.args = {
-  title: 'Ar tikrai norite pašalinti?',
-  default: 'Aprašymo tekstas.',
-  type: 'destructive',
-  showIcon: true,
-  size: 'md',
-  persistent: false,
-  primaryActionLabel: 'Pašalinti',
-  secondaryActionLabel: 'Atšaukti',
+export const Default: Story = {
+  ...Template,
+  args: {
+    title: 'Ar tikrai norite pašalinti?',
+    type: 'destructive',
+    showIcon: true,
+    size: 'md',
+    persistent: false,
+    primaryActionLabel: 'Pašalinti',
+    secondaryActionLabel: 'Atšaukti',
+  },
 }

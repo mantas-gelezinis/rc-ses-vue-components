@@ -2,6 +2,16 @@
 @use '/src/styles/vuetify/spacing-v2' as spacing-v2;
 @use '/src/styles/vuetify/typography-v2' as typography-v2;
 
+$spacing-12: spacing-v2.rc-spacing-v2('spacing-12-v2');
+$spacing-24: spacing-v2.rc-spacing-v2('spacing-24-v2');
+$spacing-32: spacing-v2.rc-spacing-v2('spacing-32-v2');
+$spacing-80: spacing-v2.rc-spacing-v2('spacing-80-v2');
+
+$modal-shadow: 0 8px 24px rgba(16, 22, 31, 0.12);
+
+$max-height-scrim: calc(100vh - #{$spacing-80} * 2);
+$max-height-body: calc(100vh - #{$spacing-80} * 2 - 200px);
+
 .rc-ses-modal-v2-dialog {
   .v-overlay__scrim {
     background: rgba(var(--v-theme-neutral-950-v2), 0.5) !important;
@@ -9,7 +19,7 @@
   }
 
   .v-overlay__content {
-    max-height: calc(100vh - #{spacing-v2.rc-spacing-v2('spacing-80-v2')} * 2);
+    max-height: $max-height-scrim;
     overflow: visible;
   }
 }
@@ -19,19 +29,19 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  padding: spacing-v2.rc-spacing-v2('spacing-32-v2');
-  gap: spacing-v2.rc-spacing-v2('spacing-24-v2');
+  padding: $spacing-32;
+  gap: $spacing-24;
   background: rgb(var(--v-theme-surface-base-v2));
   border: borders-v2.rc-stroke-v2('border-width-default-v2') solid
     rgb(var(--v-theme-border-default-v2));
   border-radius: borders-v2.rc-radius-v2('modal-radius-v2');
-  box-shadow: 0 8px 24px rgba(16, 22, 31, 0.12);
+  box-shadow: $modal-shadow;
 
   &__content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: spacing-v2.rc-spacing-v2('spacing-12-v2');
+    gap: $spacing-12;
     width: 100%;
     min-width: 0;
   }
@@ -70,9 +80,7 @@
 
     width: 100%;
     min-width: 0;
-    max-height: calc(
-      100vh - #{spacing-v2.rc-spacing-v2('spacing-80-v2')} * 2 - 200px
-    );
+    max-height: $max-height-body;
     overflow-y: auto;
     color: rgb(var(--v-theme-secondary-text-v2));
   }
@@ -82,7 +90,7 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    gap: spacing-v2.rc-spacing-v2('spacing-12-v2');
+    gap: $spacing-12;
     width: 100%;
   }
 }
