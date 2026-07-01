@@ -27,6 +27,6 @@ describe('RcSesBackdropV2', () => {
         },
       },
     })
-    expect(container.querySelector('.rc-ses-backdrop-v2')).toBeInTheDocument()
+    expect(screen.getByTestId('backdrop')).toBeInTheDocument()
   })
 })
