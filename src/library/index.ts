@@ -41,6 +41,8 @@ import RcSesFormContainer from '@/components/layouts/FormContainer/RcSesFormCont
 import RcSesFormStepper from '@/components/layouts/FormStepper/RcSesFormStepper.vue'
 import RcSesFormTabContainer from '@/components/layouts/FormTabContainer/RcSesFormTabContainer.vue'
 import RcSesHeader from '@/components/layouts/Header/RcSesHeader.vue'
+import RcSesBackdropV2 from '@/components/overlays/BackdropV2/RcSesBackdropV2.vue'
+import RcSesModalV2 from '@/components/overlays/ModalV2/RcSesModalV2.vue'
 import initI18n from '@/plugins/i18n'
 import createRcSesVuetify from '@/plugins/vuetify'
 import '@/styles/shared/index.scss'
@@ -122,6 +124,8 @@ export function createRcSesComponents(options: object = {}): Plugin<[]> {
     app.component('RcSesBadgeV2', RcSesBadgeV2)
     app.component('RcSesCardV2', RcSesCardV2)
     app.component('RcSesCardFooterV2', RcSesCardFooterV2)
+    app.component('RcSesModalV2', RcSesModalV2)
+    app.component('RcSesBackdropV2', RcSesBackdropV2)
   }
 
   return { install }
@@ -146,6 +150,9 @@ export {
   RcSesCardV2,
   RcSesCardFooterV2,
 }
+export { RcSesAlert, RcSesButton }
+export { RcSesBadgeV2, RcSesButtonV2 }
+export { RcSesModalV2, RcSesBackdropV2 }
 export { RcSesCheckbox, RcSesCheckboxField }
 export { RcSesFileInput, RcSesFileInputField }
 export { RcSesDatePicker, RcSesDatePickerField, RcSesTimePickerField }

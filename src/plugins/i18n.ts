@@ -52,6 +52,24 @@ const i18n = () => {
             pay: 'Apmokėti',
             priceBeforeTaxes: 'Suma be PVM:',
           },
+          
+          RcSesModalV2: {
+            actions: {
+              destructive: {
+                primary: 'Pašalinti',
+              },
+              confirm: {
+                primary: 'Tęsti',
+              },
+              success: {
+                primary: 'Uždaryti',
+              },
+              info: {
+                primary: 'Suprantu',
+              },
+              cancel: 'Atšaukti',
+            },
+          },
         },
       },
       en: {
@@ -90,6 +108,24 @@ const i18n = () => {
             continue: 'Continue',
             pay: 'Pay',
             priceBeforeTaxes: 'Amount excl. VAT:',
+          },
+          
+          RcSesModalV2: {
+            actions: {
+              destructive: {
+                primary: 'Remove',
+              },
+              confirm: {
+                primary: 'Continue',
+              },
+              success: {
+                primary: 'Close',
+              },
+              info: {
+                primary: 'I understand',
+              },
+              cancel: 'Cancel',
+            },
           },
         },
       },
