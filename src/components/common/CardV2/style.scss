@@ -132,30 +132,3 @@
     }
   }
 }
-
-.rc-ses-card-price-before-taxes-v2 {
-  align-items: center;
-  color: rgb(var(--v-theme-text-default-v2));
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-
-  @include layout-v2.rc-breakpoint-v2-up('sm-v2') {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    text-align: right;
-    width: auto;
-  }
-
-  &__label {
-    @include typo-v2.rc-typography-v2('body-micro-v2');
-
-    color: rgb(var(--v-theme-text-secondary-v2));
-    text-transform: uppercase;
-  }
-
-  &__amount {
-    @include typo-v2.rc-typography-v2('card-title-v2');
-  }
-}

@@ -50,7 +50,6 @@ const i18n = () => {
             cancel: 'Atšaukti',
             continue: 'Tęsti',
             pay: 'Apmokėti',
-            priceBeforeTaxes: 'Suma be PVM:',
           },
 
           RcSesModalV2: {
@@ -107,7 +106,6 @@ const i18n = () => {
             cancel: 'Cancel',
             continue: 'Continue',
             pay: 'Pay',
-            priceBeforeTaxes: 'Amount excl. VAT:',
           },
 
           RcSesModalV2: {

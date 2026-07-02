@@ -8,16 +8,12 @@ export type CardDefaultsType = {
   showDescription: boolean
   contentVariant: CardProps['contentVariant']
   headingLevel: CardHeadingLevel
-  showFooter: boolean
-  variant: CardProps['variant']
 }
 
-const cardDefaults = {
+export const cardDefaults = {
   showDescription: true,
   contentVariant: 'default',
   headingLevel: 2,
-  showFooter: true,
-  variant: 'step-n',
 } satisfies CardDefaultsType
 
 export type CardFooterDefaultsType = {
@@ -25,7 +21,6 @@ export type CardFooterDefaultsType = {
   showBackAction: boolean
   showSecondaryAction: boolean
   showPrice: boolean
-  price: number
   primaryDisabled: boolean
   secondaryDisabled: boolean
   backDisabled: boolean
@@ -36,10 +31,7 @@ export const cardFooterDefaults = {
   showBackAction: true,
   showSecondaryAction: true,
   showPrice: true,
-  price: 0,
   primaryDisabled: false,
   secondaryDisabled: false,
   backDisabled: false,
 } satisfies CardFooterDefaultsType
-
-export default cardDefaults

@@ -32,9 +32,9 @@
             {{ secondaryButtonLabel }}
           </RcSesButtonV2>
 
-          <RcSesCardPriceBeforeTaxesV2
+          <RcSesPriceDisplayV2
             v-if="showPriceBlock"
-            :price="props.price ?? 0"
+            :price="props.price ?? ''"
             :label="props.priceLabel"
           />
 
@@ -58,10 +58,12 @@
 import { useTranslation } from 'i18next-vue'
 import { computed } from 'vue'
 
-import RcSesCardPriceBeforeTaxesV2 from '@/components/common/CardV2/RcSesCardPriceBeforeTaxesV2.vue'
 import { cardFooterDefaults } from '@/components/common/CardV2/defaults'
 import type { CardFooterProps } from '@/components/common/CardV2/types'
+import RcSesPriceDisplayV2 from '@/components/common/PriceDisplayV2/RcSesPriceDisplayV2.vue'
 import RcSesButtonV2 from '@/components/common/buttonV2/RcSesButtonV2.vue'
+
+import './style.scss'
 
 const props = withDefaults(defineProps<CardFooterProps>(), cardFooterDefaults)
 

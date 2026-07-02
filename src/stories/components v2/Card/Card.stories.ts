@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from '@storybook/vue3'
+import type { Meta, StoryObj } from '@storybook/vue3'
 
 import RcSesCardFooterV2 from '@/components/common/CardV2/RcSesCardFooterV2.vue'
 import RcSesCardV2 from '@/components/common/CardV2/RcSesCardV2.vue'
@@ -15,133 +15,134 @@ const meta: Meta<typeof RcSesCardV2> = {
       control: 'select',
       options: ['default', 'form-stack', 'radio-list', 'item-list', 'empty', 'review'],
     },
-    variant: {
+    headingLevel: {
       control: 'select',
-      options: ['step-1', 'step-n', 'final', 'custom'],
+      options: [2, 3, 4, 5, 6],
     },
-    showFooter: { control: 'boolean' },
-    showBackAction: { control: 'boolean' },
-    showSecondaryAction: { control: 'boolean' },
-    showPrice: { control: 'boolean' },
-    price: { control: 'number' },
   },
 }
 
 export default meta
 
-type Story = StoryFn<typeof RcSesCardV2>
+type Story = StoryObj<typeof RcSesCardV2>
 
-const Template: Story = (args) => ({
-  components: { RcSesCardV2 },
-  setup() {
-    return { args }
+export const StepN: Story = {
+  args: {
+    heading: 'Pavadinimas',
+    description: 'Papildomas aprašymo tekstas',
   },
-  template: `
-    <RcSesCardV2 v-bind="args">
-      <div style="padding: 12px; border: 1px dashed #ccc; border-radius: 8px;">
-        Turinio sritis (slot)
-      </div>
-    </RcSesCardV2>
-  `,
-})
-
-export const StepN = Template.bind({})
-StepN.args = {
-  heading: 'Pavadinimas',
-  description: 'Papildomas aprašymo tekstas',
-  variant: 'step-n',
-  showBackAction: true,
-  showSecondaryAction: true,
+  render: (args) => ({
+    components: { RcSesCardV2, RcSesCardFooterV2 },
+    setup() {
+      return { args }
+    },
+    template: `
+      <RcSesCardV2 v-bind="args">
+        <div style="padding: 12px; border: 1px dashed #ccc; border-radius: 8px;">
+          Turinio sritis (slot)
+        </div>
+        <template #footer>
+          <RcSesCardFooterV2 variant="step-n" :show-back-action="true" />
+        </template>
+      </RcSesCardV2>
+    `,
+  }),
 }
 
-export const Step1: Story = (args) => ({
-  components: { RcSesCardV2 },
-  setup() {
-    return { args }
-  },
-  template: `
-    <RcSesCardV2
-      v-bind="args"
-      heading="Pirmas žingsnis"
-      variant="step-1"
-      :show-back-action="false"
-      :show-secondary-action="true"
-    >
-      <div style="padding: 12px; border: 1px dashed #ccc; border-radius: 8px;">
-        Formos laukai
-      </div>
-    </RcSesCardV2>
-  `,
-})
-
-export const Final: Story = (args) => ({
-  components: { RcSesCardV2 },
-  setup() {
-    return { args }
-  },
-  template: `
-    <RcSesCardV2
-      v-bind="args"
-      heading="Patvirtinimas"
-      variant="final"
-      primary-label="Apmokėti"
-      :show-price="true"
-      :price="125.5"
-      :show-back-action="true"
-    >
-      <div style="padding: 12px; border: 1px dashed #ccc; border-radius: 8px;">
-        Peržiūros suvestinė
-      </div>
-    </RcSesCardV2>
-  `,
-})
-
-export const Mobile: Story = (args) => ({
-  components: { RcSesCardV2 },
-  setup() {
-    return { args }
-  },
-  template: `
-    <div style="max-width: 568px;">
-      <RcSesCardV2
-        v-bind="args"
-        heading="Mobili versija"
-        variant="step-n"
-      >
+export const Step1: Story = {
+  render: (args) => ({
+    components: { RcSesCardV2, RcSesCardFooterV2 },
+    setup() {
+      return { args }
+    },
+    template: `
+      <RcSesCardV2 v-bind="args" heading="Pirmas žingsnis">
         <div style="padding: 12px; border: 1px dashed #ccc; border-radius: 8px;">
-          Turinys
+          Formos laukai
         </div>
+        <template #footer>
+          <RcSesCardFooterV2
+            variant="step-1"
+            :show-back-action="false"
+            :show-secondary-action="true"
+          />
+        </template>
       </RcSesCardV2>
-    </div>
-  `,
-})
+    `,
+  }),
+}
 
-export const FormStackContent: Story = (args) => ({
-  components: { RcSesCardV2 },
-  setup() {
-    return { args }
-  },
-  template: `
-    <RcSesCardV2
-      v-bind="args"
-      heading="Forma"
-      content-variant="form-stack"
-      variant="step-n"
-    >
-      <div style="padding: 8px 0;">Laukas 1</div>
-      <div style="padding: 8px 0;">Laukas 2</div>
-      <div style="padding: 8px 0;">Laukas 3</div>
-    </RcSesCardV2>
-  `,
-})
+export const Final: Story = {
+  render: (args) => ({
+    components: { RcSesCardV2, RcSesCardFooterV2 },
+    setup() {
+      return { args }
+    },
+    template: `
+      <RcSesCardV2 v-bind="args" heading="Patvirtinimas">
+        <div style="padding: 12px; border: 1px dashed #ccc; border-radius: 8px;">
+          Peržiūros suvestinė
+        </div>
+        <template #footer>
+          <RcSesCardFooterV2
+            variant="final"
+            primary-label="Apmokėti"
+            :show-price="true"
+            price="125,50 €"
+            price-label="Suma be PVM:"
+            :show-back-action="true"
+          />
+        </template>
+      </RcSesCardV2>
+    `,
+  }),
+}
 
-export const FooterOnly: Story = () => ({
-  components: { RcSesCardFooterV2 },
-  template: `
-    <div style="max-width: 1064px;">
-      <RcSesCardFooterV2 variant="step-n" />
-    </div>
-  `,
-})
+export const Mobile: Story = {
+  render: (args) => ({
+    components: { RcSesCardV2, RcSesCardFooterV2 },
+    setup() {
+      return { args }
+    },
+    template: `
+      <div style="max-width: 568px;">
+        <RcSesCardV2 v-bind="args" heading="Mobili versija">
+          <div style="padding: 12px; border: 1px dashed #ccc; border-radius: 8px;">
+            Turinys
+          </div>
+          <template #footer>
+            <RcSesCardFooterV2 variant="step-n" />
+          </template>
+        </RcSesCardV2>
+      </div>
+    `,
+  }),
+}
 
-FooterOnly.storyName = 'Card footer (standalone)'
+export const FormStackContent: Story = {
+  render: (args) => ({
+    components: { RcSesCardV2 },
+    setup() {
+      return { args }
+    },
+    template: `
+      <RcSesCardV2 v-bind="args" heading="Forma" content-variant="form-stack">
+        <div style="padding: 8px 0;">Laukas 1</div>
+        <div style="padding: 8px 0;">Laukas 2</div>
+        <div style="padding: 8px 0;">Laukas 3</div>
+      </RcSesCardV2>
+    `,
+  }),
+}
+
+export const FooterOnly: Story = {
+  name: 'Card footer (standalone)',
+  render: () => ({
+    components: { RcSesCardFooterV2 },
+    template: `
+      <div style="max-width: 1064px;">
+        <RcSesCardFooterV2 variant="step-n" />
+      </div>
+    `,
+  }),
+}

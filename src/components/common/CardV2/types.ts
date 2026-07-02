@@ -16,8 +16,6 @@ export interface CardProps {
   description?: string
   contentVariant?: CardContentVariant
   headingLevel?: CardHeadingLevel
-  showFooter?: boolean
-  variant?: CardFooterVariant
 }
 
 export interface CardFooterProps {
@@ -25,7 +23,7 @@ export interface CardFooterProps {
   showBackAction?: boolean
   showSecondaryAction?: boolean
   showPrice?: boolean
-  price?: number
+  price?: string
   priceLabel?: string
   backLabel?: string
   primaryLabel?: string
@@ -34,9 +32,4 @@ export interface CardFooterProps {
   primaryDisabled?: boolean
   secondaryDisabled?: boolean
   backDisabled?: boolean
-}
-
-export interface CardPriceBeforeTaxesProps {
-  price: number
-  label?: string
 }
