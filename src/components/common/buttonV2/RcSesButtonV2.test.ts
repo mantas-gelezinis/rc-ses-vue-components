@@ -40,29 +40,25 @@ const VBtnStub = defineComponent({
 
 const VIconStub = defineComponent({
   name: 'VIcon',
-  setup(_, { slots }) {
-    return () => h('span', { class: 'v-icon' }, slots.default?.())
-  },
-})
-
-const VIconWithDataIconStub = defineComponent({
-  name: 'VIcon',
   props: { icon: { type: String, default: undefined } },
-  setup(iconProps) {
-    return () => h('span', { class: 'v-icon', 'data-icon': iconProps.icon })
+  setup(props) {
+    return () =>
+      h('span', {
+        class: 'v-icon',
+        'data-icon': props.icon,
+      })
   },
 })
 
 const renderButton = (
   props: Partial<ButtonProps> = {},
   slots: Record<string, string> = {},
-  iconStub = VIconStub,
 ) =>
   render(RcSesButtonV2, {
     props,
     slots,
     global: {
-      stubs: { VBtn: VBtnStub, VIcon: iconStub },
+      stubs: { VBtn: VBtnStub, VIcon: VIconStub },
     },
   })
 
@@ -146,7 +142,6 @@ describe('RcSesButtonV2', () => {
       renderButton(
         { icon: '$plus', loading: true, accessibleLabel: 'Add item' },
         { default: 'Button' },
-        VIconWithDataIconStub,
       )
 
       const button = screen.getByRole('button', { name: 'Add item' })

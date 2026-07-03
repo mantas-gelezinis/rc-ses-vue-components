@@ -45,6 +45,13 @@ const i18n = () => {
             remove: 'Pašalinti',
           },
 
+          RcSesCardV2: {
+            back: 'Grįžti',
+            cancel: 'Atšaukti',
+            continue: 'Tęsti',
+            pay: 'Apmokėti',
+          },
+
           RcSesModalV2: {
             actions: {
               destructive: {
@@ -92,6 +99,13 @@ const i18n = () => {
 
           RcSesBadgeV2: {
             remove: 'Remove',
+          },
+
+          RcSesCardV2: {
+            back: 'Back',
+            cancel: 'Cancel',
+            continue: 'Continue',
+            pay: 'Pay',
           },
 
           RcSesModalV2: {
