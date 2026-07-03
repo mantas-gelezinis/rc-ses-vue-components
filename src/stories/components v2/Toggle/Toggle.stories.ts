@@ -11,7 +11,8 @@ const meta: Meta<typeof RcSesToggleV2> = {
     label: { control: 'text' },
     showLabel: { control: 'boolean' },
     disabled: { control: 'boolean' },
-    accessibleLabel: { control: 'text' },
+    readonly: { control: 'boolean' },
+    ariaLabel: { control: 'text' },
   },
 }
 
@@ -19,7 +20,7 @@ export default meta
 
 type Story = StoryFn<typeof RcSesToggleV2>
 
-const Template: Story = (args) => ({
+export const Default: Story = (args) => ({
   components: { RcSesToggleV2 },
   setup() {
     const value = ref(args.modelValue ?? false)
@@ -43,8 +44,6 @@ const Template: Story = (args) => ({
     </div>
   `,
 })
-
-export const Default = Template.bind({})
 Default.args = {
   label: 'Toggle text',
   showLabel: true,
@@ -56,10 +55,11 @@ export const WithoutLabel: Story = (args) => ({
   components: { RcSesToggleV2 },
   setup() {
     const value = ref(false)
+
     return { args, value }
   },
   template:
-    '<RcSesToggleV2 v-bind="args" v-model="value" label="Toggle text" :show-label="false" accessible-label="Toggle text" />',
+    '<RcSesToggleV2 v-bind="args" v-model="value" label="Toggle text" :show-label="false" aria-label="Toggle text" />',
 })
 WithoutLabel.args = {
   disabled: false,
@@ -71,6 +71,16 @@ export const Disabled: Story = () => ({
     <div style="display: flex; flex-direction: column; gap: 16px;">
       <RcSesToggleV2 label="Off disabled" :model-value="false" disabled />
       <RcSesToggleV2 label="On disabled" :model-value="true" disabled />
+    </div>
+  `,
+})
+
+export const Readonly: Story = () => ({
+  components: { RcSesToggleV2 },
+  template: `
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <RcSesToggleV2 label="Off readonly" :model-value="false" readonly />
+      <RcSesToggleV2 label="On readonly" :model-value="true" readonly />
     </div>
   `,
 })

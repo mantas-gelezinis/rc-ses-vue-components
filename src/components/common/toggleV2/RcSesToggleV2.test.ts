@@ -45,7 +45,7 @@ const VSwitchStub = defineComponent({
   },
 })
 
-const renderToggle = (props: Partial<ToggleProps> = {}) =>
+const renderToggle = (props: Partial<ToggleProps> & { modelValue?: boolean } = {}) =>
   render(RcSesToggleV2, {
     props,
     global: {
@@ -73,11 +73,11 @@ describe('RcSesToggleV2', () => {
     },
   )
 
-  it('hides visible label and uses accessibleLabel when showLabel is false', () => {
+  it('hides visible label and uses ariaLabel when showLabel is false', () => {
     renderToggle({
       label: 'Toggle text',
       showLabel: false,
-      accessibleLabel: 'Enable notifications',
+      ariaLabel: 'Enable notifications',
       modelValue: false,
     })
 

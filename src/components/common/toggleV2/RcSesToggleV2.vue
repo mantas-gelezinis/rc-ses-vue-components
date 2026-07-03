@@ -1,11 +1,11 @@
 <template>
   <v-switch
     v-model="model"
-    :class="['rc-ses-toggle-v2']"
+    class="rc-ses-toggle-v2"
     v-bind="vuetifyProps"
     :label="displayLabel"
-    :aria-label="ariaLabel"
-    :aria-checked="ariaChecked"
+    :aria-label="ariaLabelValue"
+    :aria-checked="model"
     role="switch"
     density="compact"
     inset
@@ -15,51 +15,38 @@
   />
 </template>
 
-<script lang="ts">
-/* eslint-disable import/no-duplicates -- dual script block for exported prop types */
-import type { DefineComponent } from 'vue'
-
-import type { ToggleProps } from '@/components/common/toggleV2/types'
-
-export default {} as DefineComponent<ToggleProps>
-</script>
-
 <script setup lang="ts">
-/* eslint-disable import/first, import/no-duplicates -- dual script block for exported prop types */
-import { computed, useAttrs, withDefaults } from 'vue'
+import { computed, useAttrs } from 'vue'
 
-import ToggleDefaults from '@/components/common/toggleV2/defaults'
-import type { ToggleOwnProps } from '@/components/common/toggleV2/types'
+import toggleDefaults from '@/components/common/toggleV2/defaults'
+import type { ToggleProps } from '@/components/common/toggleV2/types'
 
 import './style.scss'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<ToggleOwnProps>(), ToggleDefaults)
+const props = withDefaults(defineProps<ToggleProps>(), toggleDefaults)
 const attrs = useAttrs()
 
 const model = defineModel<boolean>({ default: false })
 
 const displayLabel = computed(() => (props.showLabel ? props.label : undefined))
 
-const ariaLabel = computed(() => {
-  if (props.showLabel) {
+const ariaLabelValue = computed(() => {
+  if (props.showLabel && props.label) {
     return undefined
   }
 
-  return props.accessibleLabel ?? props.label
+  return props.ariaLabel ?? props.label
 })
-
-const ariaChecked = computed(() => (model.value ? 'true' : 'false'))
 
 const vuetifyProps = computed(() => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { color, label, ...passthroughAttrs } = attrs
+  const { label, showLabel, ariaLabel, ...switchProps } = props
 
   return {
-    ...passthroughAttrs,
-    disabled: props.disabled,
-    readonly: props.readonly,
+    ...switchProps,
+    ...attrs,
   }
 })
 </script>
