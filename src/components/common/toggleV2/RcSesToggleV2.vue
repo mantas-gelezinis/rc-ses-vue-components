@@ -40,13 +40,9 @@ const ariaLabelValue = computed(() => {
   return props.ariaLabel ?? props.label
 })
 
-const vuetifyProps = computed(() => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { label, showLabel, ariaLabel, ...switchProps } = props
-
-  return {
-    ...switchProps,
-    ...attrs,
-  }
-})
+const vuetifyProps = computed(() => ({
+  disabled: props.disabled,
+  readonly: props.readonly,
+  ...attrs,
+}))
 </script>

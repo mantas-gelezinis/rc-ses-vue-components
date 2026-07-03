@@ -1,4 +1,3 @@
-/* eslint-disable vue/one-component-per-file */
 import { fireEvent, render, screen } from '@testing-library/vue'
 import { describe, expect, it } from 'vitest'
 import { defineComponent, h } from 'vue'
@@ -105,5 +104,3 @@ describe('RcSesToggleV2', () => {
     expect(emitted()['update:modelValue']).toBeUndefined()
   })
 })
-
-/* eslint-enable vue/one-component-per-file */
