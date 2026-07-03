@@ -9,6 +9,7 @@ import RcSesError from '@/components/common/Error/RcSesError.vue'
 import RcSesButtonV2 from '@/components/common/buttonV2/RcSesButtonV2.vue'
 import RcSesButton from '@/components/common/buttons/Button/RcSesButton.vue'
 import RcSesFormControl from '@/components/common/forms/RcSesFormControl.vue'
+import RcSesImageAndTextV2 from '@/components/common/imageAndTextV2/RcSesImageAndTextV2.vue'
 import RcSesCheckbox from '@/components/common/inputs/Checkboxes/Checkbox/RcSesCheckbox.vue'
 import RcSesCheckboxField from '@/components/common/inputs/Checkboxes/CheckboxField/RcSesCheckboxField.vue'
 import RcSesDatePicker from '@/components/common/inputs/Datepickers/DatePicker/RcSesDatePicker.vue'
@@ -120,6 +121,7 @@ export function createRcSesComponents(options: object = {}): Plugin<[]> {
     app.component('RcSesTooltip', RcSesTooltip)
 
     app.component('RcSesBadgeV2', RcSesBadgeV2)
+    app.component('RcSesImageAndTextV2', RcSesImageAndTextV2)
     app.component('RcSesModalV2', RcSesModalV2)
     app.component('RcSesBackdropV2', RcSesBackdropV2)
   }
@@ -138,7 +140,7 @@ export {
   RcSesFormActions,
 }
 export { RcSesAlert, RcSesButton }
-export { RcSesBadgeV2, RcSesButtonV2 }
+export { RcSesBadgeV2, RcSesButtonV2, RcSesImageAndTextV2 }
 export { RcSesModalV2, RcSesBackdropV2 }
 export { RcSesCheckbox, RcSesCheckboxField }
 export { RcSesFileInput, RcSesFileInputField }
