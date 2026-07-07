@@ -35,6 +35,8 @@ import RcSesTextField from '@/components/common/inputs/TextField/RcSesTextField.
 import RcSesTimePickerField from '@/components/common/inputs/TimePickerField/RcSesTimePickerField.vue'
 import RcSesTable from '@/components/common/tables/table/RcSesTable.vue'
 import RcSesTab from '@/components/common/tabs/RcSesTab.vue'
+import RcSesReviewCardV2 from '@/components/common/reviewCardV2/RcSesReviewCardV2.vue'
+import RcSesSubcardV2 from '@/components/common/subcardV2/RcSesSubcardV2.vue'
 import RcSesToggleV2 from '@/components/common/toggleV2/RcSesToggleV2.vue'
 import RcSesTooltip from '@/components/common/tooltip/RcSesTooltip.vue'
 import RcSesFormActions from '@/components/layouts/FormActions/RcSesFormActions.vue'
@@ -126,6 +128,8 @@ export function createRcSesComponents(options: object = {}): Plugin<[]> {
     app.component('RcSesBadgeV2', RcSesBadgeV2)
     app.component('RcSesCardV2', RcSesCardV2)
     app.component('RcSesCardFooterV2', RcSesCardFooterV2)
+    app.component('RcSesSubcardV2', RcSesSubcardV2)
+    app.component('RcSesReviewCardV2', RcSesReviewCardV2)
     app.component('RcSesModalV2', RcSesModalV2)
     app.component('RcSesBackdropV2', RcSesBackdropV2)
   }
@@ -147,7 +151,7 @@ export {
 export { RcSesAlert, RcSesButton }
 export { RcSesBadgeV2, RcSesButtonV2, RcSesToggleV2 }
 export { RcSesModalV2, RcSesBackdropV2 }
-export { RcSesCardV2, RcSesCardFooterV2 }
+export { RcSesCardV2, RcSesCardFooterV2, RcSesReviewCardV2, RcSesSubcardV2 }
 export { RcSesCheckbox, RcSesCheckboxField }
 export { RcSesFileInput, RcSesFileInputField }
 export { RcSesDatePicker, RcSesDatePickerField, RcSesTimePickerField }

@@ -1,0 +1,55 @@
+@use '/src/styles/vuetify/borders-v2' as borders-v2;
+@use '/src/styles/vuetify/spacing-v2' as spacing-v2;
+@use '/src/styles/vuetify/typography-v2' as typo-v2;
+
+.rc-ses-review-card-v2 {
+  background-color: rgb(var(--v-theme-surface-base-v2));
+  border: borders-v2.rc-stroke-v2('border-width-default-v2') solid
+    rgb(var(--v-theme-border-subtle-v2));
+  border-radius: borders-v2.rc-radius-v2('review-card-radius-v2');
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: spacing-v2.rc-spacing-v2('review-card-padding-v2');
+  width: 100%;
+
+  &__header-row {
+    align-items: flex-start;
+    display: flex;
+    gap: spacing-v2.rc-spacing-v2('stack-default-v2');
+    justify-content: space-between;
+  }
+
+  &__title-group {
+    align-items: center;
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    gap: spacing-v2.rc-spacing-v2('stack-tight-v2');
+    min-width: 0;
+  }
+
+  &__heading {
+    @include typo-v2.rc-typography-v2('h4-v2');
+
+    color: rgb(var(--v-theme-text-default-v2));
+    margin: 0;
+  }
+
+  &__header-actions {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    gap: spacing-v2.rc-spacing-v2('stack-default-v2');
+    justify-content: flex-end;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: spacing-v2.rc-spacing-v2('review-card-row-gap-v2');
+    margin-top: spacing-v2.rc-spacing-v2('review-card-section-gap-v2');
+    padding: 0;
+  }
+}
