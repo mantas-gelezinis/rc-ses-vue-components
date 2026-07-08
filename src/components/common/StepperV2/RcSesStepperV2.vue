@@ -26,30 +26,16 @@
           v-for="(step, index) in steps"
           :key="step.id"
           :label="step.label"
-          :state="
-            getStepState(
-              index,
-              activeStep,
-              loading,
-            )
-          "
+          :state="getStepState(index, activeStep, loading)"
           :placement="getStepPlacement(index, steps.length)"
           :orientation="resolvedOrientation"
           :clickable="false"
           :show-label="false"
           :leading-connector-completed="
-            isLeadingConnectorCompleted(
-              index,
-              activeStep,
-              loading,
-            )
+            isLeadingConnectorCompleted(index, activeStep, loading)
           "
           :trailing-connector-completed="
-            isTrailingConnectorCompleted(
-              index,
-              activeStep,
-              loading,
-            )
+            isTrailingConnectorCompleted(index, activeStep, loading)
           "
         />
       </ol>
@@ -62,26 +48,16 @@
         v-for="(step, index) in steps"
         :key="step.id"
         :label="step.label"
-        :state="
-          getStepState(index, activeStep, loading)
-        "
+        :state="getStepState(index, activeStep, loading)"
         :placement="getStepPlacement(index, steps.length)"
         :orientation="resolvedOrientation"
         :clickable="isStepClickable(index, activeStep, true)"
         :show-label="true"
         :leading-connector-completed="
-          isLeadingConnectorCompleted(
-            index,
-            activeStep,
-            loading,
-          )
+          isLeadingConnectorCompleted(index, activeStep, loading)
         "
         :trailing-connector-completed="
-          isTrailingConnectorCompleted(
-            index,
-            activeStep,
-            loading,
-          )
+          isTrailingConnectorCompleted(index, activeStep, loading)
         "
         @click="handleStepClick(index)"
       />
@@ -115,6 +91,7 @@ import {
 } from '@/components/common/StepperV2/getStepState'
 import RcSesStepperStepV2 from '@/components/common/StepperV2/RcSesStepperStepV2.vue'
 import type { StepperOwnProps } from '@/components/common/StepperV2/types'
+import { isBelowBreakpointV2 } from '@/constants/breakpointsV2'
 
 import './style.scss'
 
@@ -127,9 +104,9 @@ const emit = defineEmits<{
 }>()
 
 const { t } = useTranslation()
-const { mdAndDown } = useDisplay()
+const { width } = useDisplay()
 
-const isMobile = computed(() => mdAndDown.value)
+const isMobile = computed(() => isBelowBreakpointV2(width.value, 'md-v2'))
 
 const resolvedOrientation = computed(() =>
   isMobile.value ? 'horizontal' : props.orientation,

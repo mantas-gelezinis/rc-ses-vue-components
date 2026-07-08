@@ -1,4 +1,3 @@
-/* eslint-disable vue/one-component-per-file */
 import { fireEvent, render, screen } from '@testing-library/vue'
 import I18NextVue from 'i18next-vue'
 import { describe, expect, it, vi } from 'vitest'
@@ -14,7 +13,7 @@ vi.mock('vuetify', async (importOriginal) => {
   return {
     ...actual,
     useDisplay: () => ({
-      mdAndDown: ref(false),
+      width: ref(1200),
     }),
   }
 })

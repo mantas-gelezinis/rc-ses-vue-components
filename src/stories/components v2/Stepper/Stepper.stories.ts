@@ -19,7 +19,7 @@ const verticalSteps: StepperStep[] = [
 ]
 
 const meta: Meta<typeof RcSesStepperV2> = {
-  title: 'components v2/Stepper',
+  title: 'componentsV2/Stepper',
   component: RcSesStepperV2,
   tags: ['autodocs'],
   argTypes: {

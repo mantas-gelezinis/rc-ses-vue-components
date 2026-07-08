@@ -37,14 +37,18 @@
           <CheckCircleFilledIcon
             v-if="state === 'completed'"
             class="rc-ses-stepper-v2__icon-graphic"
-            size="20"
+            :size="stepIconSize"
           />
           <DotCircleFilledIcon
             v-else-if="state === 'active'"
             class="rc-ses-stepper-v2__icon-graphic"
-            size="20"
+            :size="stepIconSize"
           />
-          <CircleFilledIcon v-else class="rc-ses-stepper-v2__icon-graphic" size="20" />
+          <CircleFilledIcon
+            v-else
+            class="rc-ses-stepper-v2__icon-graphic"
+            :size="stepIconSize"
+          />
         </span>
         <span
           v-if="showTrailingConnector"
@@ -90,6 +94,9 @@ import type {
   StepperStepPlacement,
   StepperStepState,
 } from '@/components/common/StepperV2/types'
+import { RC_SIZES_V2 } from '@/constants/sizesV2'
+
+const stepIconSize = RC_SIZES_V2['icon-medium-v2']
 
 const props = defineProps<{
   label: string
@@ -130,7 +137,6 @@ const ariaLabel = computed(() => {
       step: props.label,
     })
   }
-  
 
   if (props.state === 'disabled') {
     return props.label

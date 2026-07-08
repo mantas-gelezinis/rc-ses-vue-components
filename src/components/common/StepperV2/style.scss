@@ -1,6 +1,14 @@
 @use '/src/styles/vuetify/typography-v2' as typo-v2;
 @use '/src/styles/vuetify/spacing-v2' as spacing-v2;
 @use '/src/styles/vuetify/layout-v2' as layout-v2;
+@use '/src/styles/vuetify/sizes-v2' as sizes-v2;
+@use '/src/styles/vuetify/borders-v2' as borders-v2;
+
+$stepper-step-height: sizes-v2.rc-size-v2('button-height-regular-v2');
+$stepper-step-height-mobile: sizes-v2.rc-size-v2('button-height-small-v2');
+$stepper-icon-size: sizes-v2.rc-size-v2('icon-medium-v2');
+$stepper-stroke: borders-v2.rc-stroke-v2('stroke-2-v2');
+$stepper-focus-stroke: borders-v2.rc-stroke-v2('border-width-focus-v2');
 
 .rc-ses-stepper-v2 {
   width: 100%;
@@ -16,9 +24,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    flex: 0 0 36px;
+    width: $stepper-step-height-mobile;
+    height: $stepper-step-height-mobile;
+    flex: 0 0 $stepper-step-height-mobile;
   }
 
   &__list {
@@ -36,23 +44,30 @@
 
   &--horizontal:not(&--mobile) {
     max-width: layout-v2.rc-layout-v2('container-medium-v2');
-    height: 44px;
+    height: $stepper-step-height;
   }
 
   &--vertical {
-    width: 220px;
+    width: layout-v2.rc-layout-v2('stepper-column-width-v2');
+    min-width: layout-v2.rc-layout-v2('stepper-column-width-v2');
+    max-width: layout-v2.rc-layout-v2('stepper-column-max-width-v2');
     flex-shrink: 0;
   }
 
   &--vertical &__list {
     flex-direction: column;
-    gap: spacing-v2.rc-spacing-v2('spacing-8-v2');
+    gap: 0;
+  }
+
+  &--vertical &__step {
+    flex: none;
+    height: $stepper-step-height;
   }
 
   &--horizontal &__step {
     flex: 1 1 0;
     min-width: 0;
-    height: 44px;
+    height: $stepper-step-height;
   }
 
   &--horizontal &__step--first &__step-control {
@@ -83,7 +98,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: spacing-v2.rc-spacing-v2('spacing-4-v2');
+    gap: spacing-v2.rc-spacing-v2('stepper-item-gap-v2');
     width: 100%;
     height: 100%;
     border: 0;
@@ -99,34 +114,35 @@
     }
 
     &:focus-visible {
-      outline: 2px solid rgb(var(--v-theme-border-focus-actual-v2));
-      outline-offset: 2px;
-      border-radius: 4px;
+      outline: $stepper-focus-stroke solid rgb(var(--v-theme-border-focus-actual-v2));
+      outline-offset: $stepper-focus-stroke;
+      border-radius: borders-v2.rc-radius-v2('radius-4-v2');
     }
   }
 
   &__indicator-row {
     display: flex;
     align-items: flex-start;
-    gap: spacing-v2.rc-spacing-v2('spacing-4-v2');
+    gap: spacing-v2.rc-spacing-v2('stepper-item-gap-v2');
     width: 100%;
-    height: 20px;
+    height: $stepper-icon-size;
   }
 
   &--vertical &__indicator-row {
-    flex: 0 0 20px;
-    width: 20px;
+    flex: 0 0 auto;
+    width: $stepper-icon-size;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     height: auto;
+    gap: 0;
   }
 
   &--vertical &__step-control {
     flex-direction: row;
     align-items: flex-start;
     text-align: left;
-    height: auto;
-    gap: spacing-v2.rc-spacing-v2('spacing-8-v2');
+    height: 100%;
+    gap: spacing-v2.rc-spacing-v2('stepper-item-gap-v2');
   }
 
   &__connector {
@@ -140,15 +156,19 @@
   }
 
   &--vertical &__connector {
-    padding: 0;
+    width: 100%;
+    padding: 0 calc(($stepper-icon-size - $stepper-stroke) / 2);
+    box-sizing: border-box;
     flex: 0 0 auto;
-    align-self: center;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    margin-top: spacing-v2.rc-spacing-v2('stepper-item-gap-v2');
   }
 
   &__connector-line {
     width: 100%;
-    height: 2px;
+    height: $stepper-stroke;
     background-color: rgb(var(--v-theme-neutral-300-v2));
     border-radius: 0;
 
@@ -166,10 +186,10 @@
   }
 
   &--vertical &__connector-line {
-    width: 2px;
-    height: 14px;
-    margin-top: spacing-v2.rc-spacing-v2('spacing-4-v2');
-    border-radius: 9999px;
+    width: $stepper-stroke;
+    height: spacing-v2.rc-spacing-v2('spacing-16-v2');
+    margin-top: 0;
+    border-radius: borders-v2.rc-radius-v2('radius-full-v2');
   }
 
   &--vertical &__connector--leading {
@@ -180,9 +200,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
-    flex: 0 0 20px;
+    width: $stepper-icon-size;
+    height: $stepper-icon-size;
+    flex: 0 0 $stepper-icon-size;
   }
 
   &__icon--completed,
@@ -203,7 +223,7 @@
     @include typo-v2.rc-typography-v2('body-small-v2');
     color: rgb(var(--v-theme-secondary-text-v2));
     width: 100%;
-    height: 20px;
+    height: $stepper-icon-size;
 
     &--active {
       font-weight: 500;
@@ -247,7 +267,7 @@
     width: 100px;
     max-width: 100%;
     height: 14px;
-    border-radius: 4px;
+    border-radius: borders-v2.rc-radius-v2('radius-4-v2');
     background: linear-gradient(
       90deg,
       rgb(var(--v-theme-neutral-200-v2)) 0%,
@@ -269,11 +289,11 @@
 
     .rc-ses-stepper-v2__list {
       align-items: center;
-      min-height: 36px;
+      min-height: $stepper-step-height-mobile;
     }
 
     .rc-ses-stepper-v2__step {
-      height: 36px;
+      height: $stepper-step-height-mobile;
     }
 
     .rc-ses-stepper-v2__step-control {
