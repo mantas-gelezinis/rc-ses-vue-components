@@ -45,6 +45,12 @@ const i18n = () => {
             remove: 'Pašalinti',
           },
 
+          RcSesStepperV2: {
+            back: 'Grįžti',
+            completedStep: 'Užbaigta: {{step}}',
+            loadingStep: 'Įkeliama: {{step}}',
+          },
+
           RcSesModalV2: {
             actions: {
               destructive: {
@@ -92,6 +98,12 @@ const i18n = () => {
 
           RcSesBadgeV2: {
             remove: 'Remove',
+          },
+
+          RcSesStepperV2: {
+            back: 'Back',
+            completedStep: 'Completed: {{step}}',
+            loadingStep: 'Loading: {{step}}',
           },
 
           RcSesModalV2: {
