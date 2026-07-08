@@ -1,0 +1,129 @@
+@use '/src/styles/vuetify/typography-v2' as typo-v2;
+@use '/src/styles/vuetify/elevation-v2' as elevation-v2;
+@use '/src/styles/vuetify/spacing-v2' as spacing-v2;
+@use '/src/styles/vuetify/sizes-v2' as sizes-v2;
+
+.rc-ses-toggle-v2 {
+  $toggle-container-width: sizes-v2.rc-size-v2('toggle-container-width-v2');
+  $toggle-container-height: sizes-v2.rc-size-v2('toggle-container-height-v2');
+  $toggle-track-width: sizes-v2.rc-size-v2('toggle-track-width-v2');
+  $toggle-track-height: sizes-v2.rc-size-v2('toggle-track-height-v2');
+  $toggle-thumb-size: sizes-v2.rc-size-v2('toggle-thumb-size-v2');
+  $toggle-thumb-offset: calc(($toggle-track-width - $toggle-thumb-size) / 2 - 2px);
+  $toggle-thumb-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+
+  &.v-switch {
+    flex: 0 0 auto;
+
+    .v-input__control {
+      align-items: center;
+    }
+
+    .v-selection-control {
+      min-height: $toggle-container-height !important;
+      align-items: center;
+      gap: 0;
+    }
+
+    .v-selection-control__wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: $toggle-container-width;
+      height: $toggle-container-height;
+    }
+
+    .v-label {
+      @include typo-v2.rc-typography-v2('body-regular-v2');
+      color: rgb(var(--v-theme-text-default-v2));
+      opacity: 1;
+      padding-inline-start: spacing-v2.rc-spacing-v2('spacing-8-v2');
+    }
+
+    .v-switch__track {
+      opacity: 1 !important;
+      width: $toggle-track-width !important;
+      min-width: $toggle-track-width !important;
+      height: $toggle-track-height !important;
+      padding: 0 !important;
+      background-color: rgb(var(--v-theme-neutral-400-v2)) !important;
+      color: rgb(var(--v-theme-neutral-400-v2)) !important;
+      transition: background-color 0.2s ease;
+    }
+
+    .v-switch__thumb {
+      width: $toggle-thumb-size !important;
+      height: $toggle-thumb-size !important;
+      transform: none !important;
+      background-color: rgb(var(--v-theme-surface-base-v2)) !important;
+      color: rgb(var(--v-theme-surface-base-v2)) !important;
+      box-shadow: $toggle-thumb-shadow !important;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .v-selection-control__input {
+      width: $toggle-thumb-size;
+      height: $toggle-thumb-size;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    &.v-locale--is-ltr .v-selection-control__input,
+    .v-locale--is-ltr &.v-switch .v-selection-control__input {
+      transform: translateX(calc(-1 * #{$toggle-thumb-offset})) !important;
+    }
+
+    &.v-locale--is-rtl .v-selection-control__input,
+    .v-locale--is-rtl &.v-switch .v-selection-control__input {
+      transform: translateX($toggle-thumb-offset) !important;
+    }
+
+    &.v-locale--is-ltr .v-selection-control--dirty .v-selection-control__input,
+    .v-locale--is-ltr &.v-switch .v-selection-control--dirty .v-selection-control__input {
+      transform: translateX($toggle-thumb-offset) !important;
+    }
+
+    &.v-locale--is-rtl .v-selection-control--dirty .v-selection-control__input,
+    .v-locale--is-rtl &.v-switch .v-selection-control--dirty .v-selection-control__input {
+      transform: translateX(calc(-1 * #{$toggle-thumb-offset})) !important;
+    }
+
+    &:hover:not(.v-input--disabled) .v-selection-control:not(.v-selection-control--dirty) .v-switch__track {
+      background-color: rgb(var(--v-theme-neutral-500-v2)) !important;
+      color: rgb(var(--v-theme-neutral-500-v2)) !important;
+    }
+
+    .v-selection-control--dirty .v-switch__track {
+      background-color: rgb(var(--v-theme-cyan-500-v2)) !important;
+      color: rgb(var(--v-theme-cyan-500-v2)) !important;
+    }
+
+    &:hover:not(.v-input--disabled) .v-selection-control--dirty .v-switch__track {
+      background-color: rgb(var(--v-theme-cyan-600-v2)) !important;
+      color: rgb(var(--v-theme-cyan-600-v2)) !important;
+    }
+
+    &.v-input--disabled {
+      .v-selection-control:not(.v-selection-control--dirty) .v-switch__track {
+        background-color: rgb(var(--v-theme-neutral-200-v2)) !important;
+        color: rgb(var(--v-theme-neutral-200-v2)) !important;
+      }
+
+      .v-selection-control--dirty .v-switch__track {
+        background-color: rgb(var(--v-theme-neutral-500-v2)) !important;
+        color: rgb(var(--v-theme-neutral-500-v2)) !important;
+      }
+
+      .v-label {
+        color: rgb(var(--v-theme-text-disabled-v2));
+      }
+    }
+
+    .v-selection-control--focus-visible .v-switch__track {
+      box-shadow: 0 0 0 2px rgb(var(--v-theme-border-focus-v2));
+    }
+
+    .v-selection-control--dirty.v-selection-control--focus-visible .v-switch__track {
+      @include elevation-v2.rc-focus-ring-v2('focus-ring-default-v2');
+    }
+  }
+}

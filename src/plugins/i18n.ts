@@ -50,6 +50,12 @@ const i18n = () => {
             completedStep: 'Užbaigta: {{step}}',
             loadingStep: 'Įkeliama: {{step}}',
           },
+          RcSesCardV2: {
+            back: 'Grįžti',
+            cancel: 'Atšaukti',
+            continue: 'Tęsti',
+            pay: 'Apmokėti',
+          },
 
           RcSesModalV2: {
             actions: {
@@ -104,6 +110,12 @@ const i18n = () => {
             back: 'Back',
             completedStep: 'Completed: {{step}}',
             loadingStep: 'Loading: {{step}}',
+          },
+          RcSesCardV2: {
+            back: 'Back',
+            cancel: 'Cancel',
+            continue: 'Continue',
+            pay: 'Pay',
           },
 
           RcSesModalV2: {
