@@ -45,13 +45,13 @@
 <script setup lang="ts">
 import { computed, getCurrentInstance, useSlots } from 'vue'
 
+import imageAndTextV2Defaults from '@/components/common/ImageAndTextV2/defaults'
+import type { ImageAndTextProps } from '@/components/common/ImageAndTextV2/types'
 import RcSesButtonV2 from '@/components/common/buttonV2/RcSesButtonV2.vue'
-import ImageAndTextV2Defaults from '@/components/common/imageAndTextV2/defaults'
-import type { ImageAndTextProps } from '@/components/common/imageAndTextV2/types'
 
 import './style.scss'
 
-const props = withDefaults(defineProps<ImageAndTextProps>(), ImageAndTextV2Defaults)
+const props = withDefaults(defineProps<ImageAndTextProps>(), imageAndTextV2Defaults)
 
 const emit = defineEmits<{
   (e: 'action'): void

@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/vue3'
 
-import RcSesImageAndTextV2 from '@/components/common/imageAndTextV2/RcSesImageAndTextV2.vue'
-import type { ImageAndTextProps } from '@/components/common/imageAndTextV2/types'
+import RcSesImageAndTextV2 from '@/components/common/ImageAndTextV2/RcSesImageAndTextV2.vue'
+import type { ImageAndTextProps } from '@/components/common/ImageAndTextV2/types'
 
 const meta: Meta<typeof RcSesImageAndTextV2> = {
   title: 'componentsV2/ImageAndText',
