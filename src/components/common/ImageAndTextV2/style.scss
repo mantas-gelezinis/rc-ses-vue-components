@@ -1,0 +1,80 @@
+@use '/src/styles/vuetify/borders-v2' as borders-v2;
+@use '/src/styles/vuetify/layout-v2' as layout-v2;
+@use '/src/styles/vuetify/spacing-v2' as spacing-v2;
+@use '/src/styles/vuetify/typography-v2' as typography-v2;
+
+$image-and-text-content-max-width: 480px;
+
+@mixin flex-center-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rc-ses-image-and-text-v2 {
+  @include flex-center-column;
+  width: 100%;
+  gap: spacing-v2.rc-spacing-v2('stack-default-v2');
+
+  &--background {
+    padding-block: spacing-v2.rc-spacing-v2('spacing-32-v2');
+    padding-inline: spacing-v2.rc-spacing-v2('spacing-16-v2');
+    background: rgb(var(--v-theme-surface-sunken-v2));
+    border-radius: borders-v2.rc-radius-v2('card-radius-v2');
+  }
+
+  &__image-text {
+    @include flex-center-column;
+    width: 100%;
+    gap: spacing-v2.rc-spacing-v2('stack-default-v2');
+  }
+
+  &__image {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    color: rgb(var(--v-theme-neutral-500-v2));
+  }
+
+  &__icon.v-icon {
+    width: spacing-v2.rc-spacing-v2('spacing-48-v2');
+    height: spacing-v2.rc-spacing-v2('spacing-48-v2');
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__copy {
+    @include flex-center-column;
+    width: 100%;
+    max-width: $image-and-text-content-max-width;
+    gap: spacing-v2.rc-spacing-v2('card-heading-gap-v2');
+  }
+
+  &__title {
+    @include typography-v2.rc-typography-v2('card-title-v2');
+
+    width: 100%;
+    margin: 0;
+    color: rgb(var(--v-theme-text-default-v2));
+    text-align: center;
+    letter-spacing: -0.2px;
+  }
+
+  &__description {
+    @include typography-v2.rc-typography-v2('body-small-v2');
+
+    width: 100%;
+    margin: 0;
+    color: rgb(var(--v-theme-text-secondary-v2));
+    text-align: center;
+  }
+
+  &__action {
+    display: flex;
+    justify-content: center;
+  }
+}

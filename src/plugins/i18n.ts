@@ -44,6 +44,41 @@ const i18n = () => {
           RcSesBadgeV2: {
             remove: 'Pašalinti',
           },
+
+          RcSesStepperV2: {
+            back: 'Grįžti',
+            completedStep: 'Užbaigta: {{step}}',
+            loadingStep: 'Įkeliama: {{step}}',
+            activeStep: 'Dabartinis žingsnis: {{step}}',
+          },
+          RcSesCardV2: {
+            back: 'Grįžti',
+            cancel: 'Atšaukti',
+            continue: 'Tęsti',
+            pay: 'Apmokėti',
+          },
+
+          RcSesReviewCardV2: {
+            edit: 'Redaguoti',
+          },
+
+          RcSesModalV2: {
+            actions: {
+              destructive: {
+                primary: 'Pašalinti',
+              },
+              confirm: {
+                primary: 'Tęsti',
+              },
+              success: {
+                primary: 'Uždaryti',
+              },
+              info: {
+                primary: 'Suprantu',
+              },
+              cancel: 'Atšaukti',
+            },
+          },
         },
       },
       en: {
@@ -74,6 +109,41 @@ const i18n = () => {
 
           RcSesBadgeV2: {
             remove: 'Remove',
+          },
+
+          RcSesStepperV2: {
+            back: 'Back',
+            completedStep: 'Completed: {{step}}',
+            loadingStep: 'Loading: {{step}}',
+            activeStep: 'Current step: {{step}}',
+          },
+          RcSesCardV2: {
+            back: 'Back',
+            cancel: 'Cancel',
+            continue: 'Continue',
+            pay: 'Pay',
+          },
+
+          RcSesReviewCardV2: {
+            edit: 'Edit',
+          },
+
+          RcSesModalV2: {
+            actions: {
+              destructive: {
+                primary: 'Remove',
+              },
+              confirm: {
+                primary: 'Continue',
+              },
+              success: {
+                primary: 'Close',
+              },
+              info: {
+                primary: 'I understand',
+              },
+              cancel: 'Cancel',
+            },
           },
         },
       },

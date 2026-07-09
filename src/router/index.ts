@@ -26,6 +26,16 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/pages/dataTable.vue'),
     meta: { layout: 'default' },
   },
+  {
+    path: '/horizontalWizardForm',
+    component: () => import('@/pages/horizontalWizardForm.vue'),
+    meta: { layout: 'default' },
+  },
+  {
+    path: '/verticalWizardForm',
+    component: () => import('@/pages/verticalWizardForm.vue'),
+    meta: { layout: 'default' },
+  },
 ]
 
 const router = createRouter({
