@@ -1,6 +1,6 @@
-const reviewCardDefaults = {
+const ReviewCardV2Defaults = {
   showEdit: true,
   headingLevel: 5,
 } as const
 
-export default reviewCardDefaults
+export default ReviewCardV2Defaults

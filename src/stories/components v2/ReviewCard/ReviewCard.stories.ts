@@ -29,12 +29,22 @@ const meta: Meta<typeof RcSesReviewCardV2> = {
   component: RcSesReviewCardV2,
   tags: ['autodocs'],
   argTypes: {
-    heading: { control: 'text' },
-    showEdit: { control: 'boolean' },
-    editLabel: { control: 'text' },
+    heading: {
+      control: 'text',
+      description: 'Section heading shown in the review card header',
+    },
+    showEdit: {
+      control: 'boolean',
+      description: 'Toggle the built-in Edit link button in the header',
+    },
+    editLabel: {
+      control: 'text',
+      description: 'Custom label for the Edit action (defaults to i18n)',
+    },
     headingLevel: {
       control: 'select',
       options: [4, 5, 6],
+      description: 'Semantic heading level for the section title (h4–h6)',
     },
   },
 }
@@ -75,18 +85,17 @@ Default.args = {
   showEdit: true,
 }
 
-export const WithoutEdit: Story = (args) => ({
+export const WithoutEdit: Story = () => ({
   components: { RcSesReviewCardV2 },
   setup() {
     return {
-      args,
       summaryRowStyle,
       summaryLabelStyle,
       summaryValueStyle,
     }
   },
   template: `
-    <RcSesReviewCardV2 v-bind="args" :show-edit="false">
+    <RcSesReviewCardV2 heading="Section heading" :show-edit="false">
       <dl :style="summaryRowStyle">
         <dt :style="summaryLabelStyle">Full name</dt>
         <dd :style="summaryValueStyle">John Doe</dd>
@@ -98,15 +107,11 @@ export const WithoutEdit: Story = (args) => ({
     </RcSesReviewCardV2>
   `,
 })
-WithoutEdit.args = {
-  heading: 'Section heading',
-}
 
-export const ReviewStep: Story = (args) => ({
+export const ReviewStep: Story = () => ({
   components: { RcSesCardV2, RcSesReviewCardV2 },
   setup() {
     return {
-      args,
       summaryRowStyle,
       summaryLabelStyle,
       summaryValueStyle,
@@ -138,7 +143,7 @@ export const ReviewStep: Story = (args) => ({
             <dd :style="summaryValueStyle">Represent · Sign documents</dd>
           </dl>
         </RcSesReviewCardV2>
-        <RcSesReviewCardV2 v-bind="args" heading="Term and conditions">
+        <RcSesReviewCardV2 heading="Term and conditions" :show-edit="true">
           <dl :style="summaryRowStyle">
             <dt :style="summaryLabelStyle">Valid until</dt>
             <dd :style="summaryValueStyle">2027-05-19</dd>
@@ -152,6 +157,3 @@ export const ReviewStep: Story = (args) => ({
     </RcSesCardV2>
   `,
 })
-ReviewStep.args = {
-  showEdit: true,
-}

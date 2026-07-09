@@ -35,14 +35,14 @@ import { useTranslation } from 'i18next-vue'
 import { computed, useSlots } from 'vue'
 
 import RcSesButtonV2 from '@/components/common/buttonV2/RcSesButtonV2.vue'
-import reviewCardDefaults from '@/components/common/reviewCardV2/defaults'
+import ReviewCardV2Defaults from '@/components/common/reviewCardV2/defaults'
 import type { ReviewCardProps } from '@/components/common/reviewCardV2/types'
 
 import './style.scss'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<ReviewCardProps>(), reviewCardDefaults)
+const props = withDefaults(defineProps<ReviewCardProps>(), ReviewCardV2Defaults)
 
 const emit = defineEmits<{
   edit: []

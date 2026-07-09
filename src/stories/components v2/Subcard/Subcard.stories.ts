@@ -10,13 +10,26 @@ const meta: Meta<typeof RcSesSubcardV2> = {
   component: RcSesSubcardV2,
   tags: ['autodocs'],
   argTypes: {
-    heading: { control: 'text' },
-    showDescription: { control: 'boolean' },
-    description: { control: 'text' },
-    showFooter: { control: 'boolean' },
+    heading: {
+      control: 'text',
+      description: 'Section heading shown in the subcard header',
+    },
+    showDescription: {
+      control: 'boolean',
+      description: 'Toggle the description text below the heading',
+    },
+    description: {
+      control: 'text',
+      description: 'Optional supporting text shown under the heading',
+    },
+    showFooter: {
+      control: 'boolean',
+      description: 'Toggle the footer slot area',
+    },
     headingLevel: {
       control: 'select',
       options: [3, 4, 5, 6],
+      description: 'Semantic heading level for the section title (h3–h6)',
     },
   },
 }
@@ -47,13 +60,14 @@ Default.args = {
   showFooter: true,
 }
 
-export const WithHeaderActions: Story = (args) => ({
+export const WithHeaderActions: Story = () => ({
   components: { RcSesSubcardV2, RcSesButtonV2, RcSesBadgeV2 },
-  setup() {
-    return { args }
-  },
   template: `
-    <RcSesSubcardV2 v-bind="args">
+    <RcSesSubcardV2
+      heading="Section heading"
+      description="Short supporting description for the section."
+      :show-footer="false"
+    >
       <template #heading-adornment>
         <RcSesBadgeV2 type="warning" size="small">Missing data</RcSesBadgeV2>
       </template>
@@ -69,19 +83,11 @@ export const WithHeaderActions: Story = (args) => ({
     </RcSesSubcardV2>
   `,
 })
-WithHeaderActions.args = {
-  heading: 'Section heading',
-  description: 'Short supporting description for the section.',
-  showFooter: false,
-}
 
-export const WithoutDescription: Story = (args) => ({
+export const WithoutDescription: Story = () => ({
   components: { RcSesSubcardV2, RcSesButtonV2 },
-  setup() {
-    return { args }
-  },
   template: `
-    <RcSesSubcardV2 v-bind="args" :show-description="false">
+    <RcSesSubcardV2 heading="Subcard heading" :show-description="false" :show-footer="true">
       <p style="margin: 0;">Subcard content area</p>
       <template #footer>
         <RcSesButtonV2 variant="secondary">Cancel</RcSesButtonV2>
@@ -90,35 +96,28 @@ export const WithoutDescription: Story = (args) => ({
     </RcSesSubcardV2>
   `,
 })
-WithoutDescription.args = {
-  heading: 'Subcard heading',
-  showFooter: true,
-}
 
-export const WithoutFooter: Story = (args) => ({
+export const WithoutFooter: Story = () => ({
   components: { RcSesSubcardV2 },
-  setup() {
-    return { args }
-  },
   template: `
-    <RcSesSubcardV2 v-bind="args" :show-footer="false">
+    <RcSesSubcardV2
+      heading="Subcard heading"
+      description="Short supporting description"
+      :show-footer="false"
+    >
       <p style="margin: 0;">Subcard content area</p>
     </RcSesSubcardV2>
   `,
 })
-WithoutFooter.args = {
-  heading: 'Subcard heading',
-  description: 'Short supporting description',
-}
 
-export const InsideCard: Story = (args) => ({
+export const InsideCard: Story = () => ({
   components: { RcSesCardV2, RcSesSubcardV2, RcSesButtonV2 },
-  setup() {
-    return { args }
-  },
   template: `
     <RcSesCardV2 heading="Main card" :show-description="false">
-      <RcSesSubcardV2 v-bind="args">
+      <RcSesSubcardV2
+        heading="Subcard heading"
+        description="Short supporting description"
+      >
         <p style="margin: 0;">Grouped content inside the main card.</p>
         <template #footer>
           <RcSesButtonV2 variant="secondary">Cancel</RcSesButtonV2>
@@ -128,7 +127,3 @@ export const InsideCard: Story = (args) => ({
     </RcSesCardV2>
   `,
 })
-InsideCard.args = {
-  heading: 'Subcard heading',
-  description: 'Short supporting description',
-}
