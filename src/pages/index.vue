@@ -63,5 +63,15 @@ const items = ref([
     value: 4,
     routeTo: '/dataTable',
   },
+  {
+    title: 'Horizontalios formos su vedliu pavyzdys',
+    value: 5,
+    routeTo: '/horizontalWizardForm',
+  },
+  {
+    title: 'Vertikalios formos su vedliu pavyzdys',
+    value: 6,
+    routeTo: '/verticalWizardForm',
+  },
 ])
 </script>
