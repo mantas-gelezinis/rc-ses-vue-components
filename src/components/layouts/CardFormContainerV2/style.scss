@@ -1,0 +1,41 @@
+@use '/src/styles/vuetify/layout-v2' as layout-v2;
+@use '/src/styles/vuetify/spacing-v2' as spacing-v2;
+
+.rc-ses-card-form-container-v2 {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: spacing-v2.rc-spacing-v2('page-stepper-to-card-v2');
+  padding-bottom: spacing-v2.rc-spacing-v2('spacing-64-v2');
+  width: 100%;
+
+  @include layout-v2.rc-breakpoint-v2-up('md-v2') {
+    &--row {
+      align-items: flex-start;
+      flex-direction: row;
+      gap: spacing-v2.rc-spacing-v2('stepper-side-gap-v2');
+
+      .rc-ses-stepper-v2--vertical {
+        align-self: flex-start;
+        padding-block: spacing-v2.rc-spacing-v2('stepper-vertical-padding-y-v2');
+      }
+    }
+  }
+
+  &__card {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+  }
+
+  &--row &__card {
+    max-width: layout-v2.rc-layout-v2('container-medium-v2');
+  }
+
+  // Column wizard: horizontal stepper spans the full canonical grid width
+  // (1128px), overriding the standalone StepperV2 medium cap (936px) so it
+  // aligns with the card edges.
+  &--column .rc-ses-stepper-v2--horizontal:not(.rc-ses-stepper-v2--mobile) {
+    max-width: none;
+  }
+}
