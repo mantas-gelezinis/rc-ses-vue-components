@@ -45,6 +45,12 @@ const i18n = () => {
             remove: 'Pašalinti',
           },
 
+          RcSesStepperV2: {
+            back: 'Grįžti',
+            completedStep: 'Užbaigta: {{step}}',
+            loadingStep: 'Įkeliama: {{step}}',
+            activeStep: 'Dabartinis žingsnis: {{step}}',
+          },
           RcSesCardV2: {
             back: 'Grįžti',
             cancel: 'Atšaukti',
@@ -101,6 +107,12 @@ const i18n = () => {
             remove: 'Remove',
           },
 
+          RcSesStepperV2: {
+            back: 'Back',
+            completedStep: 'Completed: {{step}}',
+            loadingStep: 'Loading: {{step}}',
+            activeStep: 'Current step: {{step}}',
+          },
           RcSesCardV2: {
             back: 'Back',
             cancel: 'Cancel',

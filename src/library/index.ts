@@ -9,6 +9,7 @@ import RcSesCardFooterV2 from '@/components/common/CardV2/RcSesCardFooterV2.vue'
 import RcSesCardV2 from '@/components/common/CardV2/RcSesCardV2.vue'
 import RcSesError from '@/components/common/Error/RcSesError.vue'
 import RcSesImageAndTextV2 from '@/components/common/ImageAndTextV2/RcSesImageAndTextV2.vue'
+import RcSesStepperV2 from '@/components/common/StepperV2/RcSesStepperV2.vue'
 import RcSesButtonV2 from '@/components/common/buttonV2/RcSesButtonV2.vue'
 import RcSesButton from '@/components/common/buttons/Button/RcSesButton.vue'
 import RcSesFormControl from '@/components/common/forms/RcSesFormControl.vue'
@@ -38,6 +39,7 @@ import RcSesTable from '@/components/common/tables/table/RcSesTable.vue'
 import RcSesTab from '@/components/common/tabs/RcSesTab.vue'
 import RcSesToggleV2 from '@/components/common/toggleV2/RcSesToggleV2.vue'
 import RcSesTooltip from '@/components/common/tooltip/RcSesTooltip.vue'
+import RcSesCardFormContainerV2 from '@/components/layouts/CardFormContainerV2/RcSesCardFormContainerV2.vue'
 import RcSesFormActions from '@/components/layouts/FormActions/RcSesFormActions.vue'
 import RcSesFormContainer from '@/components/layouts/FormContainer/RcSesFormContainer.vue'
 import RcSesFormStepper from '@/components/layouts/FormStepper/RcSesFormStepper.vue'
@@ -67,6 +69,7 @@ export function createRcSesComponents(options: object = {}): Plugin<[]> {
       .component('RcSesTabFormContainer', RcSesFormTabContainer)
       .component('RcSesFormStepper', RcSesFormStepper)
       .component('RcSesFormActions', RcSesFormActions)
+      .component('RcSesCardFormContainerV2', RcSesCardFormContainerV2)
 
     app.component('RcSesAccordion', RcSesAccordion)
 
@@ -126,6 +129,7 @@ export function createRcSesComponents(options: object = {}): Plugin<[]> {
 
     app.component('RcSesBadgeV2', RcSesBadgeV2)
     app.component('RcSesImageAndTextV2', RcSesImageAndTextV2)
+    app.component('RcSesStepperV2', RcSesStepperV2)
     app.component('RcSesCardV2', RcSesCardV2)
     app.component('RcSesCardFooterV2', RcSesCardFooterV2)
     app.component('RcSesModalV2', RcSesModalV2)
@@ -144,10 +148,12 @@ export {
   RcSesFormTabContainer,
   RcSesFormStepper,
   RcSesFormActions,
+  RcSesCardFormContainerV2,
 }
 
 export { RcSesAlert, RcSesButton }
-export { RcSesBadgeV2, RcSesButtonV2, RcSesToggleV2, RcSesImageAndTextV2 }
+export { RcSesBadgeV2, RcSesButtonV2, RcSesToggleV2 }
+export { RcSesImageAndTextV2, RcSesStepperV2 }
 export { RcSesModalV2, RcSesBackdropV2 }
 export { RcSesCardV2, RcSesCardFooterV2 }
 export { RcSesCheckbox, RcSesCheckboxField }
