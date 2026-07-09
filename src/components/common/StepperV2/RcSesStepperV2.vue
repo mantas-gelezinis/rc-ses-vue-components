@@ -7,7 +7,7 @@
     ]"
   >
     <div
-      v-if="isMobile && resolvedOrientation === 'horizontal'"
+      v-if="isMobile && resolvedOrientation === StepperOrientation.Horizontal"
       class="rc-ses-stepper-v2__mobile"
     >
       <div class="rc-ses-stepper-v2__nav-slot">
@@ -90,7 +90,10 @@ import {
   isTrailingConnectorCompleted,
 } from '@/components/common/StepperV2/getStepState'
 import RcSesStepperStepV2 from '@/components/common/StepperV2/RcSesStepperStepV2.vue'
-import type { StepperOwnProps } from '@/components/common/StepperV2/types'
+import {
+  StepperOrientation,
+  type StepperOwnProps,
+} from '@/components/common/StepperV2/types'
 import { isBelowBreakpointV2 } from '@/constants/breakpointsV2'
 
 import './style.scss'
@@ -109,13 +112,13 @@ const { width } = useDisplay()
 const isMobile = computed(() => isBelowBreakpointV2(width.value, 'md-v2'))
 
 const resolvedOrientation = computed(() =>
-  isMobile.value ? 'horizontal' : props.orientation,
+  isMobile.value ? StepperOrientation.Horizontal : props.orientation,
 )
 
 const backLabel = computed(() => t('RcSesStepperV2.back', { ns: 'components' }))
 
 const handleStepClick = (index: number) => {
-  if (index < 0 || index > props.activeStep) {
+  if (index > props.activeStep) {
     return
   }
 

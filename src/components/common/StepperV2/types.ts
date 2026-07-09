@@ -1,8 +1,21 @@
-export type StepperOrientation = 'horizontal' | 'vertical'
+export enum StepperOrientation {
+  Horizontal = 'horizontal',
+  Vertical = 'vertical',
+}
 
-export type StepperStepState = 'completed' | 'active' | 'disabled' | 'loading'
+export enum StepperStepState {
+  Completed = 'completed',
+  Active = 'active',
+  Disabled = 'disabled',
+  Loading = 'loading',
+}
 
-export type StepperStepPlacement = 'first' | 'middle' | 'last' | 'only'
+export enum StepperStepPlacement {
+  First = 'first',
+  Middle = 'middle',
+  Last = 'last',
+  Only = 'only',
+}
 
 export type StepperStep = {
   id: string

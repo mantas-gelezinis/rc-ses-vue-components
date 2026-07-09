@@ -1,5 +1,8 @@
-import type { StepperOrientation } from '@/components/common/StepperV2/types'
+import { StepperOrientation } from '@/components/common/StepperV2/types'
 import type { CardFormContainerLayout } from '@/components/layouts/CardFormContainerV2/types'
+
+export const MAX_STEPS_FOR_COLUMN_LAYOUT = 4
+export const MAX_STEPS_WITHOUT_STEPPER = 2
 
 export function getLayoutDirection(
   stepsCount: number,
@@ -9,7 +12,7 @@ export function getLayoutDirection(
     return layout
   }
 
-  if (stepsCount > 4) {
+  if (stepsCount > MAX_STEPS_FOR_COLUMN_LAYOUT) {
     return 'row'
   }
 
@@ -17,11 +20,13 @@ export function getLayoutDirection(
 }
 
 export function shouldShowStepper(stepsCount: number): boolean {
-  return stepsCount > 2
+  return stepsCount > MAX_STEPS_WITHOUT_STEPPER
 }
 
 export function getStepperOrientation(
   layoutDirection: CardFormContainerLayout,
 ): StepperOrientation {
-  return layoutDirection === 'row' ? 'vertical' : 'horizontal'
+  return layoutDirection === 'row'
+    ? StepperOrientation.Vertical
+    : StepperOrientation.Horizontal
 }

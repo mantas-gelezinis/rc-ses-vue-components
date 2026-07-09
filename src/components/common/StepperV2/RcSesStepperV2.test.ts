@@ -6,6 +6,9 @@ import { defineComponent, h, ref } from 'vue'
 import initI18n from '@/plugins/i18n'
 
 import RcSesStepperV2 from './RcSesStepperV2.vue'
+import { StepperOrientation } from './types'
+
+const widthRef = ref(1200)
 
 vi.mock('vuetify', async (importOriginal) => {
   const actual = await importOriginal<typeof import('vuetify')>()
@@ -13,7 +16,7 @@ vi.mock('vuetify', async (importOriginal) => {
   return {
     ...actual,
     useDisplay: () => ({
-      width: ref(1200),
+      width: widthRef,
     }),
   }
 })
@@ -43,8 +46,10 @@ const steps = [
   { id: '3', label: 'Step three' },
 ]
 
-const renderStepper = (props = {}) =>
-  render(RcSesStepperV2, {
+const renderStepper = (props = {}, options: { width?: number } = {}) => {
+  widthRef.value = options.width ?? 1200
+
+  return render(RcSesStepperV2, {
     props: {
       steps,
       activeStep: 1,
@@ -57,6 +62,7 @@ const renderStepper = (props = {}) =>
       },
     },
   })
+}
 
 describe('RcSesStepperV2', () => {
   it('renders step labels', () => {
@@ -65,6 +71,13 @@ describe('RcSesStepperV2', () => {
     expect(screen.getByText('Step one')).toBeInTheDocument()
     expect(screen.getByText('Step two')).toBeInTheDocument()
     expect(screen.getByText('Step three')).toBeInTheDocument()
+  })
+
+  it('applies orientation classes on desktop', () => {
+    const { container } = renderStepper({ orientation: StepperOrientation.Vertical })
+
+    expect(container.firstElementChild).toHaveClass('rc-ses-stepper-v2--vertical')
+    expect(container.firstElementChild).not.toHaveClass('rc-ses-stepper-v2--mobile')
   })
 
   it('marks the active step with aria-current="step"', () => {
@@ -83,6 +96,31 @@ describe('RcSesStepperV2', () => {
     expect(screen.getByRole('button', { name: 'Užbaigta: Step two' })).toBeInTheDocument()
   })
 
+  it('renders mobile horizontal layout at md-v2 and below', () => {
+    const { container } = renderStepper({ activeStep: 1 }, { width: 800 })
+
+    expect(container.firstElementChild).toHaveClass('rc-ses-stepper-v2--horizontal')
+    expect(container.firstElementChild).toHaveClass('rc-ses-stepper-v2--mobile')
+
+    // mobile layout hides step labels (icons only)
+    expect(screen.queryByText('Step one')).not.toBeInTheDocument()
+    expect(screen.queryByText('Step two')).not.toBeInTheDocument()
+    expect(screen.queryByText('Step three')).not.toBeInTheDocument()
+
+    // active step still has an accessible name via aria-label (localized)
+    expect(screen.getByLabelText('Dabartinis žingsnis: Step two')).toHaveAttribute(
+      'aria-current',
+      'step',
+    )
+  })
+
+  it('emits step-click when tapping mobile back button', async () => {
+    const { emitted } = renderStepper({ activeStep: 1 }, { width: 800 })
+
+    await fireEvent.click(screen.getByRole('button', { name: 'Grįžti' }))
+    expect(emitted()['step-click']).toEqual([[0]])
+  })
+
   it('emits step-click for completed steps', async () => {
     const { emitted } = renderStepper({ activeStep: 2 })
 
@@ -97,5 +135,3 @@ describe('RcSesStepperV2', () => {
     expect(emitted()['step-click']).toBeUndefined()
   })
 })
-
-/* eslint-enable vue/one-component-per-file */

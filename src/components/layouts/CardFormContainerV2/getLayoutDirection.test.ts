@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
+import { StepperOrientation } from '@/components/common/StepperV2/types'
 import {
   getLayoutDirection,
   getStepperOrientation,
@@ -37,10 +38,10 @@ describe('shouldShowStepper', () => {
 
 describe('getStepperOrientation', () => {
   it('uses horizontal orientation for column layout', () => {
-    expect(getStepperOrientation('column')).toBe('horizontal')
+    expect(getStepperOrientation('column')).toBe(StepperOrientation.Horizontal)
   })
 
   it('uses vertical orientation for row layout', () => {
-    expect(getStepperOrientation('row')).toBe('vertical')
+    expect(getStepperOrientation('row')).toBe(StepperOrientation.Vertical)
   })
 })

@@ -11,8 +11,12 @@
       :is="clickable ? 'button' : 'span'"
       :type="clickable ? 'button' : undefined"
       class="rc-ses-stepper-v2__step-control"
-      :aria-current="state === 'active' || state === 'loading' ? 'step' : undefined"
-      :aria-disabled="state === 'disabled' ? 'true' : undefined"
+      :aria-current="
+        state === StepperStepState.Active || state === StepperStepState.Loading
+          ? 'step'
+          : undefined
+      "
+      :aria-disabled="state === StepperStepState.Disabled ? 'true' : undefined"
       :aria-label="ariaLabel"
       :tabindex="tabIndex"
       :disabled="clickable ? false : undefined"
@@ -34,18 +38,8 @@
           class="rc-ses-stepper-v2__icon"
           :class="`rc-ses-stepper-v2__icon--${state}`"
         >
-          <CheckCircleFilledIcon
-            v-if="state === 'completed'"
-            class="rc-ses-stepper-v2__icon-graphic"
-            :size="stepIconSize"
-          />
-          <DotCircleFilledIcon
-            v-else-if="state === 'active'"
-            class="rc-ses-stepper-v2__icon-graphic"
-            :size="stepIconSize"
-          />
-          <CircleFilledIcon
-            v-else
+          <component
+            :is="stepIcon"
             class="rc-ses-stepper-v2__icon-graphic"
             :size="stepIconSize"
           />
@@ -64,17 +58,17 @@
       </span>
 
       <span
-        v-if="showLabel && state !== 'loading'"
+        v-if="showLabel && state !== StepperStepState.Loading"
         class="rc-ses-stepper-v2__label"
         :class="[
-          { 'rc-ses-stepper-v2__label--active': state === 'active' },
+          { 'rc-ses-stepper-v2__label--active': state === StepperStepState.Active },
           `rc-ses-stepper-v2__label--${placement}`,
         ]"
       >
         {{ label }}
       </span>
       <span
-        v-else-if="showLabel && state === 'loading'"
+        v-else-if="showLabel && state === StepperStepState.Loading"
         class="rc-ses-stepper-v2__label-skeleton"
         aria-hidden="true"
       />
@@ -84,12 +78,12 @@
 
 <script setup lang="ts">
 import { useTranslation } from 'i18next-vue'
-import { computed } from 'vue'
+import { type Component, computed } from 'vue'
 
 import CheckCircleFilledIcon from '@/assets/icons/filled/CheckCircleFilledIcon.vue'
 import CircleFilledIcon from '@/assets/icons/filled/CircleFilledIcon.vue'
 import DotCircleFilledIcon from '@/assets/icons/filled/DotCircleFilledIcon.vue'
-import type {
+import {
   StepperOrientation,
   StepperStepPlacement,
   StepperStepState,
@@ -116,29 +110,55 @@ const emit = defineEmits<{
 const { t } = useTranslation()
 
 const showLeadingConnector = computed(
-  () => props.placement !== 'first' && props.placement !== 'only',
+  () =>
+    props.placement !== StepperStepPlacement.First &&
+    props.placement !== StepperStepPlacement.Only,
 )
 
 const showTrailingConnector = computed(
-  () => props.placement !== 'last' && props.placement !== 'only',
+  () =>
+    props.placement !== StepperStepPlacement.Last &&
+    props.placement !== StepperStepPlacement.Only,
 )
 
+const stepIcon = computed<Component>(() => {
+  switch (props.state) {
+    case StepperStepState.Completed:
+      return CheckCircleFilledIcon
+    case StepperStepState.Active:
+      return DotCircleFilledIcon
+    default:
+      return CircleFilledIcon
+  }
+})
+
 const ariaLabel = computed(() => {
-  if (props.state === 'completed') {
+  if (props.state === StepperStepState.Completed) {
     return t('RcSesStepperV2.completedStep', {
       ns: 'components',
       step: props.label,
     })
   }
 
-  if (props.state === 'loading') {
+  if (props.state === StepperStepState.Loading) {
     return t('RcSesStepperV2.loadingStep', {
       ns: 'components',
       step: props.label,
     })
   }
 
-  if (props.state === 'disabled') {
+  if (props.state === StepperStepState.Active) {
+    if (props.showLabel) {
+      return undefined
+    }
+
+    return t('RcSesStepperV2.activeStep', {
+      ns: 'components',
+      step: props.label,
+    })
+  }
+
+  if (props.state === StepperStepState.Disabled) {
     return props.label
   }
 
@@ -146,11 +166,15 @@ const ariaLabel = computed(() => {
 })
 
 const tabIndex = computed(() => {
-  if (props.state === 'disabled') {
+  if (props.state === StepperStepState.Disabled) {
     return -1
   }
 
-  if (props.clickable || props.state === 'active' || props.state === 'loading') {
+  if (
+    props.clickable ||
+    props.state === StepperStepState.Active ||
+    props.state === StepperStepState.Loading
+  ) {
     return 0
   }
 

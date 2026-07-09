@@ -1,4 +1,7 @@
-import type { StepperStepState } from '@/components/common/StepperV2/types'
+import {
+  StepperStepPlacement,
+  StepperStepState,
+} from '@/components/common/StepperV2/types'
 
 export const getStepState = (
   index: number,
@@ -6,62 +9,54 @@ export const getStepState = (
   loading: boolean,
 ): StepperStepState => {
   if (index < activeStep) {
-    return 'completed'
+    return StepperStepState.Completed
   }
 
   if (index === activeStep) {
-    return loading ? 'loading' : 'active'
+    return loading ? StepperStepState.Loading : StepperStepState.Active
   }
 
-  return 'disabled'
+  return StepperStepState.Disabled
 }
 
-export const getStepPlacement = (
-  index: number,
-  total: number,
-): 'first' | 'middle' | 'last' | 'only' => {
+export const getStepPlacement = (index: number, total: number): StepperStepPlacement => {
   if (total <= 1) {
-    return 'only'
+    return StepperStepPlacement.Only
   }
 
   if (index === 0) {
-    return 'first'
+    return StepperStepPlacement.First
   }
 
   if (index === total - 1) {
-    return 'last'
+    return StepperStepPlacement.Last
   }
 
-  return 'middle'
+  return StepperStepPlacement.Middle
 }
 
 export const isStepClickable = (
   index: number,
   activeStep: number,
   interactive: boolean,
-) => interactive && index <= activeStep
+): boolean => interactive && index <= activeStep
 
 export const isLeadingConnectorCompleted = (
   index: number,
   activeStep: number,
   loading: boolean,
-) => {
-  if (index === 0) {
-    return false
-  }
+): boolean => {
+  const isFirstStep = index === 0
+  const isLoadingCurrentStep = loading && index === activeStep
 
-  if (loading && index === activeStep) {
-    return false
-  }
-
-  return index <= activeStep
+  return !isFirstStep && !isLoadingCurrentStep && index <= activeStep
 }
 
 export const isTrailingConnectorCompleted = (
   index: number,
   activeStep: number,
   loading: boolean,
-) => {
+): boolean => {
   if (loading && (index === activeStep || index === activeStep - 1)) {
     return false
   }

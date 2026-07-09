@@ -2,7 +2,7 @@ import type { Meta, StoryFn } from '@storybook/vue3'
 import { ref } from 'vue'
 
 import RcSesStepperV2 from '@/components/common/StepperV2/RcSesStepperV2.vue'
-import type { StepperStep } from '@/components/common/StepperV2/types'
+import { StepperOrientation, type StepperStep } from '@/components/common/StepperV2/types'
 
 const horizontalSteps: StepperStep[] = [
   { id: '1', label: 'Duomenys' },
@@ -25,7 +25,7 @@ const meta: Meta<typeof RcSesStepperV2> = {
   argTypes: {
     orientation: {
       control: 'select',
-      options: ['horizontal', 'vertical'],
+      options: [StepperOrientation.Horizontal, StepperOrientation.Vertical],
     },
     loading: { control: 'boolean' },
     activeStep: { control: { type: 'number', min: 0, max: 4 } },
@@ -59,7 +59,7 @@ const Template: Story = (args) => ({
 export const Horizontal = Template.bind({})
 Horizontal.args = {
   steps: horizontalSteps,
-  orientation: 'horizontal',
+  orientation: StepperOrientation.Horizontal,
   activeStep: 1,
   loading: false,
 }
@@ -67,7 +67,7 @@ Horizontal.args = {
 export const Vertical = Template.bind({})
 Vertical.args = {
   steps: verticalSteps,
-  orientation: 'vertical',
+  orientation: StepperOrientation.Vertical,
   activeStep: 2,
   loading: false,
 }
@@ -75,7 +75,7 @@ Vertical.args = {
 export const Loading = Template.bind({})
 Loading.args = {
   steps: horizontalSteps,
-  orientation: 'horizontal',
+  orientation: StepperOrientation.Horizontal,
   activeStep: 1,
   loading: true,
 }
@@ -89,7 +89,7 @@ FiveSteps.args = {
     { id: '4', label: 'Žingsnis 4' },
     { id: '5', label: 'Žingsnis 5' },
   ],
-  orientation: 'horizontal',
+  orientation: StepperOrientation.Horizontal,
   activeStep: 2,
   loading: false,
 }

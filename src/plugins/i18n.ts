@@ -49,6 +49,7 @@ const i18n = () => {
             back: 'Grįžti',
             completedStep: 'Užbaigta: {{step}}',
             loadingStep: 'Įkeliama: {{step}}',
+            activeStep: 'Dabartinis žingsnis: {{step}}',
           },
           RcSesCardV2: {
             back: 'Grįžti',
@@ -110,6 +111,7 @@ const i18n = () => {
             back: 'Back',
             completedStep: 'Completed: {{step}}',
             loadingStep: 'Loading: {{step}}',
+            activeStep: 'Current step: {{step}}',
           },
           RcSesCardV2: {
             back: 'Back',

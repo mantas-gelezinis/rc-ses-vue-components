@@ -1,4 +1,4 @@
-import type { StepperOrientation } from '@/components/common/StepperV2/types'
+import { StepperOrientation } from '@/components/common/StepperV2/types'
 
 export type StepperDefaultsType = {
   orientation: StepperOrientation
@@ -6,7 +6,7 @@ export type StepperDefaultsType = {
 }
 
 const stepperDefaults = {
-  orientation: 'horizontal',
+  orientation: StepperOrientation.Horizontal,
   loading: false,
 } satisfies StepperDefaultsType
 
