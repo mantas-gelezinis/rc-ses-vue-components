@@ -58,6 +58,10 @@ const i18n = () => {
             pay: 'Apmokėti',
           },
 
+          RcSesReviewCardV2: {
+            edit: 'Redaguoti',
+          },
+
           RcSesModalV2: {
             actions: {
               destructive: {
@@ -118,6 +122,10 @@ const i18n = () => {
             cancel: 'Cancel',
             continue: 'Continue',
             pay: 'Pay',
+          },
+
+          RcSesReviewCardV2: {
+            edit: 'Edit',
           },
 
           RcSesModalV2: {

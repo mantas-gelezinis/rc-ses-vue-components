@@ -26,6 +26,14 @@ $rc-spacing-v2-semantic: (
   'card-heading-gap-v2': 'spacing-4-v2',
   'card-section-gap-v2': 'spacing-24-v2',
   'card-footer-buttons-gap-v2': 'spacing-16-v2',
+  // Subcard
+  'subcard-padding-v2': 'spacing-20-v2',
+  'subcard-section-gap-v2': 'stack-default-v2',
+  'subcard-heading-gap-v2': 'stack-tight-v2',
+  // Review card
+  'review-card-padding-v2': 'spacing-24-v2',
+  'review-card-section-gap-v2': 'stack-default-v2',
+  'review-card-row-gap-v2': 'list-item-gap-v2',
   // Stack
   'stack-tight-v2': 'spacing-8-v2',
   'stack-default-v2': 'spacing-16-v2',
@@ -70,10 +78,10 @@ $rc-spacing-v2-semantic: (
     @return map.get($rc-spacing-v2-primitives, $token);
   }
 
-  $primitive-key: map.get($rc-spacing-v2-semantic, $token);
+  $next: map.get($rc-spacing-v2-semantic, $token);
 
-  @if $primitive-key {
-    @return map.get($rc-spacing-v2-primitives, $primitive-key);
+  @if $next {
+    @return rc-spacing-v2($next);
   }
 
   @error "Unknown spacing v2 token `#{$token}`. Use a primitive (spacing-*-v2) or semantic alias.";

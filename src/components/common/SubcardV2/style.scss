@@ -1,0 +1,87 @@
+@use '/src/styles/vuetify/borders-v2' as borders-v2;
+@use '/src/styles/vuetify/spacing-v2' as spacing-v2;
+@use '/src/styles/vuetify/typography-v2' as typo-v2;
+
+.rc-ses-subcard-v2 {
+  background-color: rgb(var(--v-theme-surface-base-v2));
+  border: borders-v2.rc-stroke-v2('border-width-default-v2') solid
+    rgb(var(--v-theme-border-subtle-v2));
+  border-radius: borders-v2.rc-radius-v2('subcard-radius-v2');
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: spacing-v2.rc-spacing-v2('subcard-padding-v2');
+  width: 100%;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: spacing-v2.rc-spacing-v2('subcard-heading-gap-v2');
+    padding: 0;
+  }
+
+  &__header-row {
+    align-items: flex-start;
+    display: flex;
+    gap: spacing-v2.rc-spacing-v2('stack-default-v2');
+    justify-content: space-between;
+  }
+
+  &__title-group {
+    align-items: center;
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    gap: spacing-v2.rc-spacing-v2('subcard-heading-gap-v2');
+    min-width: 0;
+  }
+
+  &__header-actions {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    gap: spacing-v2.rc-spacing-v2('stack-default-v2');
+    justify-content: flex-end;
+  }
+
+  &__heading {
+    @include typo-v2.rc-typography-v2('card-title-v2');
+
+    color: rgb(var(--v-theme-text-default-v2));
+    margin: 0;
+  }
+
+  &__description {
+    @include typo-v2.rc-typography-v2('body-small-v2');
+
+    color: rgb(var(--v-theme-text-secondary-v2));
+    margin: 0;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    margin-top: spacing-v2.rc-spacing-v2('subcard-section-gap-v2');
+    padding: 0;
+  }
+
+  &__footer {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: spacing-v2.rc-spacing-v2('stack-default-v2');
+    justify-content: space-between;
+    margin-top: spacing-v2.rc-spacing-v2('subcard-section-gap-v2');
+    padding: 0;
+    width: 100%;
+
+    > .rc-ses-btn-v2,
+    > .v-btn {
+      flex: 0 0 auto;
+      max-width: none;
+      width: auto;
+    }
+  }
+}
