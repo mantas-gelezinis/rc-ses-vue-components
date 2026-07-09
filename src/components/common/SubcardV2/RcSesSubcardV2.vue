@@ -33,14 +33,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import SubcardV2Defaults from '@/components/common/subcardV2/defaults'
-import type { SubcardProps } from '@/components/common/subcardV2/types'
+import subcardV2Defaults from '@/components/common/SubcardV2/defaults'
+import type { SubcardProps } from '@/components/common/SubcardV2/types'
 
 import './style.scss'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<SubcardProps>(), SubcardV2Defaults)
+const props = withDefaults(defineProps<SubcardProps>(), subcardV2Defaults)
 
 const headingTag = computed(() => `h${props.headingLevel}`)
 </script>

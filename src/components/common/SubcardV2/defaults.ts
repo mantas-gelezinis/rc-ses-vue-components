@@ -1,7 +1,7 @@
-const SubcardV2Defaults = {
+const subcardV2Defaults = {
   showDescription: true,
   showFooter: true,
   headingLevel: 3,
 } as const
 
-export default SubcardV2Defaults
+export default subcardV2Defaults

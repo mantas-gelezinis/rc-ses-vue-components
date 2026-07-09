@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/vue3'
 
 import RcSesCardV2 from '@/components/common/CardV2/RcSesCardV2.vue'
-import RcSesReviewCardV2 from '@/components/common/reviewCardV2/RcSesReviewCardV2.vue'
+import RcSesReviewCardV2 from '@/components/common/ReviewCardV2/RcSesReviewCardV2.vue'
 
 const summaryRowStyle = {
   display: 'grid',

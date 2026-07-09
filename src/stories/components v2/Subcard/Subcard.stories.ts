@@ -2,8 +2,8 @@ import type { Meta, StoryFn } from '@storybook/vue3'
 
 import RcSesBadgeV2 from '@/components/common/BadgeV2/RcSesBadgeV2.vue'
 import RcSesCardV2 from '@/components/common/CardV2/RcSesCardV2.vue'
+import RcSesSubcardV2 from '@/components/common/SubcardV2/RcSesSubcardV2.vue'
 import RcSesButtonV2 from '@/components/common/buttonV2/RcSesButtonV2.vue'
-import RcSesSubcardV2 from '@/components/common/subcardV2/RcSesSubcardV2.vue'
 
 const meta: Meta<typeof RcSesSubcardV2> = {
   title: 'componentsV2/Subcard',
