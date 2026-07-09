@@ -31,11 +31,11 @@
       <slot name="action">
         <RcSesButtonV2
           variant="primary"
-          :prepend-icon="props.buttonIcon"
-          :disabled="props.buttonDisabled"
+          :prepend-icon="props.action?.icon"
+          :disabled="props.action?.disabled"
           @click="emit('action')"
         >
-          {{ props.buttonLabel }}
+          {{ props.action?.label }}
         </RcSesButtonV2>
       </slot>
     </div>
@@ -46,12 +46,12 @@
 import { computed, getCurrentInstance, useSlots } from 'vue'
 
 import RcSesButtonV2 from '@/components/common/buttonV2/RcSesButtonV2.vue'
-import imageAndTextDefaults from '@/components/common/imageAndTextV2/defaults'
+import ImageAndTextV2Defaults from '@/components/common/imageAndTextV2/defaults'
 import type { ImageAndTextProps } from '@/components/common/imageAndTextV2/types'
 
 import './style.scss'
 
-const props = withDefaults(defineProps<ImageAndTextProps>(), imageAndTextDefaults)
+const props = withDefaults(defineProps<ImageAndTextProps>(), ImageAndTextV2Defaults)
 
 const emit = defineEmits<{
   (e: 'action'): void
@@ -66,5 +66,5 @@ const hasDescription = computed(
   () => Boolean(props.description) || Boolean(slots.description),
 )
 
-const showAction = computed(() => Boolean(props.buttonLabel) || Boolean(slots.action))
+const showAction = computed(() => Boolean(props.action) || Boolean(slots.action))
 </script>

@@ -1,7 +1,6 @@
-const imageAndTextDefaults = {
+const ImageAndTextV2Defaults = {
   icon: '$infoRegular',
   background: false,
-  buttonDisabled: false,
 } as const
 
-export default imageAndTextDefaults
+export default ImageAndTextV2Defaults

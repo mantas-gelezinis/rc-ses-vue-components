@@ -40,22 +40,32 @@ const RcSesButtonV2Stub = defineComponent({
           disabled: buttonProps.disabled,
           'data-variant': buttonProps.variant,
           'data-prepend-icon': buttonProps.prependIcon,
-          onClick: () => emit('click'),
+          onClick: () => {
+            if (buttonProps.disabled) {
+              return
+            }
+
+            emit('click')
+          },
         },
         slots.default?.(),
       )
   },
 })
 
-const renderImageAndText = (props: Partial<ImageAndTextProps> = {}) =>
+const renderImageAndText = (
+  props: Partial<ImageAndTextProps> = {},
+  slots: Record<string, string> = {},
+) =>
   render(RcSesImageAndTextV2, {
     props: {
       title: 'Place heading text here',
       description:
         'Additional description text elaborating on situation and what to do next.',
-      buttonLabel: 'Button',
+      action: { label: 'Button' },
       ...props,
     },
+    slots,
     global: {
       stubs: { VIcon: VIconStub, RcSesButtonV2: RcSesButtonV2Stub },
     },
@@ -102,26 +112,75 @@ describe('RcSesImageAndTextV2', () => {
   })
 
   it('renders action button and emits action on click', async () => {
-    const { emitted } = renderImageAndText({ buttonLabel: 'Retry' })
+    const { emitted } = renderImageAndText({ action: { label: 'Retry' } })
 
     await fireEvent.click(screen.getByRole('button', { name: 'Retry' }))
 
     expect(emitted().action).toEqual([[]])
   })
 
-  it('hides action button when buttonLabel is omitted', () => {
-    renderImageAndText({ buttonLabel: undefined })
+  it('hides action button when action is omitted', () => {
+    renderImageAndText({ action: undefined })
 
     expect(screen.queryByRole('button')).not.toBeInTheDocument()
   })
 
-  it('passes buttonIcon to the action button', () => {
-    renderImageAndText({ buttonLabel: 'Add item', buttonIcon: '$plus' })
+  it('passes action icon to the action button', () => {
+    renderImageAndText({ action: { label: 'Add item', icon: '$plus' } })
 
     expect(screen.getByRole('button', { name: 'Add item' })).toHaveAttribute(
       'data-prepend-icon',
       '$plus',
     )
+  })
+
+  it('disables the action button when action.disabled is true', () => {
+    renderImageAndText({ action: { label: 'Retry', disabled: true } })
+
+    expect(screen.getByRole('button', { name: 'Retry' })).toBeDisabled()
+  })
+
+  it('does not emit action when the button is disabled', async () => {
+    const { emitted } = renderImageAndText({
+      action: { label: 'Retry', disabled: true },
+    })
+
+    await fireEvent.click(screen.getByRole('button', { name: 'Retry' }))
+
+    expect(emitted().action).toBeUndefined()
+  })
+
+  it('renders title slot content instead of the title prop', () => {
+    renderImageAndText({ title: 'Prop title' }, { title: 'Slot title' })
+
+    expect(screen.getByRole('heading', { name: 'Slot title' })).toBeInTheDocument()
+    expect(screen.queryByText('Prop title')).not.toBeInTheDocument()
+  })
+
+  it('renders description slot content', () => {
+    renderImageAndText({ description: undefined }, { description: 'Slot description' })
+
+    expect(screen.getByText('Slot description')).toBeInTheDocument()
+  })
+
+  it('renders image slot content instead of the default icon', () => {
+    const { container } = renderImageAndText(
+      {},
+      { image: '<img data-testid="custom-image" alt="" />' },
+    )
+
+    expect(screen.getByTestId('custom-image')).toBeInTheDocument()
+    expect(container.querySelector('.v-icon')).not.toBeInTheDocument()
+  })
+
+  it('renders action slot content instead of the default button', () => {
+    renderImageAndText(
+      { action: undefined },
+      { action: '<button type="button">Custom action</button>' },
+    )
+
+    expect(screen.getByRole('button', { name: 'Custom action' })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Button' })).not.toBeInTheDocument()
   })
 })
 

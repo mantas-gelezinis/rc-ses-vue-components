@@ -5,10 +5,14 @@
 
 $image-and-text-content-max-width: 480px;
 
-.rc-ses-image-and-text-v2 {
+@mixin flex-center-column {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.rc-ses-image-and-text-v2 {
+  @include flex-center-column;
   width: 100%;
   gap: spacing-v2.rc-spacing-v2('stack-default-v2');
 
@@ -20,9 +24,7 @@ $image-and-text-content-max-width: 480px;
   }
 
   &__image-text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include flex-center-column;
     width: 100%;
     gap: spacing-v2.rc-spacing-v2('stack-default-v2');
   }
@@ -46,9 +48,7 @@ $image-and-text-content-max-width: 480px;
   }
 
   &__copy {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include flex-center-column;
     width: 100%;
     max-width: $image-and-text-content-max-width;
     gap: spacing-v2.rc-spacing-v2('card-heading-gap-v2');

@@ -1,25 +1,50 @@
 import type { Meta, StoryFn } from '@storybook/vue3'
 
 import RcSesImageAndTextV2 from '@/components/common/imageAndTextV2/RcSesImageAndTextV2.vue'
+import type { ImageAndTextProps } from '@/components/common/imageAndTextV2/types'
 
 const meta: Meta<typeof RcSesImageAndTextV2> = {
   title: 'componentsV2/ImageAndText',
   component: RcSesImageAndTextV2,
   tags: ['autodocs'],
   argTypes: {
-    icon: { control: 'text' },
-    title: { control: 'text' },
-    description: { control: 'text' },
-    background: { control: 'boolean' },
-    buttonLabel: { control: 'text' },
-    buttonIcon: { control: 'text' },
-    buttonDisabled: { control: 'boolean' },
+    icon: {
+      control: 'text',
+      description: 'Icon alias for the default image slot (e.g. $infoRegular)',
+    },
+    title: {
+      control: 'text',
+      description: 'Main heading text shown below the image',
+    },
+    description: {
+      control: 'text',
+      description: 'Optional supporting text shown under the title',
+    },
+    background: {
+      control: 'boolean',
+      description: 'Toggle background panel variant',
+    },
+    action: {
+      control: 'object',
+      description:
+        'Optional primary action button config ({ label, icon?, disabled? }). Omit to hide the default button.',
+      table: { category: 'props' },
+    },
   },
 }
 
 export default meta
 
 type Story = StoryFn<typeof RcSesImageAndTextV2>
+
+const imageAndTextDefaultArgs: Partial<ImageAndTextProps> = {
+  icon: '$infoRegular',
+  title: 'Place heading text here',
+  description:
+    'Additional description text elaborating on situation and what to do next.',
+  background: false,
+  action: { label: 'Button', icon: '$plus', disabled: false },
+}
 
 export const Default: Story = (args) => ({
   components: { RcSesImageAndTextV2 },
@@ -38,29 +63,20 @@ export const Default: Story = (args) => ({
             icon="$infoRegular"
             title="Place heading text here"
             description="Additional description text elaborating on situation and what to do next."
-            button-label="Button"
+            :action="{ label: 'Button' }"
           />
           <RcSesImageAndTextV2
             icon="$magnifyingGlass"
             title="No results found"
             description="Try adjusting your filters or search terms."
-            button-label="Clear filters"
+            :action="{ label: 'Clear filters' }"
           />
         </div>
       </div>
     </div>
   `,
 })
-Default.args = {
-  icon: '$infoRegular',
-  title: 'Place heading text here',
-  description:
-    'Additional description text elaborating on situation and what to do next.',
-  background: false,
-  buttonLabel: 'Button',
-  buttonIcon: '$plus',
-  buttonDisabled: false,
-}
+Default.args = imageAndTextDefaultArgs as Meta<typeof RcSesImageAndTextV2>['args']
 
 export const WithBackground: Story = () => ({
   components: { RcSesImageAndTextV2 },
@@ -69,8 +85,7 @@ export const WithBackground: Story = () => ({
       icon="$infoRegular"
       title="Place heading text here"
       description="Additional description text elaborating on situation and what to do next."
-      button-label="Button"
-      button-icon="$plus"
+      :action="{ label: 'Button', icon: '$plus' }"
       background
     />
   `,
@@ -83,7 +98,7 @@ export const CustomIcon: Story = () => ({
       icon="$magnifyingGlass"
       title="No results found"
       description="Try adjusting your filters or search terms."
-      button-label="Clear filters"
+      :action="{ label: 'Clear filters' }"
     />
   `,
 })
