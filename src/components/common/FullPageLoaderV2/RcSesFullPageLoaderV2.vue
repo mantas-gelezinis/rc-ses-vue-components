@@ -8,7 +8,7 @@
     :contained="props.contained"
     persistent
     scrim
-    @update:model-value="handleUpdate"
+    @update:model-value="(value) => (isVisible = value)"
   >
     <div class="rc-ses-full-page-loader-v2__card">
       <RcSesLoaderV2 size="large" :show-label="props.showLabel" :label="props.label" />
@@ -32,11 +32,7 @@ const emit = defineEmits<{
 }>()
 
 const isVisible = computed({
-  get: () => props.modelValue ?? true,
+  get: () => props.modelValue,
   set: (value: boolean) => emit('update:modelValue', value),
 })
-
-const handleUpdate = (value: boolean) => {
-  isVisible.value = value
-}
 </script>

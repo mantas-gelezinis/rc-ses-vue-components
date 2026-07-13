@@ -10,12 +10,16 @@ import { FullPageLoaderBackdrop, type FullPageLoaderProps } from './types'
 const { i18next } = initI18n()
 
 const vOverlayStub = {
-  template: '<div data-testid="full-page-loader-overlay"><slot /></div>',
+  props: ['modelValue'],
+  template:
+    '<div v-if="modelValue" data-testid="full-page-loader-overlay"><slot /></div>',
 }
 
 const vOverlayEmitStub = {
+  props: ['modelValue'],
+  emits: ['update:modelValue'],
   template:
-    '<div data-testid="full-page-loader-overlay" @click="$emit(\'update:modelValue\', false)"><slot /></div>',
+    '<div v-if="modelValue" data-testid="full-page-loader-overlay" @click="$emit(\'update:modelValue\', false)"><slot /></div>',
 }
 
 const renderFullPageLoader = (
@@ -40,6 +44,24 @@ describe('RcSesFullPageLoaderV2', () => {
     ).toBeInTheDocument()
     expect(container.querySelector('.rc-ses-loader-v2--large')).toBeInTheDocument()
     expect(screen.getByText('Kraunama...')).toBeInTheDocument()
+  })
+
+  it('renders when modelValue defaults to true', () => {
+    renderFullPageLoader()
+
+    expect(screen.getByTestId('full-page-loader-overlay')).toBeInTheDocument()
+  })
+
+  it('renders when modelValue is true', () => {
+    renderFullPageLoader({ modelValue: true })
+
+    expect(screen.getByTestId('full-page-loader-overlay')).toBeInTheDocument()
+  })
+
+  it('does not render when modelValue is false', () => {
+    renderFullPageLoader({ modelValue: false })
+
+    expect(screen.queryByTestId('full-page-loader-overlay')).not.toBeInTheDocument()
   })
 
   it('applies backdrop modifier classes', () => {
