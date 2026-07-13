@@ -4,6 +4,7 @@ $rc-size-v2-primitives: (
   'size-8-v2': 8px,
   'size-12-v2': 12px,
   'size-16-v2': 16px,
+  'size-18-v2': 18px,
   'size-20-v2': 20px,
   'size-24-v2': 24px,
   'size-32-v2': 32px,
@@ -12,6 +13,8 @@ $rc-size-v2-primitives: (
   'size-44-v2': 44px,
   'size-72-v2': 72px,
   'size-88-v2': 88px,
+  'size-320-v2': 320px,
+  'size-400-v2': 400px,
 );
 
 $rc-size-v2-semantic: (
@@ -31,6 +34,10 @@ $rc-size-v2-semantic: (
   'toggle-track-width-v2': 'size-36-v2',
   'toggle-track-height-v2': 'size-20-v2',
   'toggle-thumb-size-v2': 'size-16-v2',
+  // Snackbar
+  'snackbar-min-width-v2': 'size-320-v2',
+  'snackbar-max-width-v2': 'size-400-v2',
+  'snackbar-icon-size-v2': 'size-18-v2',
 );
 
 @function rc-size-v2($token) {

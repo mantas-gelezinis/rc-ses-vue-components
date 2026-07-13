@@ -45,6 +45,10 @@ const i18n = () => {
             remove: 'Pašalinti',
           },
 
+          RcSesSnackbarV2: {
+            close: 'Uždaryti',
+          },
+
           RcSesStepperV2: {
             back: 'Grįžti',
             completedStep: 'Užbaigta: {{step}}',
@@ -109,6 +113,10 @@ const i18n = () => {
 
           RcSesBadgeV2: {
             remove: 'Remove',
+          },
+
+          RcSesSnackbarV2: {
+            close: 'Close',
           },
 
           RcSesStepperV2: {
