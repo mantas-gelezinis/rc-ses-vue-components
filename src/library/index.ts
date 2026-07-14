@@ -7,6 +7,7 @@ import RcSesAlert from '@/components/common/Alert/RcSesAlert.vue'
 import RcSesBadgeV2 from '@/components/common/BadgeV2/RcSesBadgeV2.vue'
 import RcSesCardFooterV2 from '@/components/common/CardV2/RcSesCardFooterV2.vue'
 import RcSesCardV2 from '@/components/common/CardV2/RcSesCardV2.vue'
+import RcSesChipSelectV2 from '@/components/common/ChipSelectV2/RcSesChipSelectV2.vue'
 import RcSesError from '@/components/common/Error/RcSesError.vue'
 import RcSesFullPageLoaderV2 from '@/components/common/FullPageLoaderV2/RcSesFullPageLoaderV2.vue'
 import RcSesImageAndTextV2 from '@/components/common/ImageAndTextV2/RcSesImageAndTextV2.vue'
@@ -132,6 +133,7 @@ export function createRcSesComponents(options: object = {}): Plugin<[]> {
     app.component('RcSesTooltip', RcSesTooltip)
 
     app.component('RcSesBadgeV2', RcSesBadgeV2)
+    app.component('RcSesChipSelectV2', RcSesChipSelectV2)
     app.component('RcSesImageAndTextV2', RcSesImageAndTextV2)
     app.component('RcSesLoaderV2', RcSesLoaderV2)
     app.component('RcSesFullPageLoaderV2', RcSesFullPageLoaderV2)
@@ -160,7 +162,7 @@ export {
 }
 
 export { RcSesAlert, RcSesButton }
-export { RcSesBadgeV2, RcSesButtonV2, RcSesToggleV2 }
+export { RcSesBadgeV2, RcSesButtonV2, RcSesChipSelectV2, RcSesToggleV2 }
 export { RcSesImageAndTextV2, RcSesLoaderV2, RcSesFullPageLoaderV2, RcSesStepperV2 }
 export { RcSesModalV2, RcSesBackdropV2 }
 export { RcSesCardV2, RcSesCardFooterV2, RcSesReviewCardV2, RcSesSubcardV2 }
