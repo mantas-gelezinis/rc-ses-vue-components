@@ -1,0 +1,96 @@
+@use '/src/styles/vuetify/spacing-v2' as spacing-v2;
+@use '/src/styles/vuetify/typography-v2' as typography-v2;
+
+$loader-size-small: 24px;
+$loader-size-medium: 40px;
+$loader-size-large: 64px;
+
+$loader-stroke-small: 2.5px;
+$loader-stroke-medium: 3px;
+$loader-stroke-large: 4px;
+
+@keyframes rc-ses-loader-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rc-ses-loader-v2 {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: spacing-v2.rc-spacing-v2('spacing-8-v2');
+
+  &__spinner {
+    display: block;
+    transform-origin: center;
+    animation: rc-ses-loader-spin 1s linear infinite;
+  }
+
+  &__track {
+    fill: none;
+    stroke: rgb(var(--v-theme-border-subtle-v2));
+  }
+
+  &__arc {
+    fill: none;
+    stroke: rgb(var(--v-theme-link-text-v2));
+    stroke-linecap: round;
+    stroke-dasharray: 31.4 94.2;
+    transform-origin: center;
+  }
+
+  &__label {
+    @include typography-v2.rc-typography-v2('body-small-v2');
+
+    margin: 0;
+    color: rgb(var(--v-theme-text-secondary-v2));
+    text-align: center;
+  }
+
+  &--small {
+    .rc-ses-loader-v2__spinner {
+      width: $loader-size-small;
+      height: $loader-size-small;
+    }
+
+    .rc-ses-loader-v2__track,
+    .rc-ses-loader-v2__arc {
+      stroke-width: $loader-stroke-small;
+    }
+  }
+
+  &--medium {
+    .rc-ses-loader-v2__spinner {
+      width: $loader-size-medium;
+      height: $loader-size-medium;
+    }
+
+    .rc-ses-loader-v2__track,
+    .rc-ses-loader-v2__arc {
+      stroke-width: $loader-stroke-medium;
+    }
+  }
+
+  &--large {
+    .rc-ses-loader-v2__spinner {
+      width: $loader-size-large;
+      height: $loader-size-large;
+    }
+
+    .rc-ses-loader-v2__track,
+    .rc-ses-loader-v2__arc {
+      stroke-width: $loader-stroke-large;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rc-ses-loader-v2__spinner {
+    animation: none;
+  }
+}

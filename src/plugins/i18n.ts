@@ -66,6 +66,10 @@ const i18n = () => {
             edit: 'Redaguoti',
           },
 
+          RcSesLoaderV2: {
+            label: 'Kraunama...',
+          },
+
           RcSesModalV2: {
             actions: {
               destructive: {
@@ -134,6 +138,10 @@ const i18n = () => {
 
           RcSesReviewCardV2: {
             edit: 'Edit',
+          },
+
+          RcSesLoaderV2: {
+            label: 'Loading...',
           },
 
           RcSesModalV2: {
