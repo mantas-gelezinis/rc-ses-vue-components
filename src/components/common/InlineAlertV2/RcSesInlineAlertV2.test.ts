@@ -97,4 +97,32 @@ describe('RcSesInlineAlertV2', () => {
 
     expect(emitted().action).toEqual([[]])
   })
+
+  it('does not render close button when showClose is false', () => {
+    renderInlineAlert({ showClose: false })
+
+    expect(screen.queryByRole('button', { name: 'Uždaryti' })).not.toBeInTheDocument()
+  })
+
+  it('supports keyboard navigation between action and close buttons', () => {
+    const { container } = renderInlineAlert({
+      showAction: true,
+      actionLabel: 'Peržiūrėti',
+      showClose: true,
+    })
+
+    const actionButton = screen.getByRole('button', { name: 'Peržiūrėti' })
+    const closeButton = screen.getByRole('button', { name: 'Uždaryti' })
+    const buttons = Array.from(container.querySelectorAll('button[type="button"]'))
+
+    expect(buttons).toHaveLength(2)
+    expect(buttons[0]).toBe(actionButton)
+    expect(buttons[1]).toBe(closeButton)
+
+    actionButton.focus()
+    expect(document.activeElement).toBe(actionButton)
+
+    closeButton.focus()
+    expect(document.activeElement).toBe(closeButton)
+  })
 })

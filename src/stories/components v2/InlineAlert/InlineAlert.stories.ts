@@ -8,6 +8,8 @@ import {
 
 const defaultMessage =
   'Alert message. Replace this text with content relevant to your context.'
+const longMessage =
+  'This is a very long alert message intended to demonstrate how InlineAlertV2 handles extended content without breaking the layout. It should wrap naturally across multiple lines while keeping the icon, action link, and close button aligned. Replace this placeholder copy with context-specific content from your application.'
 const defaultActionLabel = 'View details'
 
 const meta: Meta<typeof RcSesInlineAlertV2> = {
@@ -121,5 +123,22 @@ export const WithoutIcon: Story = () => ({
       :message="defaultMessage"
       :show-icon="false"
     />
+  `,
+})
+
+export const LongMessage: Story = () => ({
+  components: { RcSesInlineAlertV2 },
+  setup() {
+    return { longMessage, defaultActionLabel }
+  },
+  template: `
+    <div style="max-width: 560px;">
+      <RcSesInlineAlertV2
+        type="info"
+        :message="longMessage"
+        show-action
+        :action-label="defaultActionLabel"
+      />
+    </div>
   `,
 })
