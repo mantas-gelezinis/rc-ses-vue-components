@@ -31,6 +31,9 @@ $rc-size-v2-semantic: (
   'toggle-track-width-v2': 'size-36-v2',
   'toggle-track-height-v2': 'size-20-v2',
   'toggle-thumb-size-v2': 'size-16-v2',
+  // Checkbox
+  'checkbox-size-v2': 'size-20-v2',
+  'checkbox-icon-size-v2': 'size-16-v2',
 );
 
 @function rc-size-v2($token) {
