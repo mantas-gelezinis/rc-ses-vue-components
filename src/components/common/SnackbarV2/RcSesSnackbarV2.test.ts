@@ -115,6 +115,15 @@ describe('RcSesSnackbarV2', () => {
     expect(emitted()['update:modelValue']).toEqual([[false]])
   })
 
+  it('emits update:modelValue once when Vuetify closes the snackbar', async () => {
+    const { emitted } = renderSnackbar()
+
+    await fireEvent.keyDown(screen.getByTestId('v-snackbar'), { key: 'Escape' })
+
+    expect(emitted()['update:modelValue']).toEqual([[false]])
+    expect(emitted().close).toEqual([[]])
+  })
+
   it('emits action and closes when dismissOnAction is true', async () => {
     const { emitted } = renderSnackbar({
       showAction: true,

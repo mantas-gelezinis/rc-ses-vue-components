@@ -1,6 +1,6 @@
 <template>
   <v-snackbar
-    v-model="isOpen"
+    :model-value="props.modelValue"
     class="rc-ses-snackbar-v2-host"
     :timeout="snackbarTimeout"
     location="bottom"
@@ -93,13 +93,6 @@ const isPersisted = computed(
   () => props.persist ?? props.state === SnackbarState.ActionNeeded,
 )
 
-const isOpen = computed({
-  get: () => props.modelValue,
-  set: (value: boolean) => {
-    emit('update:modelValue', value)
-  },
-})
-
 const snackbarTimeout = computed(() => {
   if (isPersisted.value || isPaused.value) {
     return -1
@@ -136,13 +129,17 @@ const showActions = computed(() => showActionButton.value || props.showClose)
 
 const closeAriaLabel = computed(() => t('RcSesSnackbarV2.close', { ns: 'components' }))
 
-const handleClose = () => {
-  if (!props.modelValue) {
+const handleVisibilityChange = (value: boolean) => {
+  if (value || !props.modelValue) {
     return
   }
 
-  isOpen.value = false
+  emit('update:modelValue', false)
   emit('close')
+}
+
+const handleClose = () => {
+  handleVisibilityChange(false)
 }
 
 const handleFocusOut = (event: FocusEvent) => {
@@ -166,12 +163,6 @@ const handleAction = () => {
   emit('action')
 
   if (props.dismissOnAction) {
-    handleClose()
-  }
-}
-
-const handleVisibilityChange = (value: boolean) => {
-  if (!value) {
     handleClose()
   }
 }
