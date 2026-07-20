@@ -52,6 +52,10 @@ const i18n = () => {
             close: 'Uždaryti',
           },
 
+          RcSesCheckboxV2: {
+            loading: 'Kraunama...',
+          },
+
           RcSesStepperV2: {
             back: 'Grįžti',
             completedStep: 'Užbaigta: {{step}}',
@@ -127,6 +131,10 @@ const i18n = () => {
           },
           RcSesInlineAlertV2: {
             close: 'Close',
+          },
+
+          RcSesCheckboxV2: {
+            loading: 'Loading...',
           },
 
           RcSesStepperV2: {

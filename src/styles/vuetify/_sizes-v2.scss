@@ -38,6 +38,9 @@ $rc-size-v2-semantic: (
   'snackbar-min-width-v2': 'size-320-v2',
   'snackbar-max-width-v2': 'size-400-v2',
   'snackbar-icon-size-v2': 'size-18-v2',
+  // Checkbox
+  'checkbox-size-v2': 'size-20-v2',
+  'checkbox-icon-size-v2': 'size-16-v2',
 );
 
 @function rc-size-v2($token) {
