@@ -33,3 +33,17 @@
     }
   }
 }
+
+.snackbar-story-frame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 96px;
+
+  .rc-ses-snackbar-v2-host.v-snackbar--contained {
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}

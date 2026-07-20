@@ -45,6 +45,9 @@ const i18n = () => {
             remove: 'Pašalinti',
           },
 
+          RcSesSnackbarV2: {
+            close: 'Uždaryti',
+          },
           RcSesInlineAlertV2: {
             close: 'Uždaryti',
           },
@@ -123,6 +126,9 @@ const i18n = () => {
             remove: 'Remove',
           },
 
+          RcSesSnackbarV2: {
+            close: 'Close',
+          },
           RcSesInlineAlertV2: {
             close: 'Close',
           },
