@@ -1,0 +1,23 @@
+@use '/src/styles/vuetify/spacing-v2' as spacing-v2;
+
+.rc-ses-chip-select-v2 {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: spacing-v2.rc-spacing-v2('spacing-6-v2');
+
+  &__item {
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.2s ease, transform 0.1s ease;
+
+    &:active:not(.v-chip--disabled) {
+      transform: scale(0.98);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rc-ses-chip-select-v2__item {
+    transition: none;
+  }
+}
