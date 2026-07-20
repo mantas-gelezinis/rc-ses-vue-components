@@ -45,11 +45,17 @@ const i18n = () => {
             remove: 'Pašalinti',
           },
 
+          RcSesSnackbarV2: {
+            close: 'Uždaryti',
+          },
           RcSesInlineAlertV2: {
             close: 'Uždaryti',
           },
 
           RcSesRadioV2: {
+            loading: 'Kraunama...',
+          },
+          RcSesCheckboxV2: {
             loading: 'Kraunama...',
           },
 
@@ -123,11 +129,17 @@ const i18n = () => {
             remove: 'Remove',
           },
 
+          RcSesSnackbarV2: {
+            close: 'Close',
+          },
           RcSesInlineAlertV2: {
             close: 'Close',
           },
 
           RcSesRadioV2: {
+            loading: 'Loading...',
+          },
+          RcSesCheckboxV2: {
             loading: 'Loading...',
           },
 

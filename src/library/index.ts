@@ -7,12 +7,14 @@ import RcSesAlert from '@/components/common/Alert/RcSesAlert.vue'
 import RcSesBadgeV2 from '@/components/common/BadgeV2/RcSesBadgeV2.vue'
 import RcSesCardFooterV2 from '@/components/common/CardV2/RcSesCardFooterV2.vue'
 import RcSesCardV2 from '@/components/common/CardV2/RcSesCardV2.vue'
+import RcSesChipSelectV2 from '@/components/common/ChipSelectV2/RcSesChipSelectV2.vue'
 import RcSesError from '@/components/common/Error/RcSesError.vue'
 import RcSesFullPageLoaderV2 from '@/components/common/FullPageLoaderV2/RcSesFullPageLoaderV2.vue'
 import RcSesImageAndTextV2 from '@/components/common/ImageAndTextV2/RcSesImageAndTextV2.vue'
 import RcSesInlineAlertV2 from '@/components/common/InlineAlertV2/RcSesInlineAlertV2.vue'
 import RcSesLoaderV2 from '@/components/common/LoaderV2/RcSesLoaderV2.vue'
 import RcSesReviewCardV2 from '@/components/common/ReviewCardV2/RcSesReviewCardV2.vue'
+import RcSesSnackbarV2 from '@/components/common/SnackbarV2/RcSesSnackbarV2.vue'
 import RcSesStepperV2 from '@/components/common/StepperV2/RcSesStepperV2.vue'
 import RcSesSubcardV2 from '@/components/common/SubcardV2/RcSesSubcardV2.vue'
 import RcSesButtonV2 from '@/components/common/buttonV2/RcSesButtonV2.vue'
@@ -20,6 +22,8 @@ import RcSesButton from '@/components/common/buttons/Button/RcSesButton.vue'
 import RcSesFormControl from '@/components/common/forms/RcSesFormControl.vue'
 import RcSesCheckbox from '@/components/common/inputs/Checkboxes/Checkbox/RcSesCheckbox.vue'
 import RcSesCheckboxField from '@/components/common/inputs/Checkboxes/CheckboxField/RcSesCheckboxField.vue'
+import RcSesCheckboxSelectableAreaV2 from '@/components/common/inputs/Checkboxes/CheckboxSelectableAreaV2/RcSesCheckboxSelectableAreaV2.vue'
+import RcSesCheckboxV2 from '@/components/common/inputs/Checkboxes/CheckboxV2/RcSesCheckboxV2.vue'
 import RcSesDatePicker from '@/components/common/inputs/Datepickers/DatePicker/RcSesDatePicker.vue'
 import RcSesDatePickerField from '@/components/common/inputs/Datepickers/DatePickerField/RcSesDatePickerField.vue'
 import RcSesFieldWrapper from '@/components/common/inputs/FieldWrapper/RcSesFieldWrapper.vue'
@@ -139,7 +143,11 @@ export function createRcSesComponents(options: object = {}): Plugin<[]> {
     app.component('RcSesTooltip', RcSesTooltip)
 
     app.component('RcSesBadgeV2', RcSesBadgeV2)
+    app.component('RcSesChipSelectV2', RcSesChipSelectV2)
+    app.component('RcSesCheckboxV2', RcSesCheckboxV2)
+    app.component('RcSesCheckboxSelectableAreaV2', RcSesCheckboxSelectableAreaV2)
     app.component('RcSesImageAndTextV2', RcSesImageAndTextV2)
+    app.component('RcSesSnackbarV2', RcSesSnackbarV2)
     app.component('RcSesInlineAlertV2', RcSesInlineAlertV2)
     app.component('RcSesLoaderV2', RcSesLoaderV2)
     app.component('RcSesFullPageLoaderV2', RcSesFullPageLoaderV2)
@@ -170,7 +178,10 @@ export {
 export { RcSesAlert, RcSesButton }
 export { RcSesBadgeV2, RcSesButtonV2, RcSesToggleV2 }
 export { RcSesRadioGroupV2, RcSesRadioV2, RcSesRadioSelectableAreaV2 }
-export { RcSesImageAndTextV2, RcSesInlineAlertV2, RcSesStepperV2 }
+export { RcSesImageAndTextV2, RcSesSnackbarV2 }
+export { RcSesInlineAlertV2, RcSesStepperV2 }
+export { RcSesCheckboxV2, RcSesCheckboxSelectableAreaV2 }
+export { RcSesChipSelectV2 }
 export { RcSesLoaderV2, RcSesFullPageLoaderV2 }
 export { RcSesModalV2, RcSesBackdropV2 }
 export { RcSesCardV2, RcSesCardFooterV2, RcSesReviewCardV2, RcSesSubcardV2 }
