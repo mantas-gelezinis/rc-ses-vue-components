@@ -45,6 +45,17 @@ const i18n = () => {
             remove: 'Pašalinti',
           },
 
+          RcSesSnackbarV2: {
+            close: 'Uždaryti',
+          },
+          RcSesInlineAlertV2: {
+            close: 'Uždaryti',
+          },
+
+          RcSesCheckboxV2: {
+            loading: 'Kraunama...',
+          },
+
           RcSesStepperV2: {
             back: 'Grįžti',
             completedStep: 'Užbaigta: {{step}}',
@@ -113,6 +124,17 @@ const i18n = () => {
 
           RcSesBadgeV2: {
             remove: 'Remove',
+          },
+
+          RcSesSnackbarV2: {
+            close: 'Close',
+          },
+          RcSesInlineAlertV2: {
+            close: 'Close',
+          },
+
+          RcSesCheckboxV2: {
+            loading: 'Loading...',
           },
 
           RcSesStepperV2: {
