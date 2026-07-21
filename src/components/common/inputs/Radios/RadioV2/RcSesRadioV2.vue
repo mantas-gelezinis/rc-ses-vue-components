@@ -53,7 +53,6 @@
     density="compact"
     :ripple="false"
     @update:model-value="handleVuetifyUpdate"
-    @click="handleClick"
   >
     <template v-if="$slots.default" #label>
       <slot />
@@ -111,10 +110,6 @@ const selectValue = () => {
   }
 
   group?.select(props.value)
-}
-
-const handleClick = () => {
-  selectValue()
 }
 
 const handleVuetifyUpdate = (value: unknown) => {

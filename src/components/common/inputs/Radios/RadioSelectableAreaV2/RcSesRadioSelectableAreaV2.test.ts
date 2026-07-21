@@ -131,11 +131,13 @@ describe('RcSesRadioSelectableAreaV2', () => {
       { modelValue: null },
     )
 
+    const area = container.querySelector('.rc-ses-radio-selectable-area-v2')
+
+    expect(area).toHaveAttribute('tabindex', '-1')
+
     await fireEvent.click(screen.getByText('Description text'))
 
-    expect(container.querySelector('.rc-ses-radio-selectable-area-v2')).not.toHaveClass(
-      'rc-ses-radio-selectable-area-v2--checked',
-    )
+    expect(area).not.toHaveClass('rc-ses-radio-selectable-area-v2--checked')
   })
 
   it('renders loading skeleton', () => {

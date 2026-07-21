@@ -21,7 +21,7 @@ const VRadioStub = defineComponent({
     trueIcon: { type: String, default: undefined },
     falseIcon: { type: String, default: undefined },
   },
-  emits: ['click'],
+  emits: ['update:modelValue'],
   setup(radioProps, { attrs, slots, emit }) {
     return () =>
       h(
@@ -32,7 +32,11 @@ const VRadioStub = defineComponent({
           'aria-label': attrs['aria-label'],
           'aria-checked': attrs['aria-checked'],
           'aria-disabled': radioProps.disabled || undefined,
-          onClick: (event: MouseEvent) => emit('click', event),
+          onClick: () => {
+            if (!radioProps.disabled) {
+              emit('update:modelValue', radioProps.value)
+            }
+          },
         },
         [
           h('input', {

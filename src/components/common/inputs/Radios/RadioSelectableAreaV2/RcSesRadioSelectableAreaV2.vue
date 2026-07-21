@@ -29,6 +29,7 @@
     />
   </div>
 
+  <!-- eslint-disable-next-line vuejs-accessibility/interactive-supports-focus -- :tabindex is 0 when enabled, -1 when disabled -->
   <div
     v-else
     :class="[
@@ -41,7 +42,7 @@
       },
     ]"
     role="radio"
-    tabindex="0"
+    :tabindex="isDisabled ? -1 : 0"
     :aria-checked="isSelected"
     :aria-disabled="isDisabled || undefined"
     :aria-label="radioAccessibleLabel"
