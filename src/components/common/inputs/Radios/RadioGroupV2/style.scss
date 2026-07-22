@@ -1,0 +1,30 @@
+@use '/src/styles/vuetify/sizes-v2' as sizes-v2;
+@use '/src/styles/vuetify/spacing-v2' as spacing-v2;
+@use '/src/styles/vuetify/typography-v2' as typography-v2;
+
+.rc-ses-radio-group-v2 {
+  $radio-container-size: sizes-v2.rc-size-v2('size-24-v2');
+
+  margin: 0;
+  padding: 0;
+  border: none;
+  min-inline-size: 0;
+
+  &__options {
+    display: flex;
+    flex-direction: column;
+    gap: spacing-v2.rc-spacing-v2('spacing-8-v2');
+  }
+
+  &__error {
+    @include typography-v2.rc-typography-v2('body-caption-v2');
+
+    margin: 0;
+    margin-block-start: spacing-v2.rc-spacing-v2('spacing-4-v2');
+
+    padding-inline-start: calc(
+      #{$radio-container-size} + #{spacing-v2.rc-spacing-v2('spacing-8-v2')}
+    );
+    color: rgb(var(--v-theme-error-border-v2));
+  }
+}

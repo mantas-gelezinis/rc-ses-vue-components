@@ -52,6 +52,9 @@ const i18n = () => {
             close: 'Uždaryti',
           },
 
+          RcSesRadioV2: {
+            loading: 'Kraunama...',
+          },
           RcSesCheckboxV2: {
             loading: 'Kraunama...',
           },
@@ -133,6 +136,9 @@ const i18n = () => {
             close: 'Close',
           },
 
+          RcSesRadioV2: {
+            loading: 'Loading...',
+          },
           RcSesCheckboxV2: {
             loading: 'Loading...',
           },

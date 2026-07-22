@@ -37,6 +37,9 @@ import RcSesPhoneField from '@/components/common/inputs/PhoneField/RcSesPhoneFie
 import RcSesRadioButtonsField from '@/components/common/inputs/RadioButtonsField/RcSesRadioButtonsField.vue'
 import RcSesRadio from '@/components/common/inputs/Radios/Radio/RcSesRadio.vue'
 import RcSesRadioField from '@/components/common/inputs/Radios/RadioFields/RcSesRadioField.vue'
+import RcSesRadioGroupV2 from '@/components/common/inputs/Radios/RadioGroupV2/RcSesRadioGroupV2.vue'
+import RcSesRadioSelectableAreaV2 from '@/components/common/inputs/Radios/RadioSelectableAreaV2/RcSesRadioSelectableAreaV2.vue'
+import RcSesRadioV2 from '@/components/common/inputs/Radios/RadioV2/RcSesRadioV2.vue'
 import RcSesSearchField from '@/components/common/inputs/SearchField/RcSesSearchField.vue'
 import RcSesSearchableArea from '@/components/common/inputs/SearchableArea/RcSesSearchableArea.vue'
 import RcSesSearchableField from '@/components/common/inputs/SearchableField/RcSesSearchableField.vue'
@@ -121,6 +124,9 @@ export function createRcSesComponents(options: object = {}): Plugin<[]> {
       .component('RcSesRadio', RcSesRadio)
       .component('RcSesRadioField', RcSesRadioField)
       .component('RcSesRadioButtonsField', RcSesRadioButtonsField)
+      .component('RcSesRadioGroupV2', RcSesRadioGroupV2)
+      .component('RcSesRadioV2', RcSesRadioV2)
+      .component('RcSesRadioSelectableAreaV2', RcSesRadioSelectableAreaV2)
 
     app
       .component('RcSesSearchableArea', RcSesSearchableArea)
@@ -171,6 +177,7 @@ export {
 
 export { RcSesAlert, RcSesButton }
 export { RcSesBadgeV2, RcSesButtonV2, RcSesToggleV2 }
+export { RcSesRadioGroupV2, RcSesRadioV2, RcSesRadioSelectableAreaV2 }
 export { RcSesImageAndTextV2, RcSesSnackbarV2 }
 export { RcSesInlineAlertV2, RcSesStepperV2 }
 export { RcSesCheckboxV2, RcSesCheckboxSelectableAreaV2 }
