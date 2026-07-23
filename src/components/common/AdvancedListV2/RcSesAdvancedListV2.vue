@@ -11,8 +11,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, provide } from 'vue'
 
+import { advancedListV2Key } from '@/components/common/AdvancedListV2/context'
 import advancedListV2Defaults from '@/components/common/AdvancedListV2/defaults'
 import type { AdvancedListProps } from '@/components/common/AdvancedListV2/types'
 
@@ -21,6 +22,8 @@ import './style.scss'
 const props = withDefaults(defineProps<AdvancedListProps>(), advancedListV2Defaults)
 
 const isListbox = computed(() => props.listbox || props.multiselectable)
+
+provide(advancedListV2Key, { isListbox })
 
 const listRole = computed(() => (isListbox.value ? 'listbox' : undefined))
 

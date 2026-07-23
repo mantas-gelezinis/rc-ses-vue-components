@@ -1,6 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/vue'
 import { describe, expect, it } from 'vitest'
 
+import RcSesAdvancedListV2 from '@/components/common/AdvancedListV2/RcSesAdvancedListV2.vue'
+
 import RcSesAdvancedListItemV2 from './RcSesAdvancedListItemV2.vue'
 
 describe('RcSesAdvancedListItemV2', () => {
@@ -62,8 +64,28 @@ describe('RcSesAdvancedListItemV2', () => {
     expect(item).toHaveClass('rc-ses-advanced-list-item-v2--error')
   })
 
-  it('sets option semantics when selectable', () => {
-    renderItem({ selectable: true, selected: true })
+  it('does not set option role when selectable outside a listbox', () => {
+    const { container } = renderItem({ selectable: true, selected: true })
+
+    expect(screen.queryByRole('option')).not.toBeInTheDocument()
+    expect(container.querySelector('.rc-ses-advanced-list-item-v2')).toHaveAttribute(
+      'tabindex',
+      '0',
+    )
+    expect(container.querySelector('.rc-ses-advanced-list-item-v2')).not.toHaveAttribute(
+      'aria-selected',
+    )
+  })
+
+  it('sets option semantics when selectable inside a listbox', () => {
+    render({
+      components: { RcSesAdvancedListV2, RcSesAdvancedListItemV2 },
+      template: `
+        <RcSesAdvancedListV2 listbox accessible-label="Options">
+          <RcSesAdvancedListItemV2 title="Jonas Jonaitis" selectable selected />
+        </RcSesAdvancedListV2>
+      `,
+    })
 
     const option = screen.getByRole('option')
     expect(option).toHaveAttribute('aria-selected', 'true')
@@ -71,17 +93,17 @@ describe('RcSesAdvancedListItemV2', () => {
   })
 
   it('emits select when selectable item is clicked', async () => {
-    const { emitted } = renderItem({ selectable: true })
+    const { emitted, container } = renderItem({ selectable: true })
 
-    await fireEvent.click(screen.getByRole('option'))
+    await fireEvent.click(container.querySelector('.rc-ses-advanced-list-item-v2')!)
 
     expect(emitted().select).toHaveLength(1)
   })
 
   it('does not emit select when disabled', async () => {
-    const { emitted } = renderItem({ selectable: true, disabled: true })
+    const { emitted, container } = renderItem({ selectable: true, disabled: true })
 
-    await fireEvent.click(screen.getByRole('option'))
+    await fireEvent.click(container.querySelector('.rc-ses-advanced-list-item-v2')!)
 
     expect(emitted().select).toBeUndefined()
   })
@@ -97,10 +119,25 @@ describe('RcSesAdvancedListItemV2', () => {
     expect(emitted().select).toBeUndefined()
   })
 
-  it('emits select via keyboard Enter', async () => {
-    const { emitted } = renderItem({ selectable: true })
+  it('does not emit select from trailing keydown Enter/Space', async () => {
+    const { emitted } = renderItem(
+      { selectable: true, showTrailing: true },
+      { trailing: '<button type="button">Pašalinti</button>' },
+    )
 
-    await fireEvent.keyDown(screen.getByRole('option'), { key: 'Enter' })
+    const button = screen.getByRole('button', { name: 'Pašalinti' })
+
+    await fireEvent.keyDown(button, { key: 'Enter' })
+    await fireEvent.keyDown(button, { key: ' ' })
+
+    expect(emitted().select).toBeUndefined()
+  })
+
+  it('emits select via keyboard Enter on the item itself', async () => {
+    const { emitted, container } = renderItem({ selectable: true })
+    const item = container.querySelector('.rc-ses-advanced-list-item-v2')!
+
+    await fireEvent.keyDown(item, { key: 'Enter' })
 
     expect(emitted().select).toHaveLength(1)
   })

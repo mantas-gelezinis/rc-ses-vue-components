@@ -3,13 +3,13 @@
   <li
     :class="rootClasses"
     :style="rootStyle"
-    :role="props.selectable ? 'option' : undefined"
+    :role="isListboxOption ? 'option' : undefined"
     :tabindex="tabIndex"
-    :aria-selected="props.selectable ? props.selected : undefined"
+    :aria-selected="isListboxOption ? props.selected : undefined"
     :aria-disabled="props.disabled || undefined"
     @click="handleSelect"
-    @keydown.enter.prevent="handleSelect"
-    @keydown.space.prevent="handleSelect"
+    @keydown.enter.self.prevent="handleSelect"
+    @keydown.space.self.prevent="handleSelect"
   >
     <div class="rc-ses-advanced-list-item-v2__body">
       <div
@@ -63,6 +63,7 @@
         v-if="props.showTrailing && $slots.trailing"
         class="rc-ses-advanced-list-item-v2__trailing"
         @click.stop
+        @keydown.stop
       >
         <slot name="trailing" />
       </div>
@@ -72,6 +73,7 @@
       v-if="props.showExpanded && $slots.expanded"
       class="rc-ses-advanced-list-item-v2__expanded"
       @click.stop
+      @keydown.stop
     >
       <slot name="expanded" />
     </div>
@@ -79,8 +81,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
 
+import { advancedListV2Key } from '@/components/common/AdvancedListV2/context'
 import advancedListItemV2Defaults from '@/components/common/AdvancedListItemV2/defaults'
 import type { AdvancedListItemProps } from '@/components/common/AdvancedListItemV2/types'
 
@@ -94,6 +97,12 @@ const props = withDefaults(
 const emit = defineEmits<{
   select: []
 }>()
+
+const listContext = inject(advancedListV2Key, null)
+
+const isListboxOption = computed(
+  () => props.selectable && !!listContext?.isListbox.value,
+)
 
 const tabIndex = computed(() => {
   if (!props.selectable) {

@@ -14,7 +14,6 @@ export type AdvancedListItemProps = {
   showExpanded?: boolean
   /** Nesting depth for indented sub-items (0 = root) */
   level?: number
-  /** When true, sets role="option" + aria-selected for listbox patterns */
   selectable?: boolean
   selected?: boolean
   disabled?: boolean

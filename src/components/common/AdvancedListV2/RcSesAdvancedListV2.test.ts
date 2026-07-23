@@ -66,4 +66,18 @@ describe('RcSesAdvancedListV2', () => {
     expect(list).toHaveClass('rc-ses-advanced-list-v2--scrollable')
     expect(list).toHaveStyle({ maxHeight: '200px' })
   })
+
+  it('does not set option role when selectable without listbox parent', () => {
+    render({
+      components: { RcSesAdvancedListV2, RcSesAdvancedListItemV2 },
+      template: `
+        <RcSesAdvancedListV2 accessible-label="Plain list">
+          <RcSesAdvancedListItemV2 title="Option" selectable selected />
+        </RcSesAdvancedListV2>
+      `,
+    })
+
+    expect(screen.getByRole('list', { name: 'Plain list' })).toBeInTheDocument()
+    expect(screen.queryByRole('option')).not.toBeInTheDocument()
+  })
 })
