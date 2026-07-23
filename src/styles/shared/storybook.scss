@@ -33,3 +33,24 @@
     }
   }
 }
+
+.snackbar-story-frame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 96px;
+
+  .rc-ses-snackbar-v2-host.v-snackbar--contained {
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+.advanced-list-story {
+  box-sizing: border-box;
+  max-width: 40rem;
+  min-width: 0;
+  width: 100%;
+}

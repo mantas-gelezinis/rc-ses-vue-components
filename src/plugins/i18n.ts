@@ -45,6 +45,20 @@ const i18n = () => {
             remove: 'Pašalinti',
           },
 
+          RcSesSnackbarV2: {
+            close: 'Uždaryti',
+          },
+          RcSesInlineAlertV2: {
+            close: 'Uždaryti',
+          },
+
+          RcSesRadioV2: {
+            loading: 'Kraunama...',
+          },
+          RcSesCheckboxV2: {
+            loading: 'Kraunama...',
+          },
+
           RcSesStepperV2: {
             back: 'Grįžti',
             completedStep: 'Užbaigta: {{step}}',
@@ -60,6 +74,10 @@ const i18n = () => {
 
           RcSesReviewCardV2: {
             edit: 'Redaguoti',
+          },
+
+          RcSesLoaderV2: {
+            label: 'Kraunama...',
           },
 
           RcSesModalV2: {
@@ -111,6 +129,20 @@ const i18n = () => {
             remove: 'Remove',
           },
 
+          RcSesSnackbarV2: {
+            close: 'Close',
+          },
+          RcSesInlineAlertV2: {
+            close: 'Close',
+          },
+
+          RcSesRadioV2: {
+            loading: 'Loading...',
+          },
+          RcSesCheckboxV2: {
+            loading: 'Loading...',
+          },
+
           RcSesStepperV2: {
             back: 'Back',
             completedStep: 'Completed: {{step}}',
@@ -126,6 +158,10 @@ const i18n = () => {
 
           RcSesReviewCardV2: {
             edit: 'Edit',
+          },
+
+          RcSesLoaderV2: {
+            label: 'Loading...',
           },
 
           RcSesModalV2: {
