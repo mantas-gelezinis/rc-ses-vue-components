@@ -3,6 +3,8 @@ import 'vuetify/styles'
 
 import RcSesAccordion from '@/components/common/Accordion/RcSesAccordion.vue'
 import useAccordionController from '@/components/common/Accordion/hooks/useAccordionController'
+import RcSesAdvancedListItemV2 from '@/components/common/AdvancedListItemV2/RcSesAdvancedListItemV2.vue'
+import RcSesAdvancedListV2 from '@/components/common/AdvancedListV2/RcSesAdvancedListV2.vue'
 import RcSesAlert from '@/components/common/Alert/RcSesAlert.vue'
 import RcSesBadgeV2 from '@/components/common/BadgeV2/RcSesBadgeV2.vue'
 import RcSesCardFooterV2 from '@/components/common/CardV2/RcSesCardFooterV2.vue'
@@ -143,6 +145,8 @@ export function createRcSesComponents(options: object = {}): Plugin<[]> {
     app.component('RcSesTooltip', RcSesTooltip)
 
     app.component('RcSesBadgeV2', RcSesBadgeV2)
+    app.component('RcSesAdvancedListV2', RcSesAdvancedListV2)
+    app.component('RcSesAdvancedListItemV2', RcSesAdvancedListItemV2)
     app.component('RcSesChipSelectV2', RcSesChipSelectV2)
     app.component('RcSesCheckboxV2', RcSesCheckboxV2)
     app.component('RcSesCheckboxSelectableAreaV2', RcSesCheckboxSelectableAreaV2)
@@ -177,6 +181,7 @@ export {
 
 export { RcSesAlert, RcSesButton }
 export { RcSesBadgeV2, RcSesButtonV2, RcSesToggleV2 }
+export { RcSesAdvancedListV2, RcSesAdvancedListItemV2 }
 export { RcSesRadioGroupV2, RcSesRadioV2, RcSesRadioSelectableAreaV2 }
 export { RcSesImageAndTextV2, RcSesSnackbarV2 }
 export { RcSesInlineAlertV2, RcSesStepperV2 }

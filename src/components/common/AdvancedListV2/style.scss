@@ -1,0 +1,33 @@
+@use '/src/styles/vuetify/borders-v2' as borders-v2;
+@use '/src/styles/vuetify/spacing-v2' as spacing-v2;
+
+.rc-ses-advanced-list-v2 {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: spacing-v2.rc-spacing-v2('list-item-gap-v2');
+  list-style: none;
+  margin: 0;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0;
+  width: 100%;
+
+  &--row {
+    gap: 0;
+  }
+
+  &--framed {
+    background-color: rgb(var(--v-theme-surface-base-v2));
+    border: borders-v2.rc-stroke-v2('border-width-default-v2') solid
+      rgb(var(--v-theme-border-subtle-v2));
+    border-radius: borders-v2.rc-radius-v2('list-item-radius-v2');
+    overflow-x: clip;
+    padding: spacing-v2.rc-spacing-v2('list-panel-padding-v2');
+  }
+
+  &--scrollable {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
