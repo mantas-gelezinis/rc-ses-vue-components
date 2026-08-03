@@ -10,6 +10,8 @@ import RcSesBadgeV2 from '@/components/common/BadgeV2/RcSesBadgeV2.vue'
 import RcSesCardFooterV2 from '@/components/common/CardV2/RcSesCardFooterV2.vue'
 import RcSesCardV2 from '@/components/common/CardV2/RcSesCardV2.vue'
 import RcSesChipSelectV2 from '@/components/common/ChipSelectV2/RcSesChipSelectV2.vue'
+import RcSesDatePickerV2 from '@/components/common/DatePickerV2/RcSesDatePickerV2.vue'
+import RcSesDropdownV2 from '@/components/common/DropdownV2/RcSesDropdownV2.vue'
 import RcSesError from '@/components/common/Error/RcSesError.vue'
 import RcSesFullPageLoaderV2 from '@/components/common/FullPageLoaderV2/RcSesFullPageLoaderV2.vue'
 import RcSesImageAndTextV2 from '@/components/common/ImageAndTextV2/RcSesImageAndTextV2.vue'
@@ -19,6 +21,7 @@ import RcSesReviewCardV2 from '@/components/common/ReviewCardV2/RcSesReviewCardV
 import RcSesSnackbarV2 from '@/components/common/SnackbarV2/RcSesSnackbarV2.vue'
 import RcSesStepperV2 from '@/components/common/StepperV2/RcSesStepperV2.vue'
 import RcSesSubcardV2 from '@/components/common/SubcardV2/RcSesSubcardV2.vue'
+import RcSesTooltipV2 from '@/components/common/TooltipV2/RcSesTooltipV2.vue'
 import RcSesButtonV2 from '@/components/common/buttonV2/RcSesButtonV2.vue'
 import RcSesButton from '@/components/common/buttons/Button/RcSesButton.vue'
 import RcSesFormControl from '@/components/common/forms/RcSesFormControl.vue'
@@ -33,6 +36,7 @@ import RcSesFileDropzone from '@/components/common/inputs/FileDropzones/FileDrop
 import RcSesFileDropzoneField from '@/components/common/inputs/FileDropzones/FileDropzoneField/RcSesFileDropzoneField.vue'
 import RcSesFileInput from '@/components/common/inputs/FileInputs/FileInput/RcSesFileInput.vue'
 import RcSesFileInputField from '@/components/common/inputs/FileInputs/FileInputField/RcSesFileInputField.vue'
+import RcSesInputV2 from '@/components/common/inputs/InputV2/RcSesInputV2.vue'
 import RcSesNumberStepper from '@/components/common/inputs/NumberSteppers/NumberStepper/RcSesNumberStepper.vue'
 import RcSesNumberStepperField from '@/components/common/inputs/NumberSteppers/NumberStepperField/RcSesNumberStepperField.vue'
 import RcSesPhoneField from '@/components/common/inputs/PhoneField/RcSesPhoneField.vue'
@@ -138,11 +142,15 @@ export function createRcSesComponents(options: object = {}): Plugin<[]> {
     app.component('RcSesSelectField', RcSesSelectField)
 
     app.component('RcSesTextField', RcSesTextField)
+    app.component('RcSesInputV2', RcSesInputV2)
+    app.component('RcSesDropdownV2', RcSesDropdownV2)
+    app.component('RcSesDatePickerV2', RcSesDatePickerV2)
     app.component('RcSesTextAreaField', RcSesTextAreaField)
 
     app.component('RcSesTable', RcSesTable)
     app.component('RcSesTab', RcSesTab)
     app.component('RcSesTooltip', RcSesTooltip)
+    app.component('RcSesTooltipV2', RcSesTooltipV2)
 
     app.component('RcSesBadgeV2', RcSesBadgeV2)
     app.component('RcSesAdvancedListV2', RcSesAdvancedListV2)
@@ -198,13 +206,14 @@ export { RcSesPhoneField }
 export { RcSesRadio, RcSesRadioButtonsField, RcSesRadioField }
 export { RcSesSearchableArea, RcSesSelectField, RcSesSearchField }
 export { RcSesTextField, RcSesTextAreaField }
+export { RcSesInputV2, RcSesDropdownV2, RcSesDatePickerV2 }
 export { RcSesAccordion, useAccordionController }
 export { RcSesError, RcSesFormControl }
 export { RcSesFileDropzone, RcSesFileDropzoneField }
 export { RcSesSearchableField }
 export { RcSesTable }
 export { RcSesTab }
-export { RcSesTooltip }
+export { RcSesTooltip, RcSesTooltipV2 }
 export type { UseFormType }
 
 export * from '@/assets/icons/regular'
