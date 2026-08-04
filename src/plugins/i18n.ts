@@ -80,6 +80,29 @@ const i18n = () => {
             label: 'Kraunama...',
           },
 
+          RcSesInputV2: {
+            optional: '(neprivaloma)',
+            clear: 'Išvalyti',
+          },
+
+          RcSesDropdownV2: {
+            all: 'Visi',
+            empty: 'Nerasta',
+            searchPlaceholder: 'Ieškoti',
+            selectedCount: 'Pasirinkta: {{count}}',
+          },
+
+          RcSesDatePickerV2: {
+            previousMonth: 'Ankstesnis mėnuo',
+            nextMonth: 'Kitas mėnuo',
+            openCalendar: 'Atidaryti kalendorių',
+            placeholder: 'Pasirinkite datą',
+          },
+
+          RcSesTooltipV2: {
+            accessibleLabel: 'Papildoma informacija',
+          },
+
           RcSesModalV2: {
             actions: {
               destructive: {
@@ -162,6 +185,29 @@ const i18n = () => {
 
           RcSesLoaderV2: {
             label: 'Loading...',
+          },
+
+          RcSesInputV2: {
+            optional: '(optional)',
+            clear: 'Clear',
+          },
+
+          RcSesDropdownV2: {
+            all: 'All',
+            empty: 'No results',
+            searchPlaceholder: 'Search',
+            selectedCount: 'Selected: {{count}}',
+          },
+
+          RcSesDatePickerV2: {
+            previousMonth: 'Previous month',
+            nextMonth: 'Next month',
+            openCalendar: 'Open calendar',
+            placeholder: 'Select a date',
+          },
+
+          RcSesTooltipV2: {
+            accessibleLabel: 'Additional information',
           },
 
           RcSesModalV2: {

@@ -83,9 +83,9 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue'
 
-import { advancedListV2Key } from '@/components/common/AdvancedListV2/context'
 import advancedListItemV2Defaults from '@/components/common/AdvancedListItemV2/defaults'
 import type { AdvancedListItemProps } from '@/components/common/AdvancedListItemV2/types'
+import { advancedListV2Key } from '@/components/common/AdvancedListV2/context'
 
 import './style.scss'
 
@@ -100,9 +100,7 @@ const emit = defineEmits<{
 
 const listContext = inject(advancedListV2Key, null)
 
-const isListboxOption = computed(
-  () => props.selectable && !!listContext?.isListbox.value,
-)
+const isListboxOption = computed(() => props.selectable && !!listContext?.isListbox.value)
 
 const tabIndex = computed(() => {
   if (!props.selectable) {
