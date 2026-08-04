@@ -15,6 +15,7 @@
       <div
         v-if="props.showExplainer && props.explainer"
         class="rc-ses-input-v2__explainer"
+        @click.stop
       >
         <slot name="explainer">
           <RcSesTooltipV2 :text="props.explainer" :title="props.explainerTitle" />

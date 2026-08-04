@@ -511,7 +511,21 @@ const onTriggerKeydown = (event: KeyboardEvent) => {
     return
   }
 
-  if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault()
+    if (!open.value) {
+      openAndFocus(0)
+      return
+    }
+
+    const option = flatOptions.value[activeIndex.value]
+    if (option) {
+      onSelect(option)
+    }
+    return
+  }
+
+  if (event.key === 'ArrowDown') {
     event.preventDefault()
     if (!open.value) {
       openAndFocus(0)
