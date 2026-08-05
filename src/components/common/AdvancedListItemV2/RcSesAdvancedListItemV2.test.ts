@@ -207,4 +207,50 @@ describe('RcSesAdvancedListItemV2', () => {
       '--rc-ses-list-item-level': '2',
     })
   })
+
+  it('applies wrap-auto class by default', () => {
+    const { container } = renderItem()
+
+    expect(container.querySelector('.rc-ses-advanced-list-item-v2')).toHaveClass(
+      'rc-ses-advanced-list-item-v2--wrap-auto',
+    )
+  })
+
+  it('applies wrap-off class', () => {
+    const { container } = renderItem({ wrap: 'off' })
+
+    expect(container.querySelector('.rc-ses-advanced-list-item-v2')).toHaveClass(
+      'rc-ses-advanced-list-item-v2--wrap-off',
+    )
+  })
+
+  it('applies wrap-stacked class with start and trailing regions', () => {
+    const { container } = renderItem(
+      { wrap: 'stacked' },
+      {
+        leading: '<span data-testid="leading">L</span>',
+        trailing: '<button type="button">Pašalinti</button>',
+      },
+    )
+
+    const item = container.querySelector('.rc-ses-advanced-list-item-v2')
+    expect(item).toHaveClass('rc-ses-advanced-list-item-v2--wrap-stacked')
+    expect(container.querySelector('.rc-ses-advanced-list-item-v2__start')).toBeTruthy()
+    expect(
+      container.querySelector('.rc-ses-advanced-list-item-v2__trailing'),
+    ).toBeTruthy()
+    expect(item).not.toHaveClass('rc-ses-advanced-list-item-v2--no-start')
+    expect(item).not.toHaveClass('rc-ses-advanced-list-item-v2--no-trailing')
+  })
+
+  it('marks stacked item without trailing', () => {
+    const { container } = renderItem(
+      { wrap: 'stacked', showTrailing: false },
+      { leading: '<span>L</span>' },
+    )
+
+    expect(container.querySelector('.rc-ses-advanced-list-item-v2')).toHaveClass(
+      'rc-ses-advanced-list-item-v2--no-trailing',
+    )
+  })
 })

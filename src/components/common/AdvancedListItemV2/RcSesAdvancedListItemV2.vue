@@ -12,19 +12,21 @@
     @keydown.space.self.prevent="handleSelect"
   >
     <div class="rc-ses-advanced-list-item-v2__body">
-      <div
-        v-if="props.showLeading && $slots.leading"
-        class="rc-ses-advanced-list-item-v2__leading"
-      >
-        <slot name="leading" />
-      </div>
+      <div v-if="showStart" class="rc-ses-advanced-list-item-v2__start">
+        <div
+          v-if="props.showLeading && $slots.leading"
+          class="rc-ses-advanced-list-item-v2__leading"
+        >
+          <slot name="leading" />
+        </div>
 
-      <div
-        v-if="props.showLeadingMedia && $slots['leading-media']"
-        class="rc-ses-advanced-list-item-v2__leading-media"
-        aria-hidden="true"
-      >
-        <slot name="leading-media" />
+        <div
+          v-if="props.showLeadingMedia && $slots['leading-media']"
+          class="rc-ses-advanced-list-item-v2__leading-media"
+          aria-hidden="true"
+        >
+          <slot name="leading-media" />
+        </div>
       </div>
 
       <div class="rc-ses-advanced-list-item-v2__content">
@@ -60,7 +62,7 @@
       </div>
 
       <div
-        v-if="props.showTrailing && $slots.trailing"
+        v-if="showTrailingSlot"
         class="rc-ses-advanced-list-item-v2__trailing"
         @click.stop
         @keydown.stop
@@ -81,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue'
+import { computed, inject, useSlots } from 'vue'
 
 import advancedListItemV2Defaults from '@/components/common/AdvancedListItemV2/defaults'
 import type { AdvancedListItemProps } from '@/components/common/AdvancedListItemV2/types'
@@ -98,6 +100,7 @@ const emit = defineEmits<{
   select: []
 }>()
 
+const slots = useSlots()
 const listContext = inject(advancedListV2Key, null)
 
 const isListboxOption = computed(() => props.selectable && !!listContext?.isListbox.value)
@@ -110,14 +113,25 @@ const tabIndex = computed(() => {
   return props.disabled ? -1 : 0
 })
 
+const showStart = computed(
+  () =>
+    (props.showLeading && !!slots.leading) ||
+    (props.showLeadingMedia && !!slots['leading-media']),
+)
+
+const showTrailingSlot = computed(() => props.showTrailing && !!slots.trailing)
+
 const rootClasses = computed(() => [
   'rc-ses-advanced-list-item-v2',
   `rc-ses-advanced-list-item-v2--${props.container}`,
+  `rc-ses-advanced-list-item-v2--wrap-${props.wrap}`,
   {
     'rc-ses-advanced-list-item-v2--selectable': props.selectable,
     'rc-ses-advanced-list-item-v2--selected': props.selected,
     'rc-ses-advanced-list-item-v2--disabled': props.disabled,
     'rc-ses-advanced-list-item-v2--error': props.error,
+    'rc-ses-advanced-list-item-v2--no-start': !showStart.value,
+    'rc-ses-advanced-list-item-v2--no-trailing': !showTrailingSlot.value,
   },
 ])
 
