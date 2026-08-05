@@ -88,6 +88,14 @@ describe('RcSesFilterDropdownV2', () => {
     expect(screen.getByTestId('badge')).toHaveTextContent('2')
   })
 
+  it('includes selection count in the trigger accessible name', () => {
+    renderDropdown({ modelValue: ['vilnius', 'kaunas'] })
+
+    expect(
+      screen.getByRole('button', { name: /Miestas, Pasirinkta: 2/i }),
+    ).toBeInTheDocument()
+  })
+
   it('toggles an option into the model', async () => {
     const { emitted } = renderDropdown()
 

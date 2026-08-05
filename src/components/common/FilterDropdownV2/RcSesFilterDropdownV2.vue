@@ -101,7 +101,7 @@
 
 <script setup lang="ts">
 import { useTranslation } from 'i18next-vue'
-import { computed, getCurrentInstance, nextTick, ref, watch } from 'vue'
+import { computed, getCurrentInstance, ref } from 'vue'
 
 import RcSesBadgeV2 from '@/components/common/BadgeV2/RcSesBadgeV2.vue'
 import filterDropdownV2Defaults from '@/components/common/FilterDropdownV2/defaults'
@@ -111,6 +111,7 @@ import type {
   FilterDropdownValue,
 } from '@/components/common/FilterDropdownV2/types'
 import RcSesCheckboxV2 from '@/components/common/inputs/Checkboxes/CheckboxV2/RcSesCheckboxV2.vue'
+import { useListboxKeyboard } from '@/composables/useListboxKeyboard'
 
 import './style.scss'
 
@@ -134,7 +135,14 @@ const selectionCountLabel = computed(() =>
   }),
 )
 
-const triggerAriaLabel = computed(() => props.accessibleLabel ?? props.label)
+const triggerAriaLabel = computed(() => {
+  const base = props.accessibleLabel ?? props.label
+  if (selectionCount.value > 0) {
+    return `${base}, ${selectionCountLabel.value}`
+  }
+
+  return base
+})
 
 const emptyText = computed(() => t('RcSesFilterDropdownV2.empty', { ns: 'components' }))
 
@@ -181,117 +189,18 @@ const toggleOption = (option: FilterDropdownOption) => {
   model.value = [...model.value, option.value]
 }
 
-const focusActiveOption = async () => {
-  await nextTick()
-  const option = props.options?.[activeIndex.value]
-  if (!option) {
-    return
-  }
-
-  document.getElementById(optionDomId(activeIndex.value))?.focus()
-}
-
-const openAndFocus = async (index = 0) => {
-  open.value = true
-  const total = props.options?.length ?? 0
-  activeIndex.value = Math.min(index, Math.max(total - 1, 0))
-  await focusActiveOption()
-}
-
-const moveActive = (delta: number) => {
-  const options = props.options ?? []
-  const total = options.length
-  if (total === 0) {
-    return
-  }
-
-  let next = activeIndex.value
-  for (let step = 0; step < total; step += 1) {
-    next = (next + delta + total) % total
-    if (!options[next]?.disabled) {
-      activeIndex.value = next
-      focusActiveOption()
-      return
-    }
-  }
-}
-
-const onTriggerKeydown = (event: KeyboardEvent) => {
-  if (props.disabled) {
-    return
-  }
-
-  if (event.key === 'Enter' || event.key === ' ') {
-    event.preventDefault()
-    if (!open.value) {
-      openAndFocus(0)
-      return
-    }
-
-    const option = props.options?.[activeIndex.value]
+const { onTriggerKeydown, onPanelKeydown } = useListboxKeyboard({
+  open,
+  activeIndex,
+  disabled: () => props.disabled,
+  getOptionCount: () => props.options?.length ?? 0,
+  isOptionDisabled: (index) => Boolean(props.options?.[index]?.disabled),
+  getOptionDomId: optionDomId,
+  onActivate: (index) => {
+    const option = props.options?.[index]
     if (option) {
       toggleOption(option)
     }
-    return
-  }
-
-  if (event.key === 'ArrowDown') {
-    event.preventDefault()
-    if (!open.value) {
-      openAndFocus(0)
-      return
-    }
-
-    moveActive(1)
-  }
-
-  if (event.key === 'ArrowUp') {
-    event.preventDefault()
-    if (!open.value) {
-      openAndFocus((props.options?.length ?? 1) - 1)
-      return
-    }
-
-    moveActive(-1)
-  }
-
-  if (event.key === 'Escape' && open.value) {
-    event.preventDefault()
-    open.value = false
-  }
-}
-
-const onPanelKeydown = (event: KeyboardEvent) => {
-  if (event.key === 'ArrowDown') {
-    event.preventDefault()
-    moveActive(1)
-  }
-
-  if (event.key === 'ArrowUp') {
-    event.preventDefault()
-    moveActive(-1)
-  }
-
-  if (event.key === 'Enter' || event.key === ' ') {
-    const option = props.options?.[activeIndex.value]
-    if (option) {
-      event.preventDefault()
-      toggleOption(option)
-    }
-  }
-
-  if (event.key === 'Escape') {
-    event.preventDefault()
-    open.value = false
-  }
-}
-
-watch(open, (isOpen) => {
-  if (isOpen) {
-    activeIndex.value = 0
-    return
-  }
-
-  activeIndex.value = -1
+  },
 })
 </script>

@@ -160,7 +160,7 @@
 <script setup lang="ts">
 import { useTranslation } from 'i18next-vue'
 import { v4 as uuidv4 } from 'uuid'
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 import RcSesBadgeV2 from '@/components/common/BadgeV2/RcSesBadgeV2.vue'
 import dropdownV2Defaults from '@/components/common/DropdownV2/defaults'
@@ -172,6 +172,7 @@ import type {
 } from '@/components/common/DropdownV2/types'
 import RcSesCheckboxV2 from '@/components/common/inputs/Checkboxes/CheckboxV2/RcSesCheckboxV2.vue'
 import RcSesInputV2 from '@/components/common/inputs/InputV2/RcSesInputV2.vue'
+import { useListboxKeyboard } from '@/composables/useListboxKeyboard'
 
 import './style.scss'
 
@@ -416,22 +417,6 @@ const optionClasses = (option: DropdownV2FlatOption, index: number) => [
 
 const optionDomId = (key: string) => `${listId.value}-${key}`
 
-const focusActiveOption = async () => {
-  await nextTick()
-  const option = flatOptions.value[activeIndex.value]
-  if (!option) {
-    return
-  }
-
-  document.getElementById(optionDomId(option.key))?.focus()
-}
-
-const openAndFocus = async (index = 0) => {
-  open.value = true
-  activeIndex.value = Math.min(index, Math.max(flatOptions.value.length - 1, 0))
-  await focusActiveOption()
-}
-
 const onSelect = (option: DropdownV2FlatOption) => {
   if (option.disabled || props.disabled) {
     return
@@ -489,104 +474,27 @@ const onSelect = (option: DropdownV2FlatOption) => {
   open.value = false
 }
 
-const moveActive = (delta: number) => {
-  const total = flatOptions.value.length
-  if (total === 0) {
-    return
-  }
-
-  let next = activeIndex.value
-  for (let step = 0; step < total; step += 1) {
-    next = (next + delta + total) % total
-    if (!flatOptions.value[next]?.disabled) {
-      activeIndex.value = next
-      focusActiveOption()
-      return
-    }
-  }
-}
-
-const onTriggerKeydown = (event: KeyboardEvent) => {
-  if (props.disabled) {
-    return
-  }
-
-  if (event.key === 'Enter' || event.key === ' ') {
-    event.preventDefault()
-    if (!open.value) {
-      openAndFocus(0)
-      return
-    }
-
-    const option = flatOptions.value[activeIndex.value]
+const { onTriggerKeydown, onPanelKeydown } = useListboxKeyboard({
+  open,
+  activeIndex,
+  disabled: () => props.disabled,
+  getOptionCount: () => flatOptions.value.length,
+  isOptionDisabled: (index) => Boolean(flatOptions.value[index]?.disabled),
+  getOptionDomId: (index) => {
+    const option = flatOptions.value[index]
+    return option ? optionDomId(option.key) : ''
+  },
+  onActivate: (index) => {
+    const option = flatOptions.value[index]
     if (option) {
       onSelect(option)
     }
-    return
-  }
-
-  if (event.key === 'ArrowDown') {
-    event.preventDefault()
-    if (!open.value) {
-      openAndFocus(0)
-      return
-    }
-
-    moveActive(1)
-  }
-
-  if (event.key === 'ArrowUp') {
-    event.preventDefault()
-    if (!open.value) {
-      openAndFocus(flatOptions.value.length - 1)
-      return
-    }
-
-    moveActive(-1)
-  }
-
-  if (event.key === 'Escape' && open.value) {
-    event.preventDefault()
-    open.value = false
-  }
-}
-
-const onPanelKeydown = (event: KeyboardEvent) => {
-  if (event.key === 'ArrowDown') {
-    event.preventDefault()
-    moveActive(1)
-  }
-
-  if (event.key === 'ArrowUp') {
-    event.preventDefault()
-    moveActive(-1)
-  }
-
-  if (event.key === 'Home') {
-    event.preventDefault()
-    activeIndex.value = -1
-    moveActive(1)
-  }
-
-  if (event.key === 'End') {
-    event.preventDefault()
-    activeIndex.value = flatOptions.value.length
-    moveActive(-1)
-  }
-
-  if (event.key === 'Enter' || event.key === ' ') {
-    const option = flatOptions.value[activeIndex.value]
-    if (option) {
-      event.preventDefault()
-      onSelect(option)
-    }
-  }
-
-  if (event.key === 'Escape') {
-    event.preventDefault()
-    open.value = false
-  }
-}
+  },
+  getDefaultOpenIndex: () => {
+    const selectedIndex = flatOptions.value.findIndex((option) => isOptionChecked(option))
+    return selectedIndex >= 0 ? selectedIndex : 0
+  },
+})
 
 const onSearchKeydown = (event: KeyboardEvent) => {
   if (
@@ -604,12 +512,7 @@ const onSearchKeydown = (event: KeyboardEvent) => {
 watch(open, (isOpen) => {
   if (isOpen) {
     searchQuery.value = ''
-    const selectedIndex = flatOptions.value.findIndex((option) => isOptionChecked(option))
-    activeIndex.value = selectedIndex >= 0 ? selectedIndex : 0
-    return
   }
-
-  activeIndex.value = -1
 })
 
 watch(flatOptions, () => {
