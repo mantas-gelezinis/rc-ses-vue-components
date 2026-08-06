@@ -13,6 +13,8 @@ import RcSesChipSelectV2 from '@/components/common/ChipSelectV2/RcSesChipSelectV
 import RcSesDatePickerV2 from '@/components/common/DatePickerV2/RcSesDatePickerV2.vue'
 import RcSesDropdownV2 from '@/components/common/DropdownV2/RcSesDropdownV2.vue'
 import RcSesError from '@/components/common/Error/RcSesError.vue'
+import RcSesFilterDropdownV2 from '@/components/common/FilterDropdownV2/RcSesFilterDropdownV2.vue'
+import RcSesFiltersV2 from '@/components/common/FiltersV2/RcSesFiltersV2.vue'
 import RcSesFullPageLoaderV2 from '@/components/common/FullPageLoaderV2/RcSesFullPageLoaderV2.vue'
 import RcSesImageAndTextV2 from '@/components/common/ImageAndTextV2/RcSesImageAndTextV2.vue'
 import RcSesInlineAlertV2 from '@/components/common/InlineAlertV2/RcSesInlineAlertV2.vue'
@@ -156,6 +158,8 @@ export function createRcSesComponents(options: object = {}): Plugin<[]> {
     app.component('RcSesAdvancedListV2', RcSesAdvancedListV2)
     app.component('RcSesAdvancedListItemV2', RcSesAdvancedListItemV2)
     app.component('RcSesChipSelectV2', RcSesChipSelectV2)
+    app.component('RcSesFilterDropdownV2', RcSesFilterDropdownV2)
+    app.component('RcSesFiltersV2', RcSesFiltersV2)
     app.component('RcSesCheckboxV2', RcSesCheckboxV2)
     app.component('RcSesCheckboxSelectableAreaV2', RcSesCheckboxSelectableAreaV2)
     app.component('RcSesImageAndTextV2', RcSesImageAndTextV2)
@@ -195,6 +199,7 @@ export { RcSesImageAndTextV2, RcSesSnackbarV2 }
 export { RcSesInlineAlertV2, RcSesStepperV2 }
 export { RcSesCheckboxV2, RcSesCheckboxSelectableAreaV2 }
 export { RcSesChipSelectV2 }
+export { RcSesFilterDropdownV2, RcSesFiltersV2 }
 export { RcSesLoaderV2, RcSesFullPageLoaderV2 }
 export { RcSesModalV2, RcSesBackdropV2 }
 export { RcSesCardV2, RcSesCardFooterV2, RcSesReviewCardV2, RcSesSubcardV2 }

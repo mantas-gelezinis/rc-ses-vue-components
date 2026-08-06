@@ -103,6 +103,21 @@ const i18n = () => {
             accessibleLabel: 'Papildoma informacija',
           },
 
+          RcSesFilterDropdownV2: {
+            empty: 'Nerasta',
+            selectedCount: 'Pasirinkta: {{count}}',
+          },
+
+          RcSesFiltersV2: {
+            searchPlaceholder: 'Ieškoti...',
+            clear: 'Išvalyti filtrus',
+            clearShort: 'Išvalyti',
+            sheetTitle: 'Filtrai',
+            moreFilters: 'Daugiau filtrų',
+            mobileTrigger: 'Filtrai',
+            apply: 'Taikyti ({{count}})',
+          },
+
           RcSesModalV2: {
             actions: {
               destructive: {
@@ -208,6 +223,21 @@ const i18n = () => {
 
           RcSesTooltipV2: {
             accessibleLabel: 'Additional information',
+          },
+
+          RcSesFilterDropdownV2: {
+            empty: 'No results',
+            selectedCount: 'Selected: {{count}}',
+          },
+
+          RcSesFiltersV2: {
+            searchPlaceholder: 'Search...',
+            clear: 'Clear filters',
+            clearShort: 'Clear',
+            sheetTitle: 'Filters',
+            moreFilters: 'More filters',
+            mobileTrigger: 'Filters',
+            apply: 'Apply ({{count}})',
           },
 
           RcSesModalV2: {
