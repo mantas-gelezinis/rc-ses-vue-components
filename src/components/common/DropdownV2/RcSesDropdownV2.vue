@@ -494,6 +494,9 @@ const { onTriggerKeydown, onPanelKeydown } = useListboxKeyboard({
     const selectedIndex = flatOptions.value.findIndex((option) => isOptionChecked(option))
     return selectedIndex >= 0 ? selectedIndex : 0
   },
+  onOpen: () => {
+    searchQuery.value = ''
+  },
 })
 
 const onSearchKeydown = (event: KeyboardEvent) => {
@@ -508,12 +511,6 @@ const onSearchKeydown = (event: KeyboardEvent) => {
     onPanelKeydown(event)
   }
 }
-
-watch(open, (isOpen) => {
-  if (isOpen) {
-    searchQuery.value = ''
-  }
-})
 
 watch(flatOptions, () => {
   if (!open.value || flatOptions.value.length === 0) {

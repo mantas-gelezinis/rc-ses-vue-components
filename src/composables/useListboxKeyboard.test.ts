@@ -4,21 +4,30 @@ import { nextTick, ref } from 'vue'
 import { useListboxKeyboard } from './useListboxKeyboard'
 
 describe('useListboxKeyboard', () => {
-  const setup = (optionCount = 3, disabledIndexes: number[] = []) => {
+  const setup = (
+    optionCount: number | (() => number) = 3,
+    disabledIndexes: number[] = [],
+    extras: {
+      getDefaultOpenIndex?: () => number
+      onOpen?: () => void
+    } = {},
+  ) => {
     const open = ref(false)
     const activeIndex = ref(-1)
     const activated: number[] = []
+    const getCount = typeof optionCount === 'function' ? optionCount : () => optionCount
 
     const api = useListboxKeyboard({
       open,
       activeIndex,
-      getOptionCount: () => optionCount,
+      getOptionCount: getCount,
       isOptionDisabled: (index) => disabledIndexes.includes(index),
       getOptionDomId: (index) => `option-${index}`,
       onActivate: (index) => {
         activated.push(index)
       },
-      getDefaultOpenIndex: () => 0,
+      getDefaultOpenIndex: extras.getDefaultOpenIndex ?? (() => 0),
+      onOpen: extras.onOpen,
     })
 
     vi.spyOn(document, 'getElementById').mockImplementation(
@@ -78,5 +87,44 @@ describe('useListboxKeyboard', () => {
     onTriggerKeydown(new KeyboardEvent('keydown', { key: 'Enter', cancelable: true }))
 
     expect(activated).toEqual([2])
+  })
+
+  it('calls onOpen before resolving the default open index', async () => {
+    let optionCount = 1
+    const onOpen = vi.fn(() => {
+      optionCount = 3
+    })
+    const getDefaultOpenIndex = vi.fn(() => (optionCount > 1 ? 1 : 0))
+
+    const { open, activeIndex } = setup(() => optionCount, [], {
+      onOpen,
+      getDefaultOpenIndex,
+    })
+
+    open.value = true
+    await nextTick()
+
+    expect(onOpen).toHaveBeenCalledTimes(1)
+    expect(getDefaultOpenIndex).toHaveBeenCalled()
+    expect(activeIndex.value).toBe(1)
+  })
+
+  it('calls onOpen before ArrowUp reads the last-option index', async () => {
+    let optionCount = 1
+    const onOpen = vi.fn(() => {
+      optionCount = 4
+    })
+
+    const { open, activeIndex, onTriggerKeydown } = setup(() => optionCount, [], {
+      onOpen,
+    })
+
+    onTriggerKeydown(new KeyboardEvent('keydown', { key: 'ArrowUp', cancelable: true }))
+    await nextTick()
+    await nextTick()
+
+    expect(onOpen).toHaveBeenCalled()
+    expect(open.value).toBe(true)
+    expect(activeIndex.value).toBe(3)
   })
 })

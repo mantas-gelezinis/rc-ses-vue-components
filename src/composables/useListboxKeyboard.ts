@@ -13,6 +13,7 @@ export type UseListboxKeyboardOptions = {
    * (e.g. mouse click). Defaults to 0.
    */
   getDefaultOpenIndex?: () => number
+  onOpen?: () => void
 }
 
 /**
@@ -29,6 +30,7 @@ export function useListboxKeyboard(options: UseListboxKeyboardOptions) {
     getOptionDomId,
     onActivate,
     getDefaultOpenIndex = () => 0,
+    onOpen,
   } = options
 
   let pendingFocusIndex: number | null = null
@@ -52,8 +54,10 @@ export function useListboxKeyboard(options: UseListboxKeyboardOptions) {
     document.getElementById(getOptionDomId(index))?.focus()
   }
 
-  const openAndFocus = async (index = 0) => {
-    pendingFocusIndex = index
+  const openAndFocus = async (indexOrGetter: number | (() => number) = 0) => {
+    onOpen?.()
+    pendingFocusIndex =
+      typeof indexOrGetter === 'function' ? indexOrGetter() : indexOrGetter
     open.value = true
     await nextTick()
 
@@ -124,7 +128,7 @@ export function useListboxKeyboard(options: UseListboxKeyboardOptions) {
     if (event.key === 'ArrowUp') {
       event.preventDefault()
       if (!open.value) {
-        openAndFocus(Math.max(getOptionCount() - 1, 0))
+        openAndFocus(() => Math.max(getOptionCount() - 1, 0))
         return
       }
 
@@ -146,7 +150,7 @@ export function useListboxKeyboard(options: UseListboxKeyboardOptions) {
     if (event.key === 'End') {
       event.preventDefault()
       if (!open.value) {
-        openAndFocus(Math.max(getOptionCount() - 1, 0))
+        openAndFocus(() => Math.max(getOptionCount() - 1, 0))
         return
       }
 
@@ -207,6 +211,7 @@ export function useListboxKeyboard(options: UseListboxKeyboardOptions) {
         return
       }
 
+      onOpen?.()
       activeIndex.value = clampIndex(getDefaultOpenIndex())
       return
     }
