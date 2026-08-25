@@ -4,8 +4,6 @@
     :id="rootId"
     ref="rootRef"
     class="rc-ses-error-summary-v2"
-    role="alert"
-    aria-live="assertive"
     tabindex="-1"
     :aria-labelledby="titleId"
   >
@@ -97,14 +95,15 @@ const focus = async () => {
 }
 
 const onErrorClick = (event: MouseEvent, fieldId: string) => {
+  event.preventDefault()
+
   const target = document.getElementById(fieldId)
   if (!target) {
     return
   }
 
-  event.preventDefault()
-  target.focus()
-  target.scrollIntoView?.({ block: 'center', behavior: 'smooth' })
+  target.focus({ preventScroll: true })
+  target.scrollIntoView({ block: 'center', behavior: 'smooth' })
 }
 
 watch(
