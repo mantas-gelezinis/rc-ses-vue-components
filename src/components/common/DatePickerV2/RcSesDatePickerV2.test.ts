@@ -244,6 +244,25 @@ describe('RcSesDatePickerV2', () => {
     expect((input as HTMLInputElement).value).toBe('2026-01-15')
   })
 
+  it('does not rewrite an end-only range on blur when nothing was typed', async () => {
+    const { model } = renderPicker(
+      {
+        label: 'Date range',
+        range: true,
+        showExplainer: false,
+      },
+      [null, '2026-06-15'],
+    )
+
+    const input = screen.getByRole('textbox')
+    expect((input as HTMLInputElement).value).toBe('2026-06-15')
+
+    await fireEvent.focus(input)
+    await fireEvent.blur(input)
+
+    expect(model.value).toEqual([null, '2026-06-15'])
+  })
+
   it('accepts a manually typed range on Enter', async () => {
     const { model } = renderPicker(
       {

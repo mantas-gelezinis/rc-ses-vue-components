@@ -384,7 +384,7 @@ const resolveCalendarAnchor = (value: string): Date | null => {
 }
 
 const commitTypedValue = () => {
-  if (props.disabled) {
+  if (props.disabled || inputText.value === displayValue.value) {
     return
   }
 
