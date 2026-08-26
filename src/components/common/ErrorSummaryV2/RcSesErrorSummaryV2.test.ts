@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/vue'
 import { mount } from '@vue/test-utils'
 import I18NextVue from 'i18next-vue'
-import { describe, expect, it, vi, afterEach } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
 
 import initI18n from '@/plugins/i18n'
@@ -111,7 +111,9 @@ describe('RcSesErrorSummaryV2', () => {
       screen.getByRole('link', { name: 'El. paštas — neteisingas' }),
     ).toHaveAttribute('href', '#email')
     expect(screen.getByText('Bendroji klaida')).toBeInTheDocument()
-    expect(screen.queryByRole('link', { name: 'Bendroji klaida' })).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('link', { name: 'Bendroji klaida' }),
+    ).not.toBeInTheDocument()
   })
 
   it('focuses the linked field when an error link is clicked', async () => {
